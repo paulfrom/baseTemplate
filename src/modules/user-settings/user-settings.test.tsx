@@ -1,5 +1,5 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react"
-import { message } from "antd"
+import { message } from "@ead/suid"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { act } from "react"
 import { getPortalSettings, resetPortalSettings } from "../../app/portal-settings"

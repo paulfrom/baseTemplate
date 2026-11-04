@@ -16,7 +16,7 @@
   gap: var(--space-xs);
 }
 
-.management-panel.ant-card {
+.management-panel.ead-card {
   margin-top: 2px;
 }
 
@@ -55,11 +55,11 @@
   gap: 2px;
 }
 
-.management-app-cell__copy .ant-typography {
+.management-app-cell__copy .ead-typography {
   margin: 0;
 }
 
-.management-app-cell__copy .ant-typography-secondary {
+.management-app-cell__copy .ead-typography-secondary {
   font-size: var(--font-size-help);
 }
 
@@ -70,7 +70,7 @@
   gap: 4px;
 }
 
-.management-tag-list .ant-tag {
+.management-tag-list .ead-tag {
   margin: 0;
 }
 
@@ -91,8 +91,8 @@
   gap: 0 var(--space-md);
 }
 
-.management-form-grid .ant-form-item,
-.management-editor-form > .ant-form-item {
+.management-form-grid .ead-form-item,
+.management-editor-form > .ead-form-item {
   margin-bottom: var(--space-sm);
 }
 
@@ -103,7 +103,7 @@
   gap: var(--space-lg);
 }
 
-.management-form-switches .ant-form-item {
+.management-form-switches .ead-form-item {
   margin-bottom: 0;
 }
 

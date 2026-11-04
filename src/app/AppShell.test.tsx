@@ -43,7 +43,8 @@ describe("AppShell (template)", () => {
 
     // 品牌名同时出现在侧边栏 brand 与面包屑首节，用 getAllByText
     expect(screen.getAllByText("baseTemplate").length).toBeGreaterThan(0)
-    expect(screen.getAllByRole("menuitem")).toHaveLength(2)
+    expect(screen.getAllByRole("menuitem")).toHaveLength(3)
+    expect(screen.getByRole("menuitem", { name: /申请单示例/ })).toBeInTheDocument()
     expect(screen.getByRole("menuitem", { name: /数据驾驶舱/ })).toBeInTheDocument()
     expect(screen.getByRole("menuitem", { name: /系统配置/ })).toBeInTheDocument()
     expect(screen.getByTestId("page-content")).toBeInTheDocument()

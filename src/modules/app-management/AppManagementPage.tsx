@@ -8,8 +8,9 @@ import {
   ReloadOutlined,
   SearchOutlined,
   SettingOutlined,
-} from "@ant-design/icons"
+} from "@ead/suid-icons"
 import {
+  ActionButton,
   Button,
   Card,
   Form,
@@ -20,13 +21,14 @@ import {
   Popconfirm,
   Radio,
   Select,
+  Space,
   Switch,
-  Table,
+  ExtTable,
   Tag,
   Tooltip,
   Typography,
-} from "antd"
-import type { TableColumnsType } from "antd"
+} from "@ead/suid"
+import type { ExtColumnProps } from "@ead/suid"
 import { useMemo, useState } from "react"
 import { PageStatCards, type PageStatItem } from "../../components/PageStatCards"
 import { PortalIcon } from "../../components/PortalIcon"
@@ -43,6 +45,7 @@ import {
 } from "../../app/portal-settings"
 import { PORTAL_ROUTE_DEFINITIONS } from "../../app/hash-navigation"
 import type { AppRoute } from "../../app/hash-navigation"
+import { getOperationColumnWidth } from "../../utils/operationColumn"
 import "./app-management.css"
 
 const { Text, Title } = Typography
@@ -190,7 +193,35 @@ export function AppManagementPage() {
     window.location.hash = `#/${app.route}`
   }
 
-  const columns: TableColumnsType<PortalApplication> = [
+  const columns: ExtColumnProps<PortalApplication>[] = [
+    {
+      title: "操作",
+      dataIndex: "id",
+      width: getOperationColumnWidth(3),
+      fixed: "left",
+      render: (_, record) => (
+        <Space size={4}>
+          <ActionButton title="进入" icon={<EyeOutlined />} onClick={() => handlePreview(record)}
+            {...{"aria-label": `进入${record.name}`}} />
+          <ActionButton title="编辑" icon={<EditOutlined />} onClick={() => openEdit(record)}
+            {...{"aria-label": `编辑${record.name}`}} />
+          <Popconfirm
+            title="删除应用"
+            description={`确定删除「${record.name}」吗？`}
+            okText="删除"
+            cancelText="取消"
+            okButtonProps={{ danger: true }}
+            onConfirm={() => {
+              removePortalApplication(record.id)
+              messageApi.success("应用已删除")
+            }}
+          >
+            <ActionButton title="删除" color="danger" icon={<DeleteOutlined />}
+              {...{"aria-label": `删除${record.name}`}} />
+          </Popconfirm>
+        </Space>
+      ),
+    },
     {
       title: "应用",
       dataIndex: "name",
@@ -243,32 +274,6 @@ export function AppManagementPage() {
     },
     { title: "排序", dataIndex: "sort", width: 76, align: "center", className: "numeric" },
     { title: "更新时间", dataIndex: "updatedAt", width: 116, align: "center", className: "numeric" },
-    {
-      title: "操作",
-      key: "actions",
-      width: 160,
-      fixed: "right",
-      align: "center",
-      render: (_, record) => (
-        <div className="management-row-actions">
-          <Button type="link" size="small" icon={<EyeOutlined />} onClick={() => handlePreview(record)}>进入</Button>
-          <Button type="link" size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>编辑</Button>
-          <Popconfirm
-            title="删除应用"
-            description={`确定删除「${record.name}」吗？`}
-            okText="删除"
-            cancelText="取消"
-            okButtonProps={{ danger: true }}
-            onConfirm={() => {
-              removePortalApplication(record.id)
-              messageApi.success("应用已删除")
-            }}
-          >
-            <Button type="link" size="small" danger icon={<DeleteOutlined />} aria-label={`删除${record.name}`} />
-          </Popconfirm>
-        </div>
-      ),
-    },
   ]
 
   return (
@@ -284,7 +289,6 @@ export function AppManagementPage() {
             resetPortalApplications()
             messageApi.success("应用配置已恢复默认")
           }}>恢复默认</Button>
-          <Button type="primary" icon={<PlusOutlined />} onClick={openCreate}>新建应用</Button>
         </div>
       </div>
 
@@ -315,12 +319,15 @@ export function AppManagementPage() {
           </Form>
           <Text type="secondary" className="management-result-count">共 {filteredRows.length} 个应用</Text>
         </div>
-        <Table<PortalApplication>
+        <ExtTable
           rowKey="id"
+          showQuickSearch={false}
           dataSource={filteredRows}
           columns={columns}
           size="middle"
           scroll={{ x: 1320 }}
+          storageCfg={{ storageType: "local", storageId: "app-management", rowColumn: false, dataView: false }}
+          toolbar={{ left: <Button type="primary" icon={<PlusOutlined />} onClick={openCreate}>新建应用</Button> }}
           pagination={{ pageSize: 8, showSizeChanger: false }}
         />
       </Card>

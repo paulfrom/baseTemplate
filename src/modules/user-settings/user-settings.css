@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.user-settings-card.ant-card > .ant-card-body {
+.user-settings-card.ead-card > .ead-card-body {
   padding: 8px 20px 20px;
 }
 
@@ -71,7 +71,7 @@
   gap: 5px;
 }
 
-.user-settings-profile-copy .ant-typography {
+.user-settings-profile-copy .ead-typography {
   margin: 0;
 }
 
@@ -82,7 +82,7 @@
   gap: 6px;
 }
 
-.user-settings-profile-tags .ant-tag {
+.user-settings-profile-tags .ead-tag {
   margin: 0;
 }
 
@@ -117,11 +117,11 @@
   gap: var(--space-sm);
 }
 
-.user-settings-section__head .ant-typography {
+.user-settings-section__head .ead-typography {
   margin: 0;
 }
 
-.user-settings-section__head h4.ant-typography {
+.user-settings-section__head h4.ead-typography {
   font-size: var(--font-size-title-small);
 }
 
@@ -264,7 +264,7 @@
   gap: var(--space-md);
 }
 
-.user-settings-security-card.ant-card {
+.user-settings-security-card.ead-card {
   border: 1px solid var(--color-border-soft);
   border-radius: var(--radius-lg);
   box-shadow: none;
@@ -277,11 +277,11 @@
   margin-bottom: var(--space-md);
 }
 
-.user-settings-security-card__head .ant-typography {
+.user-settings-security-card__head .ead-typography {
   margin: 0;
 }
 
-.user-settings-security-card__head h4.ant-typography {
+.user-settings-security-card__head h4.ead-typography {
   font-size: var(--font-size-title-small);
 }
 

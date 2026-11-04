@@ -10,7 +10,7 @@ import {
   SettingOutlined,
   SkinOutlined,
   UserOutlined,
-} from "@ant-design/icons"
+} from "@ead/suid-icons"
 import {
   Alert,
   Avatar,
@@ -25,7 +25,7 @@ import {
   Tabs,
   Tag,
   Typography,
-} from "antd"
+} from "@ead/suid"
 import { useState } from "react"
 import type { PrototypeThemeId } from "../../app/AppShell"
 import {

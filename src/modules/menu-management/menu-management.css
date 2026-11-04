@@ -25,10 +25,10 @@
   gap: 2px;
 }
 
-.management-menu-cell__copy .ant-typography {
+.management-menu-cell__copy .ead-typography {
   margin: 0;
 }
 
-.management-menu-cell__copy .ant-typography-secondary {
+.management-menu-cell__copy .ead-typography-secondary {
   font-size: var(--font-size-help);
 }

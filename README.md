@@ -1,5 +1,7 @@
 # baseTemplate
 
+> 公司模板对齐要求：业务 UI 使用真实 SUID 组件，数据与操作全部 Mock。`#/sample-request` 展示 ExtTable、共用编辑表单与 WorkFlow.Approve 的模拟办理。详见 [组件与页面规则](docs/company-template-alignment.md)。当前仍使用 Vite / hash 外壳，尚未迁入公司 Umi / dva / qiankun 工程结构。
+
 业务原型模板项目：保留完整的应用框架（门户入口、应用外壳、hash 路由、五套主题、图表基建、测试与质量门禁），内置「数据驾驶舱」示例，并参考 SEI Portal 补齐菜单、应用和用户配置基础能力，适合作为新业务原型的起点。
 
 ## 快速开始
@@ -24,7 +26,7 @@ npm run verify  # typecheck + lint + test + build 完整门禁
 
 ## 技术栈
 
-React 19 + TypeScript + Vite + Ant Design 6 + ECharts 6 + Vitest/Testing Library。纯前端 Mock 数据，无后端、无登录、无真实权限。
+React 18 + TypeScript + Vite + SUID 2.1.99 + ECharts 6 + MSW + Vitest/Testing Library。纯前端 Mock 数据，无后端、无登录、无真实权限。内部包安装源见 `.npmrc`；流程组件请求由浏览器 Service Worker 模拟，部署浏览器需支持 Service Worker（localhost 或 HTTPS）。
 
 ## 目录结构
 
@@ -40,11 +42,14 @@ src/
 ├── modules/
 │   ├── portal/                # 门户入口页（应用卡片与用户菜单）
 │   ├── analytics-cockpit/     # 示例业务模块：数据驾驶舱（自带 mockData 与测试）
-│   ├── menu-management/       # 菜单树与导航配置
-│   ├── app-management/        # 应用入口与门户卡片配置
+│   ├── sample-request/        # ExtTable 列表、共用主表单与模拟 WorkFlow 审批
+│   ├── menu-management/       # 菜单树与导航配置（ExtTable + Mock）
+│   ├── app-management/        # 应用入口与门户卡片配置（ExtTable + Mock）
 │   └── user-settings/         # 用户资料、主题、通知与安全演示
+├── mocks/browser.ts           # MSW 浏览器模拟层（仅原型服务契约）
+├── utils/operationColumn.ts   # 与公司模板一致的列表操作列宽规则
 ├── styles/                    # tokens.css（设计令牌）、全局与外壳样式
-└── test/setup.ts              # Vitest 环境（jsdom 补丁、antd message 清理）
+└── test/setup.ts              # Vitest 环境（jsdom 补丁、SUID message 清理）
 scripts/serve.mjs              # 零依赖静态服务器（托管 dist/，默认 127.0.0.1:8091）
 deploy/                        # 部署：deploy.sh、nginx 配置、systemd unit
 install.sh                     # 安装到 /home/paul/project/baseTemplate 并部署
@@ -57,7 +62,7 @@ install.sh                     # 安装到 /home/paul/project/baseTemplate 并�
 1. **路由**：`src/app/hash-navigation.ts` 中给 `AppRoute` 联合类型和 `knownRoutes` 加新路由 id；
 2. **渲染**：`src/app/route-registry.tsx` 中加 `lazy(() => import("../modules/<name>"))` 和 `renderMainRoute` 的 switch 分支；
 3. **菜单与文案**：在 `src/app/hash-navigation.ts` 的 `PORTAL_ROUTE_DEFINITIONS` 补充页面名称、分组、图标和默认展示状态；`AppShell.tsx` 与菜单管理会读取同一份 Router 元数据。
-4. **模块**：新建 `src/modules/<name>/`，包含页面组件、`index.ts` 导出、模块 css 与测试；数据用模块内 mock（参考 `analytics-cockpit/mockData.ts`）。
+4. **模块**：新建 `src/modules/<name>/`，包含页面组件、`index.ts` 导出、模块 css 与测试；数据用模块内 mock。列表、编辑、流程页面参考 `sample-request/` 与 [公司模板对齐规则](docs/company-template-alignment.md)，不得改用普通 Table 或另造流程组件。
 
 如需在门户加入口卡片，进入「应用管理」新建应用并开启「门户展示」；如需随模板默认提供入口，在 `src/app/portal-settings.ts` 的 `DEFAULT_APPLICATIONS` 中追加配置。
 

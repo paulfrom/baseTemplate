@@ -1,5 +1,5 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react"
-import { message } from "antd"
+import { message } from "@ead/suid"
 import { afterEach, beforeEach, describe, expect, it } from "vitest"
 import { act } from "react"
 import { getPortalSettings, resetPortalSettings } from "../../app/portal-settings"
@@ -35,7 +35,7 @@ describe("application management", () => {
   it("enters the configured application route", () => {
     window.location.hash = "#/app-management"
     render(<AppManagementPage />)
-    fireEvent.click(screen.getAllByRole("button", { name: /进入/ })[0])
+    fireEvent.click(screen.getByLabelText("进入数据驾驶舱"))
     expect(window.location.hash).toBe("#/analytics-cockpit")
   })
 
@@ -49,6 +49,6 @@ describe("application management", () => {
     await waitFor(() => {
       expect(getPortalSettings().applications.some((app) => app.code === "new-portal-app")).toBe(true)
     })
-    expect(screen.getByText("新门户应用")).toBeInTheDocument()
+    expect(await screen.findByText("新门户应用")).toBeInTheDocument()
   })
 })

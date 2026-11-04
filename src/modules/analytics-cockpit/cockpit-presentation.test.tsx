@@ -52,7 +52,7 @@ describe("cockpit presentation regressions", () => {
     await user.click(east)
     expect(east).toHaveAttribute("aria-pressed", "true")
     expect(screen.getByRole("list", { name: "核心指标" })).toHaveTextContent("283")
-    expect(screen.getByRole("combobox", { name: "组织范围" }).closest(".ant-select")).toHaveTextContent("华东区域")
+    expect(screen.getByRole("combobox", { name: "组织范围" }).closest(".ead-select")).toHaveTextContent("华东区域")
     await user.click(screen.getByRole("radio", { name: "履约质量" }).closest("label")!)
     expect(screen.getByRole("img", { name: "履约质量趋势" })).toHaveAttribute("data-min-height", "0")
     expect(screen.getByRole("img", { name: "异常率趋势" })).toHaveAttribute("data-min-height", "0")

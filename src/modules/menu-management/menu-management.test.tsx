@@ -1,5 +1,5 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react"
-import { message } from "antd"
+import { message } from "@ead/suid"
 import { afterEach, beforeEach, describe, expect, it } from "vitest"
 import { act } from "react"
 import { getPortalSettings, resetPortalSettings } from "../../app/portal-settings"
@@ -28,7 +28,7 @@ describe("router-backed menu management", () => {
 
     fireEvent.change(screen.getByPlaceholderText("名称 / 路由 / 分组 / 权限"), { target: { value: "user-settings" } })
     fireEvent.click(screen.getByRole("button", { name: /查询/ }))
-    await waitFor(() => expect(screen.getByText("筛选结果 1 / 5 项")).toBeInTheDocument())
+    await waitFor(() => expect(screen.getByText(`筛选结果 1 / ${PORTAL_ROUTE_DEFINITIONS.length} 项`)).toBeInTheDocument())
     expect(screen.getByText("用户配置")).toBeInTheDocument()
     expect(screen.queryByText("数据驾驶舱")).not.toBeInTheDocument()
   })

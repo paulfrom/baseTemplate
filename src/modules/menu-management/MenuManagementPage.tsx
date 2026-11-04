@@ -5,7 +5,7 @@ import {
   ReloadOutlined,
   SearchOutlined,
   SafetyCertificateOutlined,
-} from "@ant-design/icons"
+} from "@ead/suid-icons"
 import {
   Button,
   Card,
@@ -14,11 +14,11 @@ import {
   message,
   Select,
   Switch,
-  Table,
+  ExtTable,
   Tag,
   Typography,
-} from "antd"
-import type { TableColumnsType } from "antd"
+} from "@ead/suid"
+import type { ExtColumnProps } from "@ead/suid"
 import { useMemo, useState } from "react"
 import { PageStatCards, type PageStatItem } from "../../components/PageStatCards"
 import { PortalIcon } from "../../components/PortalIcon"
@@ -79,7 +79,7 @@ export function MenuManagementPage() {
     messageApi.success(`「${menu.name}」已${checked ? "加入" : "移出"}导航展示`)
   }
 
-  const columns: TableColumnsType<MenuRow> = [
+  const columns: ExtColumnProps<MenuRow>[] = [
     {
       title: "菜单名称",
       dataIndex: "name",
@@ -186,12 +186,14 @@ export function MenuManagementPage() {
           </Form>
           <Text type="secondary" className="management-result-count">筛选结果 {filteredRows.length} / {routeRows.length} 项</Text>
         </div>
-        <Table<MenuRow>
+        <ExtTable
           rowKey="id"
+          showQuickSearch={false}
           dataSource={filteredRows}
           columns={columns}
           size="middle"
           scroll={{ x: 1160 }}
+          storageCfg={{ storageType: "local", storageId: "menu-management", rowColumn: false, dataView: false }}
           pagination={false}
         />
       </Card>

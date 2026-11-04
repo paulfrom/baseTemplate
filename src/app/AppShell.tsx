@@ -5,15 +5,15 @@ import {
   DownOutlined,
   HomeOutlined,
   LeftOutlined,
-  LogoutOutlined,
+  PoweroffOutlined,
   MenuOutlined,
   MoonOutlined,
   RightOutlined,
   SunOutlined,
   UserOutlined,
-} from "@ant-design/icons"
-import { Avatar, Button, Dropdown, Layout, Menu, message, Tooltip } from "antd"
-import type { MenuProps } from "antd"
+} from "@ead/suid-icons"
+import { Avatar, Button, Dropdown, Layout, Menu, message, Tooltip } from "@ead/suid"
+import type { MenuProps } from "@ead/suid"
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react"
 import { PortalIcon } from "../components/PortalIcon"
 import { isAppRoute, PORTAL_ROUTE_DEFINITIONS, type AppRoute } from "./hash-navigation"
@@ -79,6 +79,7 @@ const routeToGroupMap: Partial<Record<AppRoute, string>> = {
 }
 
 const systemLabels: Record<AppRoute, string> = {
+  "sample-request": "baseTemplate",
   portal: "baseTemplate",
   "analytics-cockpit": "baseTemplate",
   "menu-management": "baseTemplate",
@@ -449,7 +450,7 @@ export function AppShell({
     },
     { type: "divider" },
     { key: "portal", icon: <HomeOutlined />, label: "返回门户" },
-    { key: "logout", icon: <LogoutOutlined />, label: "退出登录" },
+    { key: "logout", icon: <PoweroffOutlined />, label: "退出登录" },
   ]
 
   const slateMenu = isSlateNavTrial ? menuItems as NavigationItem[] : []
@@ -464,7 +465,7 @@ export function AppShell({
         width="var(--sidebar-width)"
         collapsedWidth={64}
         collapsed={isSlateNavTrial ? false : collapsed}
-        inert={isSlateNavTrial && isTopNavTheme}
+        ref={(element) => { element?.toggleAttribute('inert', isSlateNavTrial && isTopNavTheme) }}
         aria-hidden={isSlateNavTrial && isTopNavTheme ? true : undefined}
         collapsible
         trigger={null}

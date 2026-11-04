@@ -17,7 +17,7 @@
   gap: var(--space-xs);
 }
 
-.management-panel.ant-card {
+.management-panel.ead-card {
   margin-top: 2px;
 }
 
@@ -38,8 +38,8 @@
   gap: 0 var(--space-md);
 }
 
-.management-form-grid .ant-form-item,
-.management-editor-form > .ant-form-item {
+.management-form-grid .ead-form-item,
+.management-editor-form > .ead-form-item {
   margin-bottom: var(--space-sm);
 }
 
@@ -50,7 +50,7 @@
   gap: var(--space-lg);
 }
 
-.management-form-switches .ant-form-item {
+.management-form-switches .ead-form-item {
   margin-bottom: 0;
 }
 

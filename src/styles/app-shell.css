@@ -22,7 +22,7 @@
   will-change: width, min-width, max-width, flex;
 }
 
-.app-shell__sider.ant-layout-sider-collapsed,
+.app-shell__sider.ead-layout-sider-collapsed,
 .app-shell__sider--collapsed {
   width: var(--sidebar-collapsed-width, 64px) !important;
   min-width: var(--sidebar-collapsed-width, 64px) !important;
@@ -43,7 +43,7 @@
   transition: padding 0.42s cubic-bezier(0.2, 0, 0, 1);
 }
 
-.app-shell__sider.ant-layout-sider-collapsed .app-shell__brand,
+.app-shell__sider.ead-layout-sider-collapsed .app-shell__brand,
 .app-shell__sider--collapsed .app-shell__brand {
   justify-content: center;
   padding: 0;
@@ -66,7 +66,7 @@
               margin 0.42s cubic-bezier(0.2, 0, 0, 1);
 }
 
-.app-shell__sider.ant-layout-sider-collapsed .app-shell__brand-copy,
+.app-shell__sider.ead-layout-sider-collapsed .app-shell__brand-copy,
 .app-shell__sider--collapsed .app-shell__brand-copy {
   opacity: 0;
   flex: 0 0 0;
@@ -138,12 +138,12 @@
   border-inline-end: 0 !important;
 }
 
-.app-shell__sider .ant-menu-dark {
+.app-shell__sider .ead-menu-dark {
   background: transparent !important;
   color: rgb(255 255 255 / 85%) !important;
 }
 
-.app-shell__sider .ant-menu-dark .ant-menu-sub.ant-menu-inline {
+.app-shell__sider .ead-menu-dark .ead-menu-sub.ead-menu-inline {
   background: rgb(0 0 0 / 14%) !important;
   box-shadow: inset 0 2px 4px rgb(0 0 0 / 8%);
   overflow: hidden;
@@ -155,12 +155,12 @@
               padding 0.32s cubic-bezier(0.2, 0, 0, 1);
 }
 
-.app-shell__sider .ant-menu-dark .ant-menu-item,
-.app-shell__sider .ant-menu-dark .ant-menu-submenu-title,
-.app-shell__sider.ant-layout-sider-collapsed .ant-menu-dark .ant-menu-item,
-.app-shell__sider.ant-layout-sider-collapsed .ant-menu-dark .ant-menu-submenu-title,
-.app-shell__sider .ant-menu-inline-collapsed .ant-menu-item,
-.app-shell__sider .ant-menu-inline-collapsed .ant-menu-submenu-title {
+.app-shell__sider .ead-menu-dark .ead-menu-item,
+.app-shell__sider .ead-menu-dark .ead-menu-submenu-title,
+.app-shell__sider.ead-layout-sider-collapsed .ead-menu-dark .ead-menu-item,
+.app-shell__sider.ead-layout-sider-collapsed .ead-menu-dark .ead-menu-submenu-title,
+.app-shell__sider .ead-menu-inline-collapsed .ead-menu-item,
+.app-shell__sider .ead-menu-inline-collapsed .ead-menu-submenu-title {
   height: 40px !important;
   line-height: 40px !important;
   margin-block: 4px !important;
@@ -172,19 +172,19 @@
 }
 
 /* 收起过程就把图标滑到收缩终态，避免宽度走完再跳一次。 */
-.app-shell__sider--collapsed .app-shell__menu :is(.ant-menu-item, .ant-menu-submenu-title),
-.app-shell__sider .ant-menu-inline-collapsed :is(.ant-menu-item, .ant-menu-submenu-title) {
+.app-shell__sider--collapsed .app-shell__menu :is(.ead-menu-item, .ead-menu-submenu-title),
+.app-shell__sider .ead-menu-inline-collapsed :is(.ead-menu-item, .ead-menu-submenu-title) {
   width: calc(100% - var(--space-md)) !important;
   margin-inline: var(--space-xs) !important;
   padding-inline: calc((var(--sidebar-collapsed-width) - 16px) / 2 - var(--space-xs)) !important;
   justify-content: flex-start !important;
 }
 
-.app-shell__sider--collapsed .app-shell__menu .ant-menu-submenu-arrow {
+.app-shell__sider--collapsed .app-shell__menu .ead-menu-submenu-arrow {
   opacity: 0 !important;
 }
 
-.app-shell__sider .ant-menu-inline-collapsed :is(.ant-menu-title-content, .ant-menu-submenu-arrow) {
+.app-shell__sider .ead-menu-inline-collapsed :is(.ead-menu-title-content, .ead-menu-submenu-arrow) {
   width: 0 !important;
   min-width: 0 !important;
   opacity: 0 !important;
@@ -193,13 +193,13 @@
   pointer-events: none !important;
 }
 
-.app-shell__sider--collapsed .app-shell__menu :is(.ant-menu-item-icon, .anticon),
-.app-shell__sider .ant-menu-inline-collapsed :is(.ant-menu-item-icon, .anticon) {
+.app-shell__sider--collapsed .app-shell__menu :is(.ead-menu-item-icon, .anticon),
+.app-shell__sider .ead-menu-inline-collapsed :is(.ead-menu-item-icon, .anticon) {
   margin-inline: 0 !important;
 }
 
 /* 收起过程：子菜单随宽度一起淡出收拢，等宽度走完再切图标模式。 */
-.app-shell__sider--collapsed .ant-menu-sub.ant-menu-inline {
+.app-shell__sider--collapsed .ead-menu-sub.ead-menu-inline {
   max-height: 0 !important;
   opacity: 0 !important;
   margin: 0 !important;
@@ -208,21 +208,21 @@
   pointer-events: none !important;
 }
 
-.app-shell__sider .ant-menu-inline-collapsed .ant-menu-sub.ant-menu-inline {
+.app-shell__sider .ead-menu-inline-collapsed .ead-menu-sub.ead-menu-inline {
   display: none !important;
 }
 
-.app-shell__sider .ant-menu-dark .ant-menu-item:hover,
-.app-shell__sider .ant-menu-dark .ant-menu-submenu-title:hover {
+.app-shell__sider .ead-menu-dark .ead-menu-item:hover,
+.app-shell__sider .ead-menu-dark .ead-menu-submenu-title:hover {
   background-color: rgb(255 255 255 / 12%) !important;
   color: #ffffff !important;
 }
 
-.app-shell__sider .ant-menu-dark .ant-menu-item:active {
+.app-shell__sider .ead-menu-dark .ead-menu-item:active {
   transform: scale(0.96);
 }
 
-.app-shell__sider .ant-menu-dark .ant-menu-item-selected {
+.app-shell__sider .ead-menu-dark .ead-menu-item-selected {
   background-color: var(--color-sidebar-selected, #1a8ad8) !important;
   color: #ffffff !important;
   font-weight: 600;
@@ -230,15 +230,15 @@
 }
 
 /* Sider Floating Submenu Popup (for group items with submenus) */
-.ant-menu-submenu-popup {
+.ead-menu-submenu-popup {
   z-index: 1050 !important;
 }
 
-.ant-menu-submenu-popup .ant-menu,
-.ant-menu-submenu-popup .ant-menu-sub,
-.ant-menu-submenu-popup .ant-menu-vertical,
-.ant-menu-submenu-popup .ant-menu-dark,
-.ant-menu-submenu-popup ul {
+.ead-menu-submenu-popup .ead-menu,
+.ead-menu-submenu-popup .ead-menu-sub,
+.ead-menu-submenu-popup .ead-menu-vertical,
+.ead-menu-submenu-popup .ead-menu-dark,
+.ead-menu-submenu-popup ul {
   min-width: 160px !important;
   width: 160px !important;
   background: var(--color-sidebar, #0070c0) !important;
@@ -250,8 +250,8 @@
   box-sizing: border-box !important;
 }
 
-.ant-menu-submenu-popup .ant-menu-item,
-.ant-menu-submenu-popup .ant-menu-submenu-title {
+.ead-menu-submenu-popup .ead-menu-item,
+.ead-menu-submenu-popup .ead-menu-submenu-title {
   color: rgba(255, 255, 255, 0.9) !important;
   height: 38px !important;
   line-height: 38px !important;
@@ -263,13 +263,13 @@
   transition: background-color 120ms ease, color 120ms ease !important;
 }
 
-.ant-menu-submenu-popup .ant-menu-item:hover,
-.ant-menu-submenu-popup .ant-menu-submenu-title:hover {
+.ead-menu-submenu-popup .ead-menu-item:hover,
+.ead-menu-submenu-popup .ead-menu-submenu-title:hover {
   background-color: rgba(255, 255, 255, 0.18) !important;
   color: #ffffff !important;
 }
 
-.ant-menu-submenu-popup .ant-menu-item-selected {
+.ead-menu-submenu-popup .ead-menu-item-selected {
   background-color: var(--color-sidebar-selected, #1a8ad8) !important;
   color: #ffffff !important;
   font-weight: 600 !important;
@@ -277,11 +277,11 @@
 }
 
 /* Sider Tooltips for single 1st-level collapsed items (strictly unified with 160px popup card geometry) */
-body .ant-menu-inline-collapsed-tooltip .ant-tooltip-arrow {
+body .ead-menu-inline-collapsed-tooltip .ead-tooltip-arrow {
   display: none !important;
 }
 
-body .ant-menu-inline-collapsed-tooltip .ant-tooltip-inner {
+body .ead-menu-inline-collapsed-tooltip .ead-tooltip-inner {
   min-width: 160px !important;
   width: 160px !important;
   height: 46px !important;
@@ -301,7 +301,7 @@ body .ant-menu-inline-collapsed-tooltip .ant-tooltip-inner {
 }
 
 /* General tooltips across the app */
-body .ant-tooltip:not(.ant-menu-inline-collapsed-tooltip) .ant-tooltip-inner {
+body .ead-tooltip:not(.ead-menu-inline-collapsed-tooltip) .ead-tooltip-inner {
   background-color: var(--color-sidebar, #0070c0) !important;
   color: #ffffff !important;
   border-radius: var(--radius-md, 6px) !important;
@@ -311,27 +311,27 @@ body .ant-tooltip:not(.ant-menu-inline-collapsed-tooltip) .ant-tooltip-inner {
   padding: 6px 12px !important;
 }
 
-body .ant-tooltip:not(.ant-menu-inline-collapsed-tooltip) .ant-tooltip-arrow::before {
+body .ead-tooltip:not(.ead-menu-inline-collapsed-tooltip) .ead-tooltip-arrow::before {
   background-color: var(--color-sidebar, #0070c0) !important;
   background: var(--color-sidebar, #0070c0) !important;
 }
 
-[data-theme='dark'] .ant-menu-submenu-popup .ant-menu,
-[data-theme='dark'] .ant-menu-submenu-popup .ant-menu-sub,
-[data-theme='dark'] .ant-menu-submenu-popup .ant-menu-vertical,
-[data-theme='dark'] .ant-menu-submenu-popup .ant-menu-dark,
-[data-theme='dark'] .ant-tooltip .ant-tooltip-inner {
+[data-theme='dark'] .ead-menu-submenu-popup .ead-menu,
+[data-theme='dark'] .ead-menu-submenu-popup .ead-menu-sub,
+[data-theme='dark'] .ead-menu-submenu-popup .ead-menu-vertical,
+[data-theme='dark'] .ead-menu-submenu-popup .ead-menu-dark,
+[data-theme='dark'] .ead-tooltip .ead-tooltip-inner {
   background: var(--color-sidebar, #052a42) !important;
   background-color: var(--color-sidebar, #052a42) !important;
   border: 1px solid var(--color-border-soft, #303030) !important;
 }
 
-[data-theme='dark'] .ant-tooltip .ant-tooltip-arrow::before {
+[data-theme='dark'] .ead-tooltip .ead-tooltip-arrow::before {
   background-color: var(--color-sidebar, #052a42) !important;
 }
 
 /* 星穹夜主题 Tooltip 弹窗适配 */
-[data-theme='obsidian'] .ant-tooltip .ant-tooltip-inner {
+[data-theme='obsidian'] .ead-tooltip .ead-tooltip-inner {
   background: #18181b !important;
   background-color: #18181b !important;
   color: #fafafa !important;
@@ -339,13 +339,13 @@ body .ant-tooltip:not(.ant-menu-inline-collapsed-tooltip) .ant-tooltip-arrow::be
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
 }
 
-[data-theme='obsidian'] .ant-tooltip .ant-tooltip-arrow::before {
+[data-theme='obsidian'] .ead-tooltip .ead-tooltip-arrow::before {
   background: #18181b !important;
   background-color: #18181b !important;
 }
 
 /* 玄武岩/云山灰主题 Tooltip 弹窗适配 */
-[data-theme='slate'] .ant-tooltip .ant-tooltip-inner {
+[data-theme='slate'] .ead-tooltip .ead-tooltip-inner {
   background: #1e293b !important;
   background-color: #1e293b !important;
   color: #f1f5f9 !important;
@@ -353,13 +353,13 @@ body .ant-tooltip:not(.ant-menu-inline-collapsed-tooltip) .ant-tooltip-arrow::be
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
 }
 
-[data-theme='slate'] .ant-tooltip .ant-tooltip-arrow::before {
+[data-theme='slate'] .ead-tooltip .ead-tooltip-arrow::before {
   background: #1e293b !important;
   background-color: #1e293b !important;
 }
 
 /* 云境白主题 Tooltip 弹窗适配 */
-[data-theme='aurora'] .ant-tooltip .ant-tooltip-inner {
+[data-theme='aurora'] .ead-tooltip .ead-tooltip-inner {
   background: #18181b !important;
   background-color: #18181b !important;
   color: #ffffff !important;
@@ -367,7 +367,7 @@ body .ant-tooltip:not(.ant-menu-inline-collapsed-tooltip) .ant-tooltip-arrow::be
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2) !important;
 }
 
-[data-theme='aurora'] .ant-tooltip .ant-tooltip-arrow::before {
+[data-theme='aurora'] .ead-tooltip .ead-tooltip-arrow::before {
   background: #18181b !important;
   background-color: #18181b !important;
 }
@@ -631,19 +631,19 @@ body .ant-tooltip:not(.ant-menu-inline-collapsed-tooltip) .ant-tooltip-arrow::be
   align-items: center;
 }
 
-.app-shell__topnav-menu .ant-menu-submenu,
-.app-shell__topnav-menu .ant-menu-item {
+.app-shell__topnav-menu .ead-menu-submenu,
+.app-shell__topnav-menu .ead-menu-item {
   background: transparent !important;
 }
 
-.app-shell__topnav-menu .ant-menu-submenu-selected,
-.app-shell__topnav-menu .ant-menu-submenu-active,
-.app-shell__topnav-menu .ant-menu-submenu-open {
+.app-shell__topnav-menu .ead-menu-submenu-selected,
+.app-shell__topnav-menu .ead-menu-submenu-active,
+.app-shell__topnav-menu .ead-menu-submenu-open {
   background: transparent !important;
 }
 
-.app-shell__topnav-menu .ant-menu-item,
-.app-shell__topnav-menu .ant-menu-submenu-title {
+.app-shell__topnav-menu .ead-menu-item,
+.app-shell__topnav-menu .ead-menu-submenu-title {
   padding: 0 14px !important;
   color: #71717a !important;
   transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out !important;
@@ -656,14 +656,14 @@ body .ant-tooltip:not(.ant-menu-inline-collapsed-tooltip) .ant-tooltip-arrow::be
   white-space: nowrap !important;
 }
 
-.app-shell__topnav-menu .ant-menu-item:hover,
-.app-shell__topnav-menu .ant-menu-submenu-title:hover {
+.app-shell__topnav-menu .ead-menu-item:hover,
+.app-shell__topnav-menu .ead-menu-submenu-title:hover {
   color: #09090b !important;
   background: rgba(0, 0, 0, 0.04) !important;
 }
 
-.app-shell__topnav-menu .ant-menu-item-selected,
-.app-shell__topnav-menu .ant-menu-submenu-selected .ant-menu-submenu-title {
+.app-shell__topnav-menu .ead-menu-item-selected,
+.app-shell__topnav-menu .ead-menu-submenu-selected .ead-menu-submenu-title {
   color: #09090b !important;
   font-weight: 600 !important;
   background: #f4f4f5 !important;
@@ -671,36 +671,36 @@ body .ant-tooltip:not(.ant-menu-inline-collapsed-tooltip) .ant-tooltip-arrow::be
 }
 
 /* 彻底消灭 Antd 默认的 submenu-selected 突兀大色块背景 */
-.app-shell__topnav-menu.ant-menu-horizontal > .ant-menu-submenu-selected {
+.app-shell__topnav-menu.ead-menu-horizontal > .ead-menu-submenu-selected {
   background-color: transparent !important;
 }
 
-.app-shell__topnav-menu.ant-menu-horizontal > .ant-menu-submenu {
+.app-shell__topnav-menu.ead-menu-horizontal > .ead-menu-submenu {
   background-color: transparent !important;
 }
 
-.app-shell__topnav-menu .ant-menu-submenu-selected {
+.app-shell__topnav-menu .ead-menu-submenu-selected {
   background: transparent !important;
   background-color: transparent !important;
   color: inherit !important;
 }
 
-.app-shell__topnav-menu .ant-menu-submenu-selected::after,
-.app-shell__topnav-menu .ant-menu-submenu::after {
+.app-shell__topnav-menu .ead-menu-submenu-selected::after,
+.app-shell__topnav-menu .ead-menu-submenu::after {
   display: none !important;
 }
 
-.app-shell__topnav-menu .ant-menu-item-selected::after,
-.app-shell__topnav-menu .ant-menu-submenu-selected::after {
+.app-shell__topnav-menu .ead-menu-item-selected::after,
+.app-shell__topnav-menu .ead-menu-submenu-selected::after {
   display: none !important;
 }
 
 /* 现代化浮动菜单 (Navbar Dropdown Popover) - 类似 navbar.gallery / appica.dev */
-.app-shell--topnav + .ant-menu-submenu-popup .ant-menu,
-body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu,
-body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu-sub,
-body:has(.app-shell--topnav) .ant-menu-overflow-item-rest .ant-menu,
-body:has(.app-shell--topnav) .ant-menu-submenu .ant-menu {
+.app-shell--topnav + .ead-menu-submenu-popup .ead-menu,
+body:has(.app-shell--topnav) .ead-menu-submenu-popup .ead-menu,
+body:has(.app-shell--topnav) .ead-menu-submenu-popup .ead-menu-sub,
+body:has(.app-shell--topnav) .ead-menu-overflow-item-rest .ead-menu,
+body:has(.app-shell--topnav) .ead-menu-submenu .ead-menu {
   background: rgba(255, 255, 255, 0.95) !important;
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
@@ -711,8 +711,8 @@ body:has(.app-shell--topnav) .ant-menu-submenu .ant-menu {
   min-width: 150px;
 }
 
-body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu-item,
-body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu-submenu-title {
+body:has(.app-shell--topnav) .ead-menu-submenu-popup .ead-menu-item,
+body:has(.app-shell--topnav) .ead-menu-submenu-popup .ead-menu-submenu-title {
   border-radius: 8px !important;
   height: 36px !important;
   line-height: 36px !important;
@@ -724,20 +724,20 @@ body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu-submenu-title {
   transition: background-color 0.15s ease, color 0.15s ease !important;
 }
 
-body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu-item:hover,
-body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu-submenu-title:hover {
+body:has(.app-shell--topnav) .ead-menu-submenu-popup .ead-menu-item:hover,
+body:has(.app-shell--topnav) .ead-menu-submenu-popup .ead-menu-submenu-title:hover {
   color: #09090b !important;
   background: #f4f4f5 !important;
 }
 
-body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu-item-selected {
+body:has(.app-shell--topnav) .ead-menu-submenu-popup .ead-menu-item-selected {
   color: #09090b !important;
   font-weight: 600 !important;
   background: #ebecef !important;
 }
 
 /* 兼顾不支持 :has 选择器的浏览器降级 */
-.ant-menu-submenu-popup .ant-menu {
+.ead-menu-submenu-popup .ead-menu {
   border-radius: 10px;
 }
 
@@ -757,45 +757,45 @@ body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu-item-selected {
   box-shadow: 0 2px 10px rgba(99, 102, 241, 0.4) !important;
 }
 
-[data-theme='obsidian'] .app-shell__topnav-menu .ant-menu-item,
-[data-theme='obsidian'] .app-shell__topnav-menu .ant-menu-submenu-title {
+[data-theme='obsidian'] .app-shell__topnav-menu .ead-menu-item,
+[data-theme='obsidian'] .app-shell__topnav-menu .ead-menu-submenu-title {
   color: #a1a1aa !important;
 }
 
-[data-theme='obsidian'] .app-shell__topnav-menu .ant-menu-item:hover,
-[data-theme='obsidian'] .app-shell__topnav-menu .ant-menu-submenu-title:hover {
+[data-theme='obsidian'] .app-shell__topnav-menu .ead-menu-item:hover,
+[data-theme='obsidian'] .app-shell__topnav-menu .ead-menu-submenu-title:hover {
   color: #ffffff !important;
   background: rgba(255, 255, 255, 0.06) !important;
 }
 
-[data-theme='obsidian'] .app-shell__topnav-menu .ant-menu-item-selected,
-[data-theme='obsidian'] .app-shell__topnav-menu .ant-menu-submenu-selected .ant-menu-submenu-title {
+[data-theme='obsidian'] .app-shell__topnav-menu .ead-menu-item-selected,
+[data-theme='obsidian'] .app-shell__topnav-menu .ead-menu-submenu-selected .ead-menu-submenu-title {
   color: #ffffff !important;
   font-weight: 600 !important;
   background: rgba(255, 255, 255, 0.12) !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
 }
 
-body:has([data-theme='obsidian']) .ant-menu-submenu-popup .ant-menu {
+body:has([data-theme='obsidian']) .ead-menu-submenu-popup .ead-menu {
   background: rgba(18, 18, 21, 0.95) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   box-shadow: 0 12px 36px -4px rgba(0, 0, 0, 0.6) !important;
 }
 
-body:has([data-theme='obsidian']) .ant-menu-submenu-popup .ant-menu-item,
-body:has([data-theme='obsidian']) .ant-menu-submenu-popup .ant-menu-submenu-title {
+body:has([data-theme='obsidian']) .ead-menu-submenu-popup .ead-menu-item,
+body:has([data-theme='obsidian']) .ead-menu-submenu-popup .ead-menu-submenu-title {
   color: #a1a1aa !important;
   border-radius: 8px !important;
   margin: 2px 0 !important;
 }
 
-body:has([data-theme='obsidian']) .ant-menu-submenu-popup .ant-menu-item:hover,
-body:has([data-theme='obsidian']) .ant-menu-submenu-popup .ant-menu-submenu-title:hover {
+body:has([data-theme='obsidian']) .ead-menu-submenu-popup .ead-menu-item:hover,
+body:has([data-theme='obsidian']) .ead-menu-submenu-popup .ead-menu-submenu-title:hover {
   color: #ffffff !important;
   background: rgba(255, 255, 255, 0.08) !important;
 }
 
-body:has([data-theme='obsidian']) .ant-menu-submenu-popup .ant-menu-item-selected {
+body:has([data-theme='obsidian']) .ead-menu-submenu-popup .ead-menu-item-selected {
   color: #818cf8 !important;
   background: rgba(99, 102, 241, 0.15) !important;
 }
@@ -841,13 +841,13 @@ body:has([data-theme='obsidian']) {
   background: #09090b !important;
 }
 
-[data-theme='obsidian'] .analytics-cockpit__topbar-actions .ant-tag {
+[data-theme='obsidian'] .analytics-cockpit__topbar-actions .ead-tag {
   background: rgba(99, 102, 241, 0.12) !important;
   border-color: rgba(99, 102, 241, 0.3) !important;
   color: #a5b4fc !important;
 }
 
-[data-theme='obsidian'] .ant-card,
+[data-theme='obsidian'] .ead-card,
 [data-theme='obsidian'] .workbench-card,
 [data-theme='obsidian'] .page-stat-card {
   background: #121215 !important;
@@ -856,19 +856,19 @@ body:has([data-theme='obsidian']) {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
 }
 
-[data-theme='obsidian'] .ant-card:hover,
+[data-theme='obsidian'] .ead-card:hover,
 [data-theme='obsidian'] .page-stat-card:hover {
   border-color: rgba(129, 140, 248, 0.4) !important;
   box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.5), 0 0 10px rgba(99, 102, 241, 0.1) !important;
 }
 
-[data-theme='obsidian'] .ant-btn-default {
+[data-theme='obsidian'] .ead-btn-default {
   background: #18181b !important;
   border-color: #27272a !important;
   color: #e4e4e7 !important;
 }
 
-[data-theme='obsidian'] .ant-btn-default:hover {
+[data-theme='obsidian'] .ead-btn-default:hover {
   background: #27272a !important;
   border-color: #3f3f46 !important;
   color: #ffffff !important;
@@ -897,7 +897,7 @@ body:has([data-theme='obsidian']) {
   border-bottom-color: rgb(255 255 255 / 8%);
 }
 
-.app-shell--slate-switch .app-shell__sider .ant-menu-dark .ant-menu-item-selected {
+.app-shell--slate-switch .app-shell__sider .ead-menu-dark .ead-menu-item-selected {
   box-shadow: inset 3px 0 0 #38bdf8;
 }
 
@@ -1005,36 +1005,36 @@ body:has([data-theme='obsidian']) {
   box-shadow: 0 2px 8px rgba(56, 189, 248, 0.35);
 }
 
-[data-theme='slate'] .app-shell__topnav-menu .ant-menu-item,
-[data-theme='slate'] .app-shell__topnav-menu .ant-menu-submenu-title {
+[data-theme='slate'] .app-shell__topnav-menu .ead-menu-item,
+[data-theme='slate'] .app-shell__topnav-menu .ead-menu-submenu-title {
   color: #94a3b8 !important;
   font-size: 14px;
   font-weight: 500;
 }
 
-[data-theme='slate'] .app-shell__topnav-menu .ant-menu-item:hover,
-[data-theme='slate'] .app-shell__topnav-menu .ant-menu-submenu-title:hover {
+[data-theme='slate'] .app-shell__topnav-menu .ead-menu-item:hover,
+[data-theme='slate'] .app-shell__topnav-menu .ead-menu-submenu-title:hover {
   color: #ffffff !important;
   background: rgba(255, 255, 255, 0.06) !important;
 }
 
-[data-theme='slate'] .app-shell__topnav-menu .ant-menu-item-selected,
-[data-theme='slate'] .app-shell__topnav-menu .ant-menu-submenu-selected .ant-menu-submenu-title {
+[data-theme='slate'] .app-shell__topnav-menu .ead-menu-item-selected,
+[data-theme='slate'] .app-shell__topnav-menu .ead-menu-submenu-selected .ead-menu-submenu-title {
   color: #ffffff !important;
   font-weight: 600 !important;
   background: rgba(255, 255, 255, 0.1) !important;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
 }
 
-[data-theme='slate'] .app-shell__topnav-menu.ant-menu-horizontal > .ant-menu-submenu-selected {
+[data-theme='slate'] .app-shell__topnav-menu.ead-menu-horizontal > .ead-menu-submenu-selected {
   background-color: transparent !important;
 }
 
-[data-theme='obsidian'] .app-shell__topnav-menu.ant-menu-horizontal > .ant-menu-submenu-selected {
+[data-theme='obsidian'] .app-shell__topnav-menu.ead-menu-horizontal > .ead-menu-submenu-selected {
   background-color: transparent !important;
 }
 
-body:has([data-theme='slate']) .ant-menu-submenu-popup .ant-menu {
+body:has([data-theme='slate']) .ead-menu-submenu-popup .ead-menu {
   background: rgba(30, 36, 48, 0.95) !important;
   backdrop-filter: blur(16px) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -1043,21 +1043,21 @@ body:has([data-theme='slate']) .ant-menu-submenu-popup .ant-menu {
   padding: 6px !important;
 }
 
-body:has([data-theme='slate']) .ant-menu-submenu-popup .ant-menu-item,
-body:has([data-theme='slate']) .ant-menu-submenu-popup .ant-menu-submenu-title {
+body:has([data-theme='slate']) .ead-menu-submenu-popup .ead-menu-item,
+body:has([data-theme='slate']) .ead-menu-submenu-popup .ead-menu-submenu-title {
   color: #cbd5e1 !important;
   border-radius: 8px !important;
   margin: 2px 0 !important;
   transition: background-color 0.15s ease, color 0.15s ease !important;
 }
 
-body:has([data-theme='slate']) .ant-menu-submenu-popup .ant-menu-item:hover,
-body:has([data-theme='slate']) .ant-menu-submenu-popup .ant-menu-submenu-title:hover {
+body:has([data-theme='slate']) .ead-menu-submenu-popup .ead-menu-item:hover,
+body:has([data-theme='slate']) .ead-menu-submenu-popup .ead-menu-submenu-title:hover {
   color: #ffffff !important;
   background: rgba(255, 255, 255, 0.08) !important;
 }
 
-body:has([data-theme='slate']) .ant-menu-submenu-popup .ant-menu-item-selected {
+body:has([data-theme='slate']) .ead-menu-submenu-popup .ead-menu-item-selected {
   color: #38bdf8 !important;
   background: rgba(56, 189, 248, 0.14) !important;
   font-weight: 600 !important;
@@ -1103,14 +1103,14 @@ body:has([data-theme='slate']) {
   background: #1a202c !important;
 }
 
-[data-theme='slate'] .analytics-cockpit__topbar-actions .ant-tag {
+[data-theme='slate'] .analytics-cockpit__topbar-actions .ead-tag {
   background: rgba(56, 189, 248, 0.12) !important;
   border-color: rgba(56, 189, 248, 0.3) !important;
   color: #7dd3fc !important;
   border-radius: 6px;
 }
 
-[data-theme='slate'] .ant-card,
+[data-theme='slate'] .ead-card,
 [data-theme='slate'] .workbench-card,
 [data-theme='slate'] .page-stat-card {
   background: #222938 !important;
@@ -1120,46 +1120,46 @@ body:has([data-theme='slate']) {
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-[data-theme='slate'] .ant-card:hover,
+[data-theme='slate'] .ead-card:hover,
 [data-theme='slate'] .page-stat-card:hover {
   border-color: rgba(56, 189, 248, 0.35) !important;
   box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.25), 0 0 8px rgba(56, 189, 248, 0.1) !important;
   transform: translateY(-1px);
 }
 
-[data-theme='slate'] .ant-btn-default {
+[data-theme='slate'] .ead-btn-default {
   background: #222938 !important;
   border: 1px solid #333d4e !important;
   color: #e2e8f0 !important;
   border-radius: 8px !important;
 }
 
-[data-theme='slate'] .ant-btn-default:hover {
+[data-theme='slate'] .ead-btn-default:hover {
   background: #2b3547 !important;
   border-color: #4b5568 !important;
   color: #ffffff !important;
 }
 
 /* 表格、表单输入框等中度灰深度契合 */
-[data-theme='slate'] .ant-input,
-[data-theme='slate'] .ant-select-selector {
+[data-theme='slate'] .ead-input,
+[data-theme='slate'] .ead-select-selector {
   background: #1a202c !important;
   border-color: #333d4e !important;
   color: #f1f5f9 !important;
 }
 
-[data-theme='slate'] .ant-table-thead > tr > th {
+[data-theme='slate'] .ead-table-thead > tr > th {
   background: #1e2430 !important;
   color: #cbd5e1 !important;
   border-bottom: 1px solid #2b3544 !important;
 }
 
-[data-theme='slate'] .ant-table-tbody > tr > td {
+[data-theme='slate'] .ead-table-tbody > tr > td {
   border-bottom: 1px solid #242c3b !important;
   color: #e2e8f0 !important;
 }
 
-[data-theme='slate'] .ant-table-tbody > tr:hover > td {
+[data-theme='slate'] .ead-table-tbody > tr:hover > td {
   background: #262e3d !important;
 }
 
@@ -1174,7 +1174,7 @@ body:has([data-theme='slate']) {
 }
 
 /* 卡片悬浮与细腻质感 - 类似 appica.dev 的高质感柔和卡片 */
-[data-theme='aurora'] .ant-card,
+[data-theme='aurora'] .ead-card,
 [data-theme='aurora'] .workbench-card,
 [data-theme='aurora'] .page-stat-card {
   background: #ffffff !important;
@@ -1184,7 +1184,7 @@ body:has([data-theme='slate']) {
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-[data-theme='aurora'] .ant-card:hover,
+[data-theme='aurora'] .ead-card:hover,
 [data-theme='aurora'] .page-stat-card:hover {
   border-color: rgba(212, 212, 216, 0.9) !important;
   box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02) !important;
@@ -1192,7 +1192,7 @@ body:has([data-theme='slate']) {
 }
 
 /* 刷新数据按钮等次级操作现代极简微调 */
-[data-theme='aurora'] .ant-btn-default {
+[data-theme='aurora'] .ead-btn-default {
   background: #ffffff;
   border-color: #e4e4e7;
   color: #27272a;
@@ -1201,20 +1201,20 @@ body:has([data-theme='slate']) {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
 }
 
-[data-theme='aurora'] .ant-btn-default:hover {
+[data-theme='aurora'] .ead-btn-default:hover {
   background: #f4f4f5 !important;
   border-color: #d4d4d8 !important;
   color: #09090b !important;
 }
 
 /* 顶部菜单项微调：增加下沉指示器和箭头间距 */
-.app-shell--topnav .app-shell__topnav-menu .ant-menu-submenu-arrow {
+.app-shell--topnav .app-shell__topnav-menu .ead-menu-submenu-arrow {
   margin-left: 4px;
   opacity: 0.5;
   transition: transform 0.2s ease;
 }
 
-.app-shell--topnav .app-shell__topnav-menu .ant-menu-submenu-open .ant-menu-submenu-arrow {
+.app-shell--topnav .app-shell__topnav-menu .ead-menu-submenu-open .ead-menu-submenu-arrow {
   opacity: 0.9;
 }
 
@@ -1479,18 +1479,18 @@ body:has([data-theme='slate']) {
     display: none;
   }
 
-  .app-shell__menu .ant-menu-title-content {
+  .app-shell__menu .ead-menu-title-content {
     display: none;
   }
 
-  .app-shell__menu .ant-menu-item,
-  .app-shell__menu .ant-menu-submenu-title {
+  .app-shell__menu .ead-menu-item,
+  .app-shell__menu .ead-menu-submenu-title {
     padding-inline: 0 !important;
     text-align: center;
   }
 
-  .app-shell__menu .ant-menu-item .anticon,
-  .app-shell__menu .ant-menu-submenu-title .anticon {
+  .app-shell__menu .ead-menu-item .anticon,
+  .app-shell__menu .ead-menu-submenu-title .anticon {
     margin-inline-end: 0;
     font-size: 16px;
   }

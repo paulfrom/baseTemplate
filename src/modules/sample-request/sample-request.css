@@ -1,0 +1,6 @@
+/* 原型只开放业务单据和办理动作，隐藏未实现的流程图、日志、标注与常用意见配置入口。 */
+.sample-request-approval .ead-tabs-nav,
+.sample-request-approval .ead-card-extra,
+.sample-request-approval [class$="-opinion-wrapper"] {
+  display: none;
+}

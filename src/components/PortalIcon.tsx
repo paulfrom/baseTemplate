@@ -5,7 +5,7 @@ import {
   MonitorOutlined,
   SettingOutlined,
   UserOutlined,
-} from "@ant-design/icons"
+} from "@ead/suid-icons"
 import type { PortalIconKey } from "../app/portal-settings"
 
 const ICON_MAP = {

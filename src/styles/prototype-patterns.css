@@ -31,7 +31,7 @@
   min-width: 0;
 }
 
-.prototype-page-header :is(h1, h2, h3, h4).ant-typography {
+.prototype-page-header :is(h1, h2, h3, h4).ead-typography {
   margin: 4px 0 2px;
   color: var(--color-text-1);
   font-size: var(--font-size-title-sub);
@@ -40,22 +40,22 @@
   text-wrap: balance;
 }
 
-.prototype-page-header .ant-typography-secondary {
+.prototype-page-header .ead-typography-secondary {
   color: var(--color-text-2);
 }
 
-.prototype-panel.ant-card {
+.prototype-panel.ead-card {
   border: 1px solid var(--color-border-soft);
   border-radius: var(--radius-md);
   background: var(--color-bg-white);
   box-shadow: 0 1px 2px rgb(20 54 80 / 4%);
 }
 
-.prototype-filter-panel.ant-card {
+.prototype-filter-panel.ead-card {
   border-top-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-border-soft));
 }
 
-.prototype-filter-panel > .ant-card-body {
+.prototype-filter-panel > .ead-card-body {
   padding: var(--space-md) 20px var(--space-sm);
 }
 
@@ -67,7 +67,7 @@
  * 3. 保证文本、标签、输入框、下拉框及操作按钮在任何分辨率下均保持像素级中线对齐。
  * ───────────────────────────────────────────────────────────── */
 
-.ant-form-inline,
+.ead-form-inline,
 .prototype-filter-form {
   display: flex;
   flex-wrap: wrap;
@@ -75,8 +75,8 @@
   gap: var(--space-xs) var(--space-sm);
 }
 
-.ant-form-inline .ant-form-item,
-.prototype-filter-form .ant-form-item {
+.ead-form-inline .ead-form-item,
+.prototype-filter-form .ead-form-item {
   display: inline-flex;
   align-items: center;
   margin-bottom: var(--space-xs);
@@ -105,16 +105,16 @@
   border-left: 0;
 }
 
-.ant-form-inline .ant-form-item-row,
-.prototype-filter-form .ant-form-item-row {
+.ead-form-inline .ead-form-item-row,
+.prototype-filter-form .ead-form-item-row {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
   min-height: var(--control-height-md, 32px);
 }
 
-.ant-form-inline .ant-form-item-label,
-.prototype-filter-form .ant-form-item-label {
+.ead-form-inline .ead-form-item-label,
+.prototype-filter-form .ead-form-item-label {
   display: inline-flex;
   align-items: center;
   padding: 0 8px 0 0;
@@ -123,8 +123,8 @@
   vertical-align: middle;
 }
 
-.ant-form-inline .ant-form-item-label > label,
-.prototype-filter-form .ant-form-item-label > label {
+.ead-form-inline .ead-form-item-label > label,
+.prototype-filter-form .ead-form-item-label > label {
   display: inline-flex;
   align-items: center;
   height: var(--control-height-md, 32px);
@@ -136,8 +136,8 @@
   line-height: var(--control-height-md, 32px);
 }
 
-.ant-form-inline .ant-form-item-label > label::after,
-.prototype-filter-form .ant-form-item-label > label::after {
+.ead-form-inline .ead-form-item-label > label::after,
+.prototype-filter-form .ead-form-item-label > label::after {
   content: ":";
   position: relative;
   top: 0;
@@ -146,64 +146,64 @@
   line-height: var(--control-height-md, 32px);
 }
 
-.ant-form-inline .ant-form-item-control,
-.prototype-filter-form .ant-form-item-control {
+.ead-form-inline .ead-form-item-control,
+.prototype-filter-form .ead-form-item-control {
   display: inline-flex;
   align-items: center;
   min-height: var(--control-height-md, 32px);
   line-height: var(--control-height-md, 32px);
 }
 
-.ant-form-inline .ant-form-item-control-input,
-.prototype-filter-form .ant-form-item-control-input {
+.ead-form-inline .ead-form-item-control-input,
+.prototype-filter-form .ead-form-item-control-input {
   display: flex;
   align-items: center;
   min-height: var(--control-height-md, 32px);
 }
 
-.ant-form-inline .ant-form-item-control-input-content,
-.prototype-filter-form .ant-form-item-control-input-content {
+.ead-form-inline .ead-form-item-control-input-content,
+.prototype-filter-form .ead-form-item-control-input-content {
   display: inline-flex;
   align-items: center;
 }
 
-.ant-form-inline :is(.ant-input:not(.ant-input-affix-wrapper .ant-input), .ant-input-affix-wrapper, .ant-picker, .ant-select-selector, .ant-input-number),
-.prototype-filter-form :is(.ant-input:not(.ant-input-affix-wrapper .ant-input), .ant-input-affix-wrapper, .ant-picker, .ant-select-selector, .ant-input-number),
-.prototype-business-form :is(.ant-input:not(.ant-input-affix-wrapper .ant-input), .ant-input-affix-wrapper, .ant-picker, .ant-select-selector, .ant-input-number) {
+.ead-form-inline :is(.ead-input:not(.ead-input-affix-wrapper .ead-input), .ead-input-affix-wrapper, .ead-picker, .ead-select-selector, .ead-input-number),
+.prototype-filter-form :is(.ead-input:not(.ead-input-affix-wrapper .ead-input), .ead-input-affix-wrapper, .ead-picker, .ead-select-selector, .ead-input-number),
+.prototype-business-form :is(.ead-input:not(.ead-input-affix-wrapper .ead-input), .ead-input-affix-wrapper, .ead-picker, .ead-select-selector, .ead-input-number) {
   border-radius: var(--radius-md);
 }
 
-.prototype-filter-form :is(.ant-picker, .ant-select, .ant-input-number),
-.prototype-business-form :is(.ant-picker, .ant-select, .ant-input-number) {
+.prototype-filter-form :is(.ead-picker, .ead-select, .ead-input-number),
+.prototype-business-form :is(.ead-picker, .ead-select, .ead-input-number) {
   width: 100%;
 }
 
-.ant-form-inline :is(.ant-input:not(.ant-input-affix-wrapper .ant-input), .ant-input-affix-wrapper, .ant-picker, .ant-select-selector, .ant-input-number):focus-within,
-.prototype-filter-form :is(.ant-input:not(.ant-input-affix-wrapper .ant-input), .ant-input-affix-wrapper, .ant-picker, .ant-select-selector, .ant-input-number):focus-within,
-.prototype-business-form :is(.ant-input:not(.ant-input-affix-wrapper .ant-input), .ant-input-affix-wrapper, .ant-picker, .ant-select-selector, .ant-input-number):focus-within {
+.ead-form-inline :is(.ead-input:not(.ead-input-affix-wrapper .ead-input), .ead-input-affix-wrapper, .ead-picker, .ead-select-selector, .ead-input-number):focus-within,
+.prototype-filter-form :is(.ead-input:not(.ead-input-affix-wrapper .ead-input), .ead-input-affix-wrapper, .ead-picker, .ead-select-selector, .ead-input-number):focus-within,
+.prototype-business-form :is(.ead-input:not(.ead-input-affix-wrapper .ead-input), .ead-input-affix-wrapper, .ead-picker, .ead-select-selector, .ead-input-number):focus-within {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 12%, transparent);
 }
 
 /* 消除带前缀/后缀图标的 Input 内部原生 input 标签被污染产生内双框线 */
-.ant-input-affix-wrapper .ant-input,
-.ant-input-affix-wrapper .ant-input:focus,
-.ant-input-affix-wrapper .ant-input:focus-within {
+.ead-input-affix-wrapper .ead-input,
+.ead-input-affix-wrapper .ead-input:focus,
+.ead-input-affix-wrapper .ead-input:focus-within {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
 }
 
 /* 业务垂直/弹出表单（Business Form）独立保留上标签下输入框布局 */
-.prototype-business-form .ant-form-item {
+.prototype-business-form .ead-form-item {
   margin-bottom: var(--space-sm);
 }
 
-.prototype-business-form .ant-form-item-label {
+.prototype-business-form .ead-form-item-label {
   padding-bottom: 4px;
 }
 
-.prototype-business-form .ant-form-item-label > label {
+.prototype-business-form .ead-form-item-label > label {
   height: 20px;
   color: var(--color-text-2);
   font-size: 13px;
@@ -211,8 +211,27 @@
   line-height: 20px;
 }
 
-.prototype-table-panel > .ant-card-body {
+/* ExtTable 依赖根节点实测高度计算表体；卡片与表体必须形成可测量的 flex 高度链。 */
+.prototype-table-panel.ead-card {
+  display: flex;
+  min-width: 0;
+  min-height: 420px;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.prototype-table-panel > .ead-card-body {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
   padding: var(--space-md) 20px 20px;
+}
+
+.prototype-table-panel .ead-ext-table {
+  min-height: 0;
+  flex: 1 1 auto;
 }
 
 .prototype-toolbar {
@@ -226,48 +245,48 @@
 }
 
 .prototype-toolbar .prototype-filter-form,
-.prototype-toolbar .ant-form-inline {
+.prototype-toolbar .ead-form-inline {
   margin-bottom: 0;
   display: flex;
   align-items: center;
 }
 
-.prototype-toolbar .prototype-filter-form .ant-form-item,
-.prototype-toolbar .ant-form-inline .ant-form-item {
+.prototype-toolbar .prototype-filter-form .ead-form-item,
+.prototype-toolbar .ead-form-inline .ead-form-item {
   margin-bottom: 0;
   display: inline-flex;
   align-items: center;
 }
 
-.prototype-page .ant-btn {
+.prototype-page .ead-btn {
   border-radius: var(--radius-md);
 }
 
-.prototype-page .ant-btn-primary {
+.prototype-page .ead-btn-primary {
   font-weight: 600;
 }
 
-.prototype-table-panel .ant-table-thead > tr > th {
+.prototype-table-panel .ead-table-thead > tr > th {
   border-bottom-color: var(--color-border-soft);
   background: color-mix(in srgb, var(--color-primary) 4%, var(--color-bg-1));
   color: var(--color-text-1);
   font-weight: 600;
 }
 
-.prototype-table-panel .ant-table-tbody > tr > td {
+.prototype-table-panel .ead-table-tbody > tr > td {
   border-bottom-color: var(--color-border-soft);
 }
 
-.prototype-table-panel .ant-table-tbody > tr.ant-table-row:hover > td,
-.prototype-table-panel .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+.prototype-table-panel .ead-table-tbody > tr.ead-table-row:hover > td,
+.prototype-table-panel .ead-table-tbody > tr > td.ead-table-cell-row-hover {
   background: color-mix(in srgb, var(--color-primary) 5%, var(--color-bg-white));
 }
 
-.prototype-table-panel :is(.ant-table-cell, .ant-pagination) {
+.prototype-table-panel :is(.ead-table-cell, .ead-pagination) {
   font-variant-numeric: tabular-nums;
 }
 
-.prototype-table-panel .ant-pagination {
+.prototype-table-panel .ead-pagination {
   margin-bottom: 0;
 }
 
@@ -278,22 +297,22 @@
 
 /* 分类 / 归属 / 模式等非状态标签：品牌浅底，不走 AntD 糖果预设色。
    选择器覆盖页面内表格与 Drawer/Modal 传送门，避免详情层掉回默认灰底。 */
-.ant-tag.prototype-meta-tag,
-.ant-tag.prototype-meta-tag.ant-tag-blue,
-.ant-tag.prototype-meta-tag.ant-tag-cyan,
-.ant-tag.prototype-meta-tag.ant-tag-purple,
-.ant-tag.prototype-meta-tag.ant-tag-geekblue,
-.ant-tag.prototype-meta-tag.ant-tag-volcano,
-.ant-tag.prototype-meta-tag.ant-tag-orange,
-.ant-tag.prototype-meta-tag.ant-tag-gold,
-.ant-tag.prototype-meta-tag.ant-tag-lime {
+.ead-tag.prototype-meta-tag,
+.ead-tag.prototype-meta-tag.ead-tag-blue,
+.ead-tag.prototype-meta-tag.ead-tag-cyan,
+.ead-tag.prototype-meta-tag.ead-tag-purple,
+.ead-tag.prototype-meta-tag.ead-tag-geekblue,
+.ead-tag.prototype-meta-tag.ead-tag-volcano,
+.ead-tag.prototype-meta-tag.ead-tag-orange,
+.ead-tag.prototype-meta-tag.ead-tag-gold,
+.ead-tag.prototype-meta-tag.ead-tag-lime {
   border-color: color-mix(in srgb, var(--color-primary) 18%, var(--color-border-soft));
   background: var(--color-tag-blue-bg);
   color: var(--color-tag-blue-text);
 }
 
 /* 进行中状态对齐品牌蓝，避免与分类标签形成第二套亮蓝。 */
-.ant-tag.ant-tag-filled.ant-tag-processing {
+.ead-tag.ead-tag-filled.ead-tag-processing {
   --ant-color-info-bg: var(--color-processing-bg);
   --ant-color-info-border: color-mix(in srgb, var(--color-primary) 22%, var(--color-border-soft));
   --ant-color-info: var(--color-primary);
@@ -305,26 +324,26 @@
 
 
 /* 详情双列按内容均分，避免左宽右窄。 */
-.prototype-page .ant-descriptions-bordered .ant-descriptions-view > table,
-.ant-drawer .ant-descriptions-bordered .ant-descriptions-view > table,
-.ant-modal .ant-descriptions-bordered .ant-descriptions-view > table {
+.prototype-page .ead-descriptions-bordered .ead-descriptions-view > table,
+.ead-drawer .ead-descriptions-bordered .ead-descriptions-view > table,
+.ead-modal .ead-descriptions-bordered .ead-descriptions-view > table {
   table-layout: fixed;
 }
 
-.prototype-page .ant-descriptions-bordered .ant-descriptions-item-label,
-.ant-drawer .ant-descriptions-bordered .ant-descriptions-item-label,
-.ant-modal .ant-descriptions-bordered .ant-descriptions-item-label {
+.prototype-page .ead-descriptions-bordered .ead-descriptions-item-label,
+.ead-drawer .ead-descriptions-bordered .ead-descriptions-item-label,
+.ead-modal .ead-descriptions-bordered .ead-descriptions-item-label {
   width: 22%;
 }
 
-.prototype-page .ant-descriptions-bordered .ant-descriptions-item-content,
-.ant-drawer .ant-descriptions-bordered .ant-descriptions-item-content,
-.ant-modal .ant-descriptions-bordered .ant-descriptions-item-content {
+.prototype-page .ead-descriptions-bordered .ead-descriptions-item-content,
+.ead-drawer .ead-descriptions-bordered .ead-descriptions-item-content,
+.ead-modal .ead-descriptions-bordered .ead-descriptions-item-content {
   width: 28%;
 }
 
 /* 侧边导航：层级、节奏和交互状态在所有业务页面保持一致。 */
-.app-shell__sider .app-shell__menu.ant-menu-inline :is(.ant-menu-item, .ant-menu-submenu-title) {
+.app-shell__sider .app-shell__menu.ead-menu-inline :is(.ead-menu-item, .ead-menu-submenu-title) {
   width: calc(100% - var(--space-md));
   height: var(--control-height-lg);
   margin: 2px var(--space-xs);
@@ -332,18 +351,18 @@
   line-height: var(--control-height-lg);
 }
 
-.app-shell__sider .app-shell__menu .ant-menu-item-icon,
+.app-shell__sider .app-shell__menu .ead-menu-item-icon,
 .app-shell__sider .app-shell__menu .anticon {
   min-width: var(--space-md);
   font-size: 16px;
 }
 
-.app-shell__sider .ant-menu-dark .ant-menu-item-selected {
+.app-shell__sider .ead-menu-dark .ead-menu-item-selected {
   background: var(--color-sidebar-selected) !important;
   box-shadow: inset 3px 0 0 #ffffff !important;
 }
 
-.app-shell__sider .ant-menu-dark .ant-menu-item-disabled {
+.app-shell__sider .ead-menu-dark .ead-menu-item-disabled {
   color: rgb(255 255 255 / 42%) !important;
 }
 
@@ -357,9 +376,9 @@
     gap: var(--space-md);
   }
 
-  .prototype-filter-panel > .ant-card-body,
-  .prototype-table-panel > .ant-card-body,
-  .prototype-form-section > .ant-card-body {
+  .prototype-filter-panel > .ead-card-body,
+  .prototype-table-panel > .ead-card-body,
+  .prototype-form-section > .ead-card-body {
     padding-inline: var(--space-md);
   }
 }

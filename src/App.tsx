@@ -1,5 +1,5 @@
-import {ConfigProvider, theme} from "antd"
-import zhCN from "antd/locale/zh_CN"
+import {App as SuidApp, ConfigProvider, theme} from "@ead/suid"
+import zhCN from "@ead/suid/es/locale/zh_CN"
 import {Suspense, useEffect, useState} from "react"
 import "./App.css"
 import {AppShell, type PrototypeThemeId} from "./app/AppShell"
@@ -149,6 +149,7 @@ function App() {
         },
       }}
     >
+      <SuidApp>
       {route === "portal" ? (
         <PortalPage
           dataTheme={darkMode ? "dark" : "light"}
@@ -169,6 +170,7 @@ function App() {
           <Suspense fallback={null}>{renderMainRoute(route, { navigate, currentTheme: themeId, onSelectTheme: handleThemeSelect })}</Suspense>
         </AppShell>
       )}
+      </SuidApp>
     </ConfigProvider>
   )
 }

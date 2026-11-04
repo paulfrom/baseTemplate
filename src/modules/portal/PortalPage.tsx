@@ -1,5 +1,5 @@
-import {AppstoreOutlined, ArrowRightOutlined, DownOutlined, HomeOutlined, MenuOutlined, MoonOutlined, QuestionCircleOutlined, SettingOutlined, SunOutlined, UserOutlined} from '@ant-design/icons'
-import {Avatar, Button, Dropdown, Switch, message} from 'antd'
+import {AppstoreOutlined, ArrowRightOutlined, DownOutlined, HomeOutlined, MenuOutlined, MoonOutlined, QuestionCircleOutlined, SettingOutlined, SunOutlined, UserOutlined} from '@ead/suid-icons'
+import {Avatar, Button, Dropdown, Switch, message} from '@ead/suid'
 import {useEffect, useMemo, useState} from 'react'
 import {usePortalSettings, type PortalApplication} from '../../app/portal-settings'
 import {PlatformIllustration, PortalNetworkBackdrop} from './PlatformIllustration'

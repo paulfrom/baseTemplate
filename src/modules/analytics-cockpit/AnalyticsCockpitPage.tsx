@@ -1,9 +1,9 @@
 import {
   ArrowDownOutlined, ArrowUpOutlined, ClockCircleOutlined, DownloadOutlined,
   InfoCircleOutlined, MinusOutlined, ReloadOutlined,
-} from "@ant-design/icons"
-import { Button, Card, Progress, Segmented, Select, Space, Table, Tag, Tooltip, Typography, message } from "antd"
-import type { TableColumnsType } from "antd"
+} from "@ead/suid-icons"
+import { Button, Card, Progress, Segmented, Select, Space, Table, Tag, Tooltip, Typography, message } from "@ead/suid"
+import type { TableColumnsType } from "@ead/suid"
 import { useEffect, useMemo, useRef, useState } from "react"
 import "./analytics-cockpit.css"
 import { EChart } from "../../components/charts/EChart"

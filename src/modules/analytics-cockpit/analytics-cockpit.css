@@ -64,7 +64,7 @@ body:has(.analytics-cockpit) { background: #f3f6fa; }
 [data-theme='slate'] body:has(.analytics-cockpit) { background: #1e2430; }
 [data-theme='aurora'] body:has(.analytics-cockpit) { background: #f4f4f5; }
 
-:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) .analytics-cockpit .ant-progress-inner {
+:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) .analytics-cockpit .ead-progress-inner {
   background-color: var(--color-border-soft);
 }
 
@@ -87,21 +87,21 @@ body:has(.analytics-cockpit) { background: #f3f6fa; }
   flex-wrap: wrap;
   gap: var(--space-sm);
 }
-.analytics-cockpit__topbar-title.ant-typography {
+.analytics-cockpit__topbar-title.ead-typography {
   margin: 0;
   color: var(--analytics-text);
   font-size: var(--font-size-title-main);
   font-weight: 650;
   line-height: 1.3;
 }
-.analytics-cockpit__subtitle.ant-typography {
+.analytics-cockpit__subtitle.ead-typography {
   display: block;
   margin-top: var(--space-xs);
   font-size: var(--font-size-help);
   color: var(--analytics-muted);
 }
 .analytics-cockpit__update-time { font-size: var(--font-size-help); }
-.analytics-cockpit__topbar-actions .ant-tag { margin: 0; }
+.analytics-cockpit__topbar-actions .ead-tag { margin: 0; }
 .analytics-cockpit__toolbar {
   display: flex;
   align-items: center;
@@ -121,7 +121,7 @@ body:has(.analytics-cockpit) { background: #f3f6fa; }
   min-width: 0;
 }
 .analytics-cockpit__toolbar-item > span { flex-shrink: 0; }
-.analytics-cockpit__toolbar-item .ant-select { min-width: 88px; max-width: 280px; }
+.analytics-cockpit__toolbar-item .ead-select { min-width: 88px; max-width: 280px; }
 .analytics-cockpit__toolbar-summary { margin-left: auto; font-size: var(--font-size-help); color: var(--analytics-muted); overflow-wrap: anywhere; }
 
 /* 八项指标优先单行，仅在内容区不足 900px 时切换两行。 */
@@ -152,13 +152,13 @@ body:has(.analytics-cockpit) { background: #f3f6fa; }
 .analytics-cockpit__kpi-change--danger strong,
 .analytics-cockpit__danger { color: var(--color-error-text); }
 
-.analytics-cockpit__panel.ant-card { border: 1px solid var(--analytics-panel-border); border-radius: var(--radius-lg); background: var(--color-bg-white); box-shadow: none; min-width: 0; }
-.analytics-cockpit__panel > .ant-card-body { padding: var(--space-md); }
+.analytics-cockpit__panel.ead-card { border: 1px solid var(--analytics-panel-border); border-radius: var(--radius-lg); background: var(--color-bg-white); box-shadow: none; min-width: 0; }
+.analytics-cockpit__panel > .ead-card-body { padding: var(--space-md); }
 .analytics-cockpit__panel-head { min-height: 26px; margin-bottom: var(--space-sm); }
 .analytics-cockpit__panel-title { display: flex; align-items: center; gap: var(--space-xs); margin: 0; font-size: var(--font-size-body); font-weight: 650; line-height: 1.5; color: var(--analytics-text); }
 .analytics-cockpit__panel-title::before { content: ''; display: block; width: 3px; height: 14px; border-radius: var(--radius-sm); background: var(--color-primary); flex-shrink: 0; }
 .analytics-cockpit__panel-meta { font-size: var(--font-size-help); color: var(--analytics-muted); }
-.analytics-cockpit__panel-head .ant-btn { padding-inline: 0; }
+.analytics-cockpit__panel-head .ead-btn { padding-inline: 0; }
 
 /* 高度由紧凑内容决定，地图不再跟随视口放大并拉伸两侧。 */
 .analytics-cockpit__tower { display: grid; grid-template-columns: 208px minmax(0, 1fr) 232px; gap: var(--space-md); align-items: stretch; }
@@ -176,7 +176,7 @@ body:has(.analytics-cockpit) { background: #f3f6fa; }
 .analytics-cockpit__tower-footer span { color: var(--analytics-muted); font-size: var(--font-size-help); }
 .analytics-cockpit__tower-footer strong { display: block; margin-top: 4px; font-size: var(--font-size-title-sub); font-family: var(--analytics-number-font); font-variant-numeric: tabular-nums; font-weight: 600; }
 .analytics-cockpit__tower-footer small { font-size: var(--font-size-help); font-weight: 400; }
-.analytics-cockpit__map-panel.ant-card { background: linear-gradient(180deg, var(--color-bg-white) 60%, var(--color-surface-subtle)); }
+.analytics-cockpit__map-panel.ead-card { background: linear-gradient(180deg, var(--color-bg-white) 60%, var(--color-surface-subtle)); }
 .analytics-cockpit__map-tools {
   display: flex;
   align-items: center;
@@ -202,7 +202,7 @@ body:has(.analytics-cockpit) { background: #f3f6fa; }
 }
 .analytics-cockpit__map-nav button:hover { color: var(--color-primary); }
 .analytics-cockpit__map-nav [aria-current='page'] { color: var(--analytics-text); font-weight: 600; }
-.analytics-cockpit__map-tools .ant-select { min-width: 118px; }
+.analytics-cockpit__map-tools .ead-select { min-width: 118px; }
 .analytics-cockpit__map-wrap { position: relative; width: 100%; height: 392px; cursor: pointer; }
 @container cockpit (min-width: 1280px) {
   .analytics-cockpit__map-wrap { height: 420px; }
@@ -216,7 +216,7 @@ body:has(.analytics-cockpit) { background: #f3f6fa; }
 .analytics-cockpit__exception-improve { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: var(--font-size-help); color: var(--analytics-success); margin: var(--space-xs) 0 var(--space-md); }
 .analytics-cockpit__exception-list { display: grid; gap: var(--space-xs); }
 .analytics-cockpit__mini-trend { border-top: 1px solid var(--analytics-panel-border); padding-top: var(--space-xs); margin-top: var(--space-sm); }
-.analytics-cockpit__mini-trend > .ant-typography { font-size: var(--font-size-help); }
+.analytics-cockpit__mini-trend > .ead-typography { font-size: var(--font-size-help); }
 .analytics-cockpit__mini-chart { height: 96px; margin-top: 4px; }
 
 .analytics-cockpit__region-controls { flex-wrap: wrap; }
@@ -227,7 +227,7 @@ body:has(.analytics-cockpit) { background: #f3f6fa; }
 .analytics-cockpit__region-chip[aria-pressed='true'] { background: var(--analytics-blue-soft); box-shadow: inset 0 -2px var(--color-primary); }
 .analytics-cockpit__region-chip-name { color: var(--analytics-muted); font-size: var(--font-size-help); }
 .analytics-cockpit__region-chip-value { margin: 4px 0 var(--space-xs); font-size: var(--font-size-title-small); font-weight: 600; font-family: var(--analytics-number-font); font-variant-numeric: tabular-nums; }
-.analytics-cockpit__region-chip .ant-progress { margin: 0; }
+.analytics-cockpit__region-chip .ead-progress { margin: 0; }
 
 .analytics-cockpit__analysis { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: var(--space-md); }
 .analytics-cockpit__trend-chart { height: 240px; }
@@ -254,9 +254,9 @@ body:has(.analytics-cockpit) { background: #f3f6fa; }
 .analytics-cockpit__table-head { margin-bottom: var(--space-sm); }
 .analytics-cockpit__table-note { color: var(--analytics-muted); font-size: var(--font-size-help); margin-top: 4px; }
 .analytics-cockpit__carrier-name { color: var(--analytics-text); font-weight: 500; }
-.analytics-cockpit__table .ant-table-cell { font-variant-numeric: tabular-nums; }
-.analytics-cockpit__table .ant-table-thead > tr > th { background: var(--color-surface-subtle); color: var(--analytics-label); }
-.analytics-cockpit__footnote.ant-typography { color: var(--analytics-muted); font-size: var(--font-size-help); }
+.analytics-cockpit__table .ead-table-cell { font-variant-numeric: tabular-nums; }
+.analytics-cockpit__table .ead-table-thead > tr > th { background: var(--color-surface-subtle); color: var(--analytics-label); }
+.analytics-cockpit__footnote.ead-typography { color: var(--analytics-muted); font-size: var(--font-size-help); }
 
 @container cockpit (min-width: 1536px) {
   .analytics-cockpit__kpi-strip { grid-template-columns: repeat(8, minmax(0, 1fr)); }
@@ -289,7 +289,7 @@ body:has(.analytics-cockpit) { background: #f3f6fa; }
   .analytics-cockpit__kpi-strip, .analytics-cockpit__alloc-grid, .analytics-cockpit__region-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .analytics-cockpit__toolbar-summary { width: 100%; margin: 0; }
   .analytics-cockpit__toolbar-item { flex-wrap: wrap; }
-  .analytics-cockpit__toolbar-item .ant-select { max-width: 100%; }
+  .analytics-cockpit__toolbar-item .ead-select { max-width: 100%; }
   .analytics-cockpit__region-controls > .analytics-cockpit__panel-meta { display: none; }
   .analytics-cockpit__tower { grid-template-columns: 1fr; }
   .analytics-cockpit__kpi-cell { padding: var(--space-sm); }

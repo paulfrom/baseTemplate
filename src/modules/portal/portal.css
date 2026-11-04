@@ -131,7 +131,7 @@
 }
 
 .portal__nav-btn:disabled,
-.portal__nav-btn.ant-btn-disabled {
+.portal__nav-btn.ead-btn-disabled {
   background: transparent !important;
   color: var(--color-text-disabled) !important;
   opacity: 0.6;

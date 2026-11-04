@@ -9,6 +9,7 @@ import type { AppRoute } from "./hash-navigation"
  */
 
 const AnalyticsCockpitPage = lazy(() => import("../modules/analytics-cockpit").then((m) => ({ default: m.AnalyticsCockpitPage })))
+const SampleRequestPage = lazy(() => import("../modules/sample-request"))
 const MenuManagementPage = lazy(() => import("../modules/menu-management").then((m) => ({ default: m.MenuManagementPage })))
 const AppManagementPage = lazy(() => import("../modules/app-management").then((m) => ({ default: m.AppManagementPage })))
 const UserSettingsPage = lazy(() => import("../modules/user-settings").then((m) => ({ default: m.UserSettingsPage })))
@@ -22,6 +23,8 @@ interface MainRouteContext {
 /** 主平台（AppShell 内）路由的渲染适配：需要额外 props 的页面在 switch 中传入。 */
 export function renderMainRoute(route: AppRoute, ctx: MainRouteContext) {
   switch (route) {
+    case "sample-request":
+      return <SampleRequestPage />
     case "analytics-cockpit":
       return <AnalyticsCockpitPage />
     case "menu-management":

@@ -1,8 +1,12 @@
+import 'fake-indexeddb/auto'
 import '@testing-library/jest-dom/vitest'
 import { cleanup } from '@testing-library/react'
-import { afterEach } from 'vitest'
+import { afterEach, vi } from 'vitest'
 import { act } from 'react'
-import { message } from 'antd'
+import message from '@ead/suid/es/message'
+
+// 动画播放器依赖 canvas；页面交互测试不渲染动画。
+vi.mock('react-lottie', () => ({ default: () => null }))
 
 // React 19 在测试环境需要显式声明 Act 环境；否则用户交互会输出 act(...) 噪声。
 Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: true })

@@ -1,4 +1,4 @@
-import { Card, Select } from "antd"
+import { Card, Select } from "@ead/suid"
 import { useMemo, useState } from "react"
 import { EChart, mainlandGeoJson } from "../../components/charts/EChart"
 import type { EChartClickEvent } from "../../components/charts/EChart"

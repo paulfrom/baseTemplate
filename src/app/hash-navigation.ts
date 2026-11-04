@@ -17,11 +17,22 @@ export interface PortalRouteDefinition {
 export type AppRoute =
   | "portal"
   | "analytics-cockpit"
+  | "sample-request"
   | "menu-management"
   | "app-management"
   | "user-settings"
 
 export const PORTAL_ROUTE_DEFINITIONS: readonly PortalRouteDefinition[] = [
+  {
+    route: "sample-request",
+    label: "申请单示例",
+    groupId: null,
+    groupLabel: "顶级菜单",
+    icon: "menu",
+    permission: "sample:request:view",
+    sort: 15,
+    defaultVisible: true,
+  },
   {
     route: "portal",
     label: "门户入口",
