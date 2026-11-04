@@ -16,7 +16,7 @@ import { Avatar, Button, Dropdown, Layout, Menu, message, Tooltip } from "antd"
 import type { MenuProps } from "antd"
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react"
 import { PortalIcon } from "../components/PortalIcon"
-import { isAppRoute, type AppRoute } from "./hash-navigation"
+import { isAppRoute, PORTAL_ROUTE_DEFINITIONS, type AppRoute } from "./hash-navigation"
 import { usePortalSettings, type PortalIconKey, type PortalMenuItem } from "./portal-settings"
 
 /**
@@ -62,13 +62,9 @@ export function SidebarToggleIcon({ className }: { className?: string }) {
 
 const { Content, Header, Sider } = Layout
 
-const routeLabels: Record<AppRoute, string> = {
-  portal: "门户入口",
-  "analytics-cockpit": "数据驾驶舱",
-  "menu-management": "菜单管理",
-  "app-management": "应用管理",
-  "user-settings": "用户配置",
-}
+const routeLabels = Object.fromEntries(
+  PORTAL_ROUTE_DEFINITIONS.map((definition) => [definition.route, definition.label]),
+) as Record<AppRoute, string>
 
 const routeGroupLabels: Partial<Record<AppRoute, string>> = {
   "menu-management": "系统配置",
@@ -113,7 +109,7 @@ function buildNavigationItems(menus: PortalMenuItem[], includeIcons: boolean): N
   const mapItem = (item: PortalMenuItem): NavigationItem => {
     const children = childrenByParent.get(item.id)?.map(mapItem)
     return {
-      // 页面菜单以路由作为导航 key；新增菜单的 id 是本地随机值，不能拿它当路由。
+      // 页面菜单以 Router 路由作为导航 key，目录分组才使用配置 id。
       key: item.type === "page" && item.route ? item.route : item.id,
       label: item.name,
       ...(includeIcons ? { icon: MENU_ICON_NODES[item.icon] } : {}),

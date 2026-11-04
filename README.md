@@ -16,11 +16,11 @@ npm run verify  # typecheck + lint + test + build 完整门禁
 
 外壳和用户菜单提供以下入口，页面均为可操作的纯前端原型：
 
-- `#/menu-management`：菜单分组、页面路由、权限标识、显示开关、排序及新增 / 编辑 / 删除；保存后同步侧边栏、顶部导航和面包屑。
-- `#/app-management`：应用卡片、分类、路由、标签、门户展示和启停状态；保存后同步门户首屏卡片。
+- `#/menu-management`：直接读取当前 Router 的页面清单，支持名称 / 路由 / 分组 / 权限筛选和“导航展示”勾选；取消勾选后同步隐藏侧边栏、顶部导航入口，不提供新增自定义菜单。
+- `#/app-management`：应用卡片、分类、路由、标签和门户展示配置；保存后同步门户首屏卡片，不提供应用启停切换，已配置路由的应用可直接进入。
 - `#/user-settings`：基本资料、头像颜色、默认主题、首页与密度偏好、通知开关，以及明确标注为演示的安全设置。
 
-菜单、应用和用户偏好共享 `src/app/portal-settings.ts` 中的本地事实源，默认写入浏览器 `localStorage` 的 `prototype_portal_settings_v1`，刷新后保留；可在各管理页点击「恢复默认」还原对应配置。权限标识、登录设备、密码修改和通知渠道仅用于原型演示，不代表真实权限、认证或后端能力。
+菜单、应用和用户偏好共享 `src/app/portal-settings.ts` 中的本地事实源，默认写入浏览器 `localStorage` 的 `prototype_portal_settings_v1`，刷新后保留；菜单的页面名称、层级、路由和权限始终以 `src/app/hash-navigation.ts` 的 `PORTAL_ROUTE_DEFINITIONS` 为准，仅持久化展示勾选。可在各管理页点击「恢复默认」还原对应配置。权限标识、登录设备、密码修改和通知渠道仅用于原型演示，不代表真实权限、认证或后端能力。
 
 ## 技术栈
 
@@ -56,7 +56,7 @@ install.sh                     # 安装到 /home/paul/project/baseTemplate 并�
 
 1. **路由**：`src/app/hash-navigation.ts` 中给 `AppRoute` 联合类型和 `knownRoutes` 加新路由 id；
 2. **渲染**：`src/app/route-registry.tsx` 中加 `lazy(() => import("../modules/<name>"))` 和 `renderMainRoute` 的 switch 分支；
-3. **菜单与文案**：`src/app/AppShell.tsx` 中补 `routeLabels` / `systemLabels`（必填），有分组时再补 `routeGroupLabels` / `routeToGroupMap` / `routeToOpenKeys`；默认导航来自 `portal-settings.ts` 的菜单配置，新增页面还需在菜单管理中配置可见入口（或补充默认菜单）。
+3. **菜单与文案**：在 `src/app/hash-navigation.ts` 的 `PORTAL_ROUTE_DEFINITIONS` 补充页面名称、分组、图标和默认展示状态；`AppShell.tsx` 与菜单管理会读取同一份 Router 元数据。
 4. **模块**：新建 `src/modules/<name>/`，包含页面组件、`index.ts` 导出、模块 css 与测试；数据用模块内 mock（参考 `analytics-cockpit/mockData.ts`）。
 
 如需在门户加入口卡片，进入「应用管理」新建应用并开启「门户展示」；如需随模板默认提供入口，在 `src/app/portal-settings.ts` 的 `DEFAULT_APPLICATIONS` 中追加配置。

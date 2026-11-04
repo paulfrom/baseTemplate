@@ -1702,3 +1702,17 @@ body:has([data-theme='slate']) {
     padding: 2px !important;
   }
 }
+
+/* AntD Sider 会把宽度写成内联 flex 属性，移动端需要同时覆盖宽度与 flex 基准。 */
+@media (width <= 720px) {
+  .app-shell:not(.app-shell--topnav) .app-shell__sider {
+    width: var(--sidebar-collapsed-width, 64px) !important;
+    min-width: var(--sidebar-collapsed-width, 64px) !important;
+    max-width: var(--sidebar-collapsed-width, 64px) !important;
+    flex: 0 0 var(--sidebar-collapsed-width, 64px) !important;
+  }
+
+  .app-shell:not(.app-shell--topnav) .app-shell__main {
+    margin-left: var(--sidebar-collapsed-width, 64px) !important;
+  }
+}

@@ -2,14 +2,14 @@ import { beforeEach, describe, expect, it } from "vitest"
 import {
   getPortalSettings,
   removePortalApplication,
-  removePortalMenu,
   resetPortalApplications,
   resetPortalMenus,
   resetPortalSettings,
   savePortalApplication,
-  savePortalMenu,
+  setPortalMenuVisibility,
   updatePortalUser,
 } from "./portal-settings"
+import { PORTAL_ROUTE_DEFINITIONS } from "./hash-navigation"
 
 beforeEach(() => {
   window.localStorage.clear()
@@ -17,17 +17,14 @@ beforeEach(() => {
 })
 
 describe("portal settings local store", () => {
-  it("provides the built-in menu, application and user configuration", () => {
+  it("provides router-backed menus, applications and user configuration", () => {
     const settings = getPortalSettings()
     expect(settings.version).toBe(1)
     expect(settings.applications).toHaveLength(6)
-    expect(settings.menus.map((menu) => menu.id)).toEqual([
-      "analytics-cockpit",
-      "system-config-group",
-      "menu-management",
-      "app-management",
-      "user-settings",
-    ])
+    expect(settings.menus.filter((menu) => menu.type === "page").map((menu) => menu.route)).toEqual(
+      PORTAL_ROUTE_DEFINITIONS.map((definition) => definition.route),
+    )
+    expect(settings.menus.find((menu) => menu.id === "portal")?.visible).toBe(false)
     expect(settings.user.userName).toBe("管理员")
   })
 
@@ -44,7 +41,7 @@ describe("portal settings local store", () => {
     expect(JSON.parse(window.localStorage.getItem("prototype_portal_settings_v1") ?? "{}").applications).toHaveLength(7)
 
     savePortalApplication({ ...application, status: "disabled" })
-    expect(getPortalSettings().applications.find((item) => item.id === "app-test")?.status).toBe("disabled")
+    expect(getPortalSettings().applications.find((item) => item.id === "app-test")?.status).toBe("enabled")
     removePortalApplication("app-test")
     expect(getPortalSettings().applications).toHaveLength(6)
 
@@ -54,22 +51,10 @@ describe("portal settings local store", () => {
     expect(getPortalSettings().applications.some((item) => item.id === "app-test")).toBe(false)
   })
 
-  it("persists menu hierarchy and user notification preferences without losing sibling settings", () => {
-    const menu = {
-      ...getPortalSettings().menus[1],
-      id: "custom-group",
-      name: "自定义分组",
-      sort: 80,
-    }
-    savePortalMenu(menu)
-    savePortalMenu({
-      ...getPortalSettings().menus[0],
-      id: "custom-page",
-      parentId: "custom-group",
-      name: "自定义页面",
-      route: "app-management",
-    })
-    expect(getPortalSettings().menus.find((item) => item.id === "custom-page")).toMatchObject({ parentId: "custom-group", route: "app-management" })
+  it("persists only router menu visibility and keeps user notification siblings", () => {
+    setPortalMenuVisibility("analytics-cockpit", false)
+    expect(getPortalSettings().menus.find((menu) => menu.id === "analytics-cockpit")?.visible).toBe(false)
+    expect(JSON.parse(window.localStorage.getItem("prototype_portal_settings_v1") ?? "{}").menus.find((menu: { id: string }) => menu.id === "analytics-cockpit").visible).toBe(false)
 
     updatePortalUser({ userName: "门户管理员", notifications: { ...getPortalSettings().user.notifications, email: false } })
     updatePortalUser({ defaultTheme: "obsidian" })
@@ -77,10 +62,8 @@ describe("portal settings local store", () => {
     expect(getPortalSettings().user.notifications.email).toBe(false)
     expect(getPortalSettings().user.notifications.website).toBe(true)
 
-    removePortalMenu("custom-page")
-    removePortalMenu("custom-group")
-    expect(getPortalSettings().menus).toHaveLength(5)
     resetPortalMenus()
+    expect(getPortalSettings().menus.find((menu) => menu.id === "analytics-cockpit")?.visible).toBe(true)
     expect(getPortalSettings().user.userName).toBe("门户管理员")
   })
 })

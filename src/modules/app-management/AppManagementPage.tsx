@@ -38,21 +38,19 @@ import {
   savePortalApplication,
   usePortalSettings,
   type PortalApplication,
-  type PortalAppScope,
   type PortalAppTheme,
   type PortalIconKey,
 } from "../../app/portal-settings"
+import { PORTAL_ROUTE_DEFINITIONS } from "../../app/hash-navigation"
 import type { AppRoute } from "../../app/hash-navigation"
 import "./app-management.css"
 
 const { Text, Title } = Typography
 
-const ROUTE_OPTIONS: Array<{ value: AppRoute; label: string }> = [
-  { value: "analytics-cockpit", label: "数据驾驶舱" },
-  { value: "app-management", label: "应用管理" },
-  { value: "menu-management", label: "菜单管理" },
-  { value: "user-settings", label: "用户配置" },
-]
+const ROUTE_OPTIONS: Array<{ value: AppRoute; label: string }> = PORTAL_ROUTE_DEFINITIONS.map((definition) => ({
+  value: definition.route,
+  label: definition.label,
+}))
 
 const ICON_OPTIONS: Array<{ value: PortalIconKey; label: string }> = [
   { value: "cockpit", label: "数据图表" },
@@ -75,9 +73,7 @@ interface AppFormValues {
   theme: PortalAppTheme
   illustration: PortalApplication["illustration"]
   icon: PortalIconKey
-  scope: PortalAppScope
   visibleOnPortal: boolean
-  status: "enabled" | "disabled"
   sort: number
 }
 
@@ -92,15 +88,9 @@ function emptyFormValues(): AppFormValues {
     theme: "blue",
     illustration: "mall",
     icon: "apps",
-    scope: "all",
     visibleOnPortal: true,
-    status: "enabled",
     sort: 10,
   }
-}
-
-function scopeForApp(app: PortalApplication): PortalAppScope {
-  return app.visibleOnPortal ? "all" : "admin"
 }
 
 export function AppManagementPage() {
@@ -109,7 +99,6 @@ export function AppManagementPage() {
   const [form] = Form.useForm<AppFormValues>()
   const [keywordDraft, setKeywordDraft] = useState("")
   const [keyword, setKeyword] = useState("")
-  const [statusFilter, setStatusFilter] = useState<"all" | "enabled" | "disabled">("all")
   const [editorOpen, setEditorOpen] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
 
@@ -120,22 +109,18 @@ export function AppManagementPage() {
 
   const filteredRows = useMemo(() => {
     const query = keyword.trim().toLowerCase()
-    return appRows.filter((app) => {
-      if (statusFilter !== "all" && app.status !== statusFilter) return false
-      if (!query) return true
-      return `${app.name}${app.code}${app.category}${app.route}${app.tags.join("")}`.toLowerCase().includes(query)
-    })
-  }, [appRows, keyword, statusFilter])
+    if (!query) return appRows
+    return appRows.filter((app) => `${app.name}${app.code}${app.category}${app.route}${app.tags.join("")}`.toLowerCase().includes(query))
+  }, [appRows, keyword])
 
   const statItems: PageStatItem[] = useMemo(() => {
-    const enabled = appRows.filter((app) => app.status === "enabled").length
-    const portalVisible = appRows.filter((app) => app.status === "enabled" && app.visibleOnPortal).length
+    const portalVisible = appRows.filter((app) => app.visibleOnPortal).length
     const categories = new Set(appRows.map((app) => app.category)).size
     return [
       { key: "all", title: "应用总数", value: appRows.length, unit: "个", status: "primary", icon: <AppstoreOutlined />, subText: <span>覆盖 {categories} 个分类</span> },
-      { key: "enabled", title: "已启用", value: enabled, unit: "个", status: "success", icon: <CheckCircleOutlined />, subText: <span>可被门户访问</span> },
+      { key: "enabled", title: "可访问应用", value: appRows.length, unit: "个", status: "success", icon: <CheckCircleOutlined />, subText: <span>不提供启停切换</span> },
       { key: "portal", title: "门户展示", value: portalVisible, unit: "个", status: "purple", icon: <EyeOutlined />, subText: <span>首屏入口卡片</span> },
-      { key: "routes", title: "已接路由", value: appRows.filter((app) => Boolean(app.route)).length, unit: "个", status: "default", icon: <SettingOutlined />, subText: <span>可配置跳转地址</span> },
+      { key: "routes", title: "已接路由", value: appRows.filter((app) => Boolean(app.route)).length, unit: "个", status: "default", icon: <SettingOutlined />, subText: <span>入口可直接切换</span> },
     ]
   }, [appRows])
 
@@ -157,9 +142,7 @@ export function AppManagementPage() {
       theme: app.theme,
       illustration: app.illustration,
       icon: app.icon,
-      scope: scopeForApp(app),
       visibleOnPortal: app.visibleOnPortal,
-      status: app.status,
       sort: app.sort,
     })
     setEditorOpen(true)
@@ -173,7 +156,6 @@ export function AppManagementPage() {
       return
     }
     const current = appRows.find((app) => app.id === editingId)
-    const now = formatSettingsDate()
     savePortalApplication({
       id: editingId ?? makeSettingsId("app"),
       name: values.name.trim(),
@@ -185,18 +167,14 @@ export function AppManagementPage() {
       theme: values.theme,
       illustration: values.illustration,
       icon: values.icon,
-      status: values.status,
+      // 应用只维护入口配置，不提供启停切换。
+      status: "enabled",
       visibleOnPortal: values.visibleOnPortal,
       sort: values.sort,
-      updatedAt: now,
+      updatedAt: formatSettingsDate(),
     })
     messageApi.success(current ? "应用配置已更新" : "应用已创建")
     setEditorOpen(false)
-  }
-
-  const handleToggleStatus = (app: PortalApplication, checked: boolean) => {
-    savePortalApplication({ ...app, status: checked ? "enabled" : "disabled", updatedAt: formatSettingsDate() })
-    messageApi.success(`「${app.name}」已${checked ? "启用" : "停用"}`)
   }
 
   const handleTogglePortal = (app: PortalApplication, checked: boolean) => {
@@ -205,10 +183,6 @@ export function AppManagementPage() {
   }
 
   const handlePreview = (app: PortalApplication) => {
-    if (app.status !== "enabled") {
-      messageApi.warning("应用已停用，启用后才能预览")
-      return
-    }
     if (!app.route) {
       messageApi.info(`「${app.name}」尚未配置访问路由`)
       return
@@ -256,7 +230,7 @@ export function AppManagementPage() {
     {
       title: "门户展示",
       dataIndex: "visibleOnPortal",
-      width: 104,
+      width: 110,
       align: "center",
       render: (visible: boolean, record) => (
         <Switch
@@ -264,22 +238,6 @@ export function AppManagementPage() {
           checked={visible}
           onChange={(checked) => handleTogglePortal(record, checked)}
           aria-label={`${record.name}门户展示`}
-        />
-      ),
-    },
-    {
-      title: "状态",
-      dataIndex: "status",
-      width: 96,
-      align: "center",
-      render: (status: PortalApplication["status"], record) => (
-        <Switch
-          size="small"
-          checked={status === "enabled"}
-          checkedChildren="启用"
-          unCheckedChildren="停用"
-          onChange={(checked) => handleToggleStatus(record, checked)}
-          aria-label={`${record.name}启用状态`}
         />
       ),
     },
@@ -293,7 +251,7 @@ export function AppManagementPage() {
       align: "center",
       render: (_, record) => (
         <div className="management-row-actions">
-          <Button type="link" size="small" icon={<EyeOutlined />} onClick={() => handlePreview(record)}>预览</Button>
+          <Button type="link" size="small" icon={<EyeOutlined />} onClick={() => handlePreview(record)}>进入</Button>
           <Button type="link" size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>编辑</Button>
           <Popconfirm
             title="删除应用"
@@ -319,7 +277,7 @@ export function AppManagementPage() {
       <div className="prototype-page-header management-page__header">
         <div>
           <Title level={2}>应用管理</Title>
-          <Text type="secondary">维护门户应用入口、访问路由、展示范围与上下线状态，配置结果会同步到门户首屏。</Text>
+          <Text type="secondary">维护门户应用入口、访问路由、分类与展示配置；应用不提供启停切换，点击“进入”可直接切换到已配置页面。</Text>
         </div>
         <div className="management-page__header-actions">
           <Button icon={<ReloadOutlined />} onClick={() => {
@@ -345,18 +303,6 @@ export function AppManagementPage() {
                 style={{ width: 260 }}
               />
             </Form.Item>
-            <Form.Item label="状态">
-              <Select
-                value={statusFilter}
-                onChange={setStatusFilter}
-                style={{ width: 120 }}
-                options={[
-                  { value: "all", label: "全部状态" },
-                  { value: "enabled", label: "已启用" },
-                  { value: "disabled", label: "已停用" },
-                ]}
-              />
-            </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit" icon={<SearchOutlined />}>查询</Button>
             </Form.Item>
@@ -364,7 +310,6 @@ export function AppManagementPage() {
               <Button onClick={() => {
                 setKeywordDraft("")
                 setKeyword("")
-                setStatusFilter("all")
               }}>重置</Button>
             </Form.Item>
           </Form>
@@ -375,7 +320,7 @@ export function AppManagementPage() {
           dataSource={filteredRows}
           columns={columns}
           size="middle"
-          scroll={{ x: 1450 }}
+          scroll={{ x: 1320 }}
           pagination={{ pageSize: 8, showSizeChanger: false }}
         />
       </Card>
@@ -423,14 +368,9 @@ export function AppManagementPage() {
           <Form.Item name="description" label="应用说明">
             <Input.TextArea rows={3} maxLength={160} showCount placeholder="说明应用面向的用户与核心能力" />
           </Form.Item>
-          <div className="management-form-switches">
-            <Form.Item name="visibleOnPortal" label="门户展示" valuePropName="checked">
-              <Switch checkedChildren="展示" unCheckedChildren="隐藏" />
-            </Form.Item>
-            <Form.Item name="status" label="启用状态" valuePropName="checked" getValueProps={(value) => ({ checked: value === "enabled" })} normalize={(checked: boolean) => checked ? "enabled" : "disabled"}>
-              <Switch checkedChildren="启用" unCheckedChildren="停用" />
-            </Form.Item>
-          </div>
+          <Form.Item name="visibleOnPortal" label="门户展示" valuePropName="checked">
+            <Switch checkedChildren="展示" unCheckedChildren="隐藏" />
+          </Form.Item>
         </Form>
       </Modal>
     </div>

@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from "react"
-import type { AppRoute } from "./hash-navigation"
+import { PORTAL_ROUTE_DEFINITIONS, type AppRoute, type PortalRouteIcon } from "./hash-navigation"
 
 /**
  * 门户基础配置的唯一本地事实源。
@@ -10,7 +10,7 @@ import type { AppRoute } from "./hash-navigation"
 export type PortalAppStatus = "enabled" | "disabled"
 export type PortalAppScope = "all" | "admin" | "developer"
 export type PortalAppTheme = "blue" | "teal"
-export type PortalIconKey = "cockpit" | "menu" | "apps" | "user" | "settings" | "monitor"
+export type PortalIconKey = PortalRouteIcon
 export type PortalMenuType = "group" | "page"
 export type PortalThemePreference = "light" | "dark" | "aurora" | "obsidian" | "slate"
 
@@ -146,7 +146,7 @@ const DEFAULT_APPLICATIONS: PortalApplication[] = [
     id: "app-management",
     name: "应用管理",
     code: "app-management",
-    description: "维护门户应用卡片、访问路由、分类与上下线状态。",
+    description: "维护门户应用卡片、访问路由、分类与展示配置。",
     route: "app-management",
     category: "系统管理",
     tags: ["应用卡片", "门户配置"],
@@ -176,67 +176,36 @@ const DEFAULT_APPLICATIONS: PortalApplication[] = [
   },
 ]
 
+const ROUTE_GROUPS = new Map<string, string>()
+PORTAL_ROUTE_DEFINITIONS.forEach((definition) => {
+  if (definition.groupId) ROUTE_GROUPS.set(definition.groupId, definition.groupLabel)
+})
+
 const DEFAULT_MENUS: PortalMenuItem[] = [
-  {
-    id: "analytics-cockpit",
-    name: "数据驾驶舱",
-    parentId: null,
-    type: "page",
-    route: "analytics-cockpit",
-    icon: "cockpit",
-    visible: true,
-    sort: 10,
-    permission: "portal:analytics:view",
+  ...PORTAL_ROUTE_DEFINITIONS.map((definition) => ({
+    id: definition.route,
+    name: definition.label,
+    parentId: definition.groupId,
+    type: "page" as const,
+    route: definition.route,
+    icon: definition.icon,
+    visible: definition.defaultVisible,
+    sort: definition.sort,
+    permission: definition.permission,
     updatedAt: DEFAULT_DATE,
-  },
-  {
-    id: "system-config-group",
-    name: "系统配置",
+  })),
+  ...Array.from(ROUTE_GROUPS, ([groupId, groupLabel], index) => ({
+    id: groupId,
+    name: groupLabel,
     parentId: null,
-    type: "group",
-    route: "",
-    icon: "settings",
+    type: "group" as const,
+    route: "" as const,
+    icon: "settings" as const,
     visible: true,
-    sort: 20,
+    sort: 20 + index,
     permission: "",
     updatedAt: DEFAULT_DATE,
-  },
-  {
-    id: "menu-management",
-    name: "菜单管理",
-    parentId: "system-config-group",
-    type: "page",
-    route: "menu-management",
-    icon: "menu",
-    visible: true,
-    sort: 21,
-    permission: "system:menu:manage",
-    updatedAt: DEFAULT_DATE,
-  },
-  {
-    id: "app-management",
-    name: "应用管理",
-    parentId: "system-config-group",
-    type: "page",
-    route: "app-management",
-    icon: "apps",
-    visible: true,
-    sort: 22,
-    permission: "system:app:manage",
-    updatedAt: DEFAULT_DATE,
-  },
-  {
-    id: "user-settings",
-    name: "用户配置",
-    parentId: "system-config-group",
-    type: "page",
-    route: "user-settings",
-    icon: "user",
-    visible: true,
-    sort: 23,
-    permission: "system:user:config",
-    updatedAt: DEFAULT_DATE,
-  },
+  })),
 ]
 
 const DEFAULT_USER: PortalUserPreferences = {
@@ -278,11 +247,30 @@ function normalizeSettings(input: unknown): PortalSettings {
   if (!isRecord(input)) return defaults
 
   const applications = Array.isArray(input.applications)
-    ? input.applications.filter((item): item is PortalApplication => isRecord(item) && typeof item.id === "string" && typeof item.name === "string")
+    ? input.applications
+        .filter((item): item is PortalApplication => isRecord(item) && typeof item.id === "string" && typeof item.name === "string")
+        .map((application) => ({
+          ...application,
+          // 应用不提供启停切换，历史版本保存的 disabled 状态也统一归一为可用。
+          status: "enabled" as const,
+          tags: Array.isArray(application.tags) ? application.tags.filter((tag): tag is string => typeof tag === "string") : [],
+        }))
     : defaults.applications
-  const menus = Array.isArray(input.menus)
-    ? input.menus.filter((item): item is PortalMenuItem => isRecord(item) && typeof item.id === "string" && typeof item.name === "string")
-    : defaults.menus
+
+  // 菜单名称、层级、路由和权限完全以当前 Router 为准，只恢复用户保存的展示勾选。
+  const savedVisibility = new Map<string, boolean>()
+  if (Array.isArray(input.menus)) {
+    input.menus.forEach((item) => {
+      if (isRecord(item) && typeof item.id === "string" && typeof item.visible === "boolean") {
+        savedVisibility.set(item.id, item.visible)
+      }
+    })
+  }
+  const menus = defaults.menus.map((menu) => ({
+    ...menu,
+    visible: menu.type === "page" ? savedVisibility.get(menu.id) ?? menu.visible : true,
+  }))
+
   const user = isRecord(input.user)
     ? {
         ...defaults.user,
@@ -295,8 +283,8 @@ function normalizeSettings(input: unknown): PortalSettings {
     : defaults.user
   return {
     version: 1,
-    applications: applications.length ? applications : defaults.applications,
-    menus: menus.length ? menus : defaults.menus,
+    applications,
+    menus,
     user: user as PortalUserPreferences,
   }
 }
@@ -352,9 +340,10 @@ export function updatePortalUser(patch: Partial<PortalUserPreferences>) {
 }
 
 export function savePortalApplication(application: PortalApplication) {
+  const nextApplication = { ...application, status: "enabled" as const }
   const applications = settingsState.applications.some((item) => item.id === application.id)
-    ? settingsState.applications.map((item) => (item.id === application.id ? application : item))
-    : [...settingsState.applications, application]
+    ? settingsState.applications.map((item) => (item.id === application.id ? nextApplication : item))
+    : [...settingsState.applications, nextApplication]
   commit({ ...settingsState, applications })
 }
 
@@ -369,17 +358,14 @@ export function resetPortalApplications() {
   commit({ ...settingsState, applications: createDefaultPortalSettings().applications })
 }
 
-export function savePortalMenu(menu: PortalMenuItem) {
-  const menus = settingsState.menus.some((item) => item.id === menu.id)
-    ? settingsState.menus.map((item) => (item.id === menu.id ? menu : item))
-    : [...settingsState.menus, menu]
-  commit({ ...settingsState, menus })
-}
-
-export function removePortalMenu(menuId: string) {
+export function setPortalMenuVisibility(menuId: string, visible: boolean) {
+  const target = settingsState.menus.find((menu) => menu.id === menuId && menu.type === "page")
+  if (!target) return
   commit({
     ...settingsState,
-    menus: settingsState.menus.filter((item) => item.id !== menuId),
+    menus: settingsState.menus.map((menu) => menu.id === target.id
+      ? { ...menu, visible, updatedAt: formatSettingsDate() }
+      : menu),
   })
 }
 

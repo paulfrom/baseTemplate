@@ -32,6 +32,13 @@ describe("application management", () => {
     })
   })
 
+  it("enters the configured application route", () => {
+    window.location.hash = "#/app-management"
+    render(<AppManagementPage />)
+    fireEvent.click(screen.getAllByRole("button", { name: /进入/ })[0])
+    expect(window.location.hash).toBe("#/analytics-cockpit")
+  })
+
   it("creates an application from the editor", async () => {
     render(<AppManagementPage />)
     fireEvent.click(screen.getByRole("button", { name: /新建应用/ }))

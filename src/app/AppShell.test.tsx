@@ -1,12 +1,12 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { act } from "react"
-import { resetPortalSettings, savePortalMenu } from "./portal-settings"
+import { resetPortalSettings, setPortalMenuVisibility } from "./portal-settings"
 import { AppShell, PROTOTYPE_THEMES, type PrototypeThemeId } from "./AppShell"
 
 /**
  * 模板版 AppShell 回归：布局骨架、动态菜单项、导航回调、
- * 侧边栏折叠与顶栏主题变体。新增菜单/分组后在此补充对应用例。
+ * 侧边栏折叠与顶栏主题变体。调整 Router 菜单或展示规则后在此补充对应用例。
  */
 
 beforeEach(() => {
@@ -49,26 +49,15 @@ describe("AppShell (template)", () => {
     expect(screen.getByTestId("page-content")).toBeInTheDocument()
   })
 
-  it("uses the configured route for a newly created menu item", async () => {
-    const { onNavigate } = renderShell()
-    act(() => {
-      savePortalMenu({
-        id: "local-shortcut",
-        name: "快捷应用",
-        parentId: null,
-        type: "page",
-        route: "app-management",
-        icon: "apps",
-        visible: true,
-        sort: 70,
-        permission: "",
-        updatedAt: "2026-08-18",
-      })
-    })
+  it("honors the router-backed menu visibility setting", async () => {
+    renderShell()
+    act(() => setPortalMenuVisibility("analytics-cockpit", false))
 
-    const shortcut = await screen.findByRole("menuitem", { name: /快捷应用/ })
-    fireEvent.click(shortcut)
-    expect(onNavigate).toHaveBeenCalledWith("app-management")
+    await waitFor(() => {
+      expect(screen.queryByRole("menuitem", { name: /数据驾驶舱/ })).not.toBeInTheDocument()
+    })
+    act(() => setPortalMenuVisibility("analytics-cockpit", true))
+    expect(await screen.findByRole("menuitem", { name: /数据驾驶舱/ })).toBeInTheDocument()
   })
 
   it("navigates to the cockpit route when the menu item is clicked", () => {

@@ -1,9 +1,19 @@
 import { useEffect, useState } from "react"
 
-/**
- * 模板路由表：新增页面时在这里补充路由 id，
- * 然后同步更新 route-registry.tsx（渲染）与 AppShell.tsx（菜单与文案映射）。
- */
+/** 当前 Router 的页面元数据：菜单管理只读取这里，不允许脱离路由新增菜单。 */
+export type PortalRouteIcon = "cockpit" | "menu" | "apps" | "user" | "settings" | "monitor"
+
+export interface PortalRouteDefinition {
+  route: AppRoute
+  label: string
+  groupId: string | null
+  groupLabel: string
+  icon: PortalRouteIcon
+  permission: string
+  sort: number
+  defaultVisible: boolean
+}
+
 export type AppRoute =
   | "portal"
   | "analytics-cockpit"
@@ -11,14 +21,61 @@ export type AppRoute =
   | "app-management"
   | "user-settings"
 
+export const PORTAL_ROUTE_DEFINITIONS: readonly PortalRouteDefinition[] = [
+  {
+    route: "portal",
+    label: "门户入口",
+    groupId: null,
+    groupLabel: "顶级菜单",
+    icon: "apps",
+    permission: "portal:home:view",
+    sort: 0,
+    defaultVisible: false,
+  },
+  {
+    route: "analytics-cockpit",
+    label: "数据驾驶舱",
+    groupId: null,
+    groupLabel: "顶级菜单",
+    icon: "cockpit",
+    permission: "portal:analytics:view",
+    sort: 10,
+    defaultVisible: true,
+  },
+  {
+    route: "menu-management",
+    label: "菜单管理",
+    groupId: "system-config-group",
+    groupLabel: "系统配置",
+    icon: "menu",
+    permission: "system:menu:manage",
+    sort: 21,
+    defaultVisible: true,
+  },
+  {
+    route: "app-management",
+    label: "应用管理",
+    groupId: "system-config-group",
+    groupLabel: "系统配置",
+    icon: "apps",
+    permission: "system:app:manage",
+    sort: 22,
+    defaultVisible: true,
+  },
+  {
+    route: "user-settings",
+    label: "用户配置",
+    groupId: "system-config-group",
+    groupLabel: "系统配置",
+    icon: "user",
+    permission: "system:user:config",
+    sort: 23,
+    defaultVisible: true,
+  },
+]
+
 const defaultRoute: AppRoute = "portal"
-const knownRoutes = new Set<AppRoute>([
-  "portal",
-  "analytics-cockpit",
-  "menu-management",
-  "app-management",
-  "user-settings",
-])
+const knownRoutes = new Set<AppRoute>(PORTAL_ROUTE_DEFINITIONS.map((definition) => definition.route))
 
 export function isAppRoute(value: string): value is AppRoute {
   return knownRoutes.has(value as AppRoute)
