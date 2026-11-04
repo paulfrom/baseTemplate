@@ -1,0 +1,118 @@
+.management-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  min-width: 0;
+}
+
+.management-page__header {
+  align-items: center;
+}
+
+.management-page__header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.management-panel.ant-card {
+  margin-top: 2px;
+}
+
+.management-app-cell {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+}
+
+.management-app-cell__icon {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  font-size: 16px;
+}
+
+.management-app-cell__icon--blue {
+  background: color-mix(in srgb, var(--color-primary) 12%, var(--color-bg-white));
+  color: var(--color-primary);
+}
+
+.management-app-cell__icon--teal {
+  background: color-mix(in srgb, var(--color-platform-fulfillment) 12%, var(--color-bg-white));
+  color: var(--color-platform-fulfillment-active);
+}
+
+.management-app-cell__copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.management-app-cell__copy .ant-typography {
+  margin: 0;
+}
+
+.management-app-cell__copy .ant-typography-secondary {
+  font-size: var(--font-size-help);
+}
+
+.management-tag-list {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.management-tag-list .ant-tag {
+  margin: 0;
+}
+
+.management-row-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+.management-result-count {
+  font-size: var(--font-size-help);
+  white-space: nowrap;
+}
+
+.management-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--space-md);
+}
+
+.management-form-grid .ant-form-item,
+.management-editor-form > .ant-form-item {
+  margin-bottom: var(--space-sm);
+}
+
+.management-form-switches {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.management-form-switches .ant-form-item {
+  margin-bottom: 0;
+}
+
+@media (max-width: 720px) {
+  .management-page__header {
+    align-items: flex-start;
+  }
+
+  .management-form-grid {
+    grid-template-columns: 1fr;
+  }
+}

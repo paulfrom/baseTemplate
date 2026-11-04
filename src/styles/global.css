@@ -1,0 +1,388 @@
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  color: var(--color-text-1);
+  background: var(--color-bg-2);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-base);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 页面级滚动条：滚动时短暂显示，停止后自动收起，保留滚动能力与位置反馈。 */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+html.is-scrolling {
+  scrollbar-color: rgb(15 23 42 / 30%) transparent;
+}
+
+html::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  background-clip: padding-box;
+}
+
+html.is-scrolling::-webkit-scrollbar-thumb {
+  background: rgb(15 23 42 / 30%);
+  background-clip: padding-box;
+}
+
+/* 可滚动业务容器沿用同一套“滚动中显示”语义。 */
+[data-auto-hide-scrollbar] {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+[data-auto-hide-scrollbar].is-scrolling {
+  scrollbar-color: rgb(15 23 42 / 30%) transparent;
+}
+
+[data-auto-hide-scrollbar]::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-auto-hide-scrollbar]::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[data-auto-hide-scrollbar]::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  background-clip: padding-box;
+}
+
+[data-auto-hide-scrollbar].is-scrolling::-webkit-scrollbar-thumb {
+  background: rgb(15 23 42 / 30%);
+  background-clip: padding-box;
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']).is-scrolling {
+  scrollbar-color: rgb(255 255 255 / 34%) transparent;
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']).is-scrolling::-webkit-scrollbar-thumb,
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) [data-auto-hide-scrollbar].is-scrolling::-webkit-scrollbar-thumb {
+  background: rgb(255 255 255 / 34%);
+  background-clip: padding-box;
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) [data-auto-hide-scrollbar].is-scrolling {
+  scrollbar-color: rgb(255 255 255 / 34%) transparent;
+}
+
+/* 暗色主题必须覆盖到根节点：Ant Design 的弹层会挂载到 body 下。 */
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) {
+  color-scheme: dark;
+  background: var(--color-bg-2);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) body {
+  background: var(--color-bg-2);
+}
+
+/* 统一 Ant Design 脱离业务页面的公共表面，避免页面间隙露出亮色底。 */
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) :is(.ant-layout, .ant-layout-content, .ant-card, .ant-table-wrapper,
+  .ant-table, .ant-table-container, .ant-table-content, .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td, .ant-collapse, .ant-collapse-content,
+  .ant-descriptions-view, .ant-list, .ant-list-item, .ant-tabs-content-holder) {
+  background-color: var(--color-bg-white);
+  color: var(--color-text-1);
+  border-color: var(--color-border-soft);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) :is(.ant-layout, .ant-layout-content) {
+  background-color: var(--color-bg-2);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) :is(.ant-table, .ant-table-container, .ant-table-content,
+  .ant-table-thead > tr > th, .ant-table-tbody > tr > td) {
+  background-color: var(--color-bg-white);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) .ant-table-thead > tr > th {
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-bg-1));
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) .ant-table-tbody > tr.ant-table-row:hover > td,
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: var(--color-surface-selected);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) :is(.ant-modal-content, .ant-modal-header, .ant-modal-body,
+  .ant-modal-footer, .ant-drawer-content, .ant-drawer-header, .ant-drawer-body,
+  .ant-drawer-footer, .ant-popover-inner, .ant-dropdown-menu, .ant-select-dropdown,
+  .ant-picker-dropdown, .ant-picker-panel-container, .ant-tooltip-inner) {
+  background: var(--color-bg-elevated);
+  color: var(--color-text-1);
+  border-color: var(--color-border-soft);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) :is(.ant-modal-header, .ant-drawer-header, .ant-modal-footer,
+  .ant-drawer-footer) {
+  border-color: var(--color-border-soft);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) :is(.ant-input, .ant-input-affix-wrapper, .ant-input-number,
+  .ant-input-number-group-wrapper, .ant-picker, .ant-select-selector,
+  .ant-mentions, .ant-cascader-picker) {
+  background: var(--color-control-bg);
+  border-color: var(--color-control-border);
+  color: var(--color-text-1);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) :is(.ant-btn-default, .ant-btn-dashed) {
+  background: var(--color-control-bg);
+  border-color: var(--color-control-border);
+  color: var(--color-text-1);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) :is(.ant-btn-default, .ant-btn-dashed):not(:disabled):hover {
+  background: var(--color-surface-selected);
+  border-color: var(--color-primary);
+  color: var(--color-link);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) :is(.ant-input::placeholder, .ant-input-number-input::placeholder,
+  .ant-select-selection-placeholder) {
+  color: var(--color-text-3);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) .ant-pagination-item {
+  background: var(--color-bg-white);
+  border-color: var(--color-border-soft);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) .ant-pagination-item a {
+  color: var(--color-text-2);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) :is(.ant-card-head, .ant-card-bordered, .ant-divider,
+  .ant-tabs-nav::before, .ant-table-thead > tr > th, .ant-table-tbody > tr > td,
+  .ant-descriptions-row > th, .ant-descriptions-row > td) {
+  border-color: var(--color-border-soft);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) :is(.ant-card-head-title, .ant-form-item-label > label,
+  .ant-typography, .ant-empty-description, .ant-list-item-meta-title,
+  .ant-descriptions-item-label, .ant-descriptions-item-content) {
+  color: var(--color-text-1);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) :is(.ant-typography-secondary, .ant-form-item-explain,
+  .ant-form-item-extra, .ant-descriptions-item-label, .ant-empty-description) {
+  color: var(--color-text-2);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) :is(.ant-segmented, .ant-segmented-item-selected,
+  .ant-radio-button-wrapper, .ant-upload, .ant-upload-drag) {
+  background: var(--color-bg-1);
+  border-color: var(--color-border-soft);
+  color: var(--color-text-1);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) .ant-segmented-item-selected {
+  background: var(--color-surface-selected);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) :is(.ant-select-item-option-active, .ant-select-item-option-selected,
+  .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner) {
+  background: var(--color-surface-selected);
+  color: var(--color-text-1);
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) :is(.ant-alert, .ant-notification-notice, .ant-message-notice-content) {
+  background: var(--color-bg-elevated);
+  border-color: var(--color-border-soft);
+  color: var(--color-text-1);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.numeric,
+.amount,
+.stat-value,
+.ant-statistic-content,
+.ant-table-cell.numeric {
+  font-family: var(--font-family-number);
+  font-variant-numeric: tabular-nums;
+}
+
+.prototype-page {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+@media (width <= 1100px) {
+  .page-title-row {
+    flex-wrap: wrap;
+  }
+}
+
+@media (width <= 720px) {
+  .app-shell__content {
+    padding: var(--space-sm);
+  }
+
+  .page-title-row {
+    gap: var(--space-sm);
+  }
+
+  .page-title-row h1 {
+    font-size: 20px;
+  }
+}
+
+.prototype-surface {
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-white);
+}
+
+.page-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.page-title-row h1 {
+  margin: 0;
+  color: var(--color-text-1);
+  font-size: var(--font-size-title-main);
+  line-height: 1.35;
+}
+
+.page-title-row p {
+  margin: var(--space-xs) 0 0;
+  color: var(--color-text-2);
+}
+
+.ant-table-wrapper .ant-table-cell {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 宽表横向滚动条：常态弱化，悬停/拖动再略加深，避免压过表格内容。 */
+.ant-table-wrapper :is(.ant-table-content, .ant-table-body, .ant-table-header) {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(15 23 42 / 22%) transparent;
+}
+
+.ant-table-wrapper :is(.ant-table-content, .ant-table-body, .ant-table-header)::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.ant-table-wrapper :is(.ant-table-content, .ant-table-body, .ant-table-header)::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ant-table-wrapper :is(.ant-table-content, .ant-table-body, .ant-table-header)::-webkit-scrollbar-thumb {
+  background: rgb(15 23 42 / 22%);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+.ant-table-wrapper :is(.ant-table-content, .ant-table-body, .ant-table-header)::-webkit-scrollbar-thumb:hover,
+.ant-table-wrapper :is(.ant-table-content, .ant-table-body, .ant-table-header)::-webkit-scrollbar-thumb:active {
+  background: rgb(15 23 42 / 38%);
+  background-clip: padding-box;
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) .ant-table-wrapper :is(.ant-table-content, .ant-table-body, .ant-table-header) {
+  scrollbar-color: rgb(255 255 255 / 28%) transparent;
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) .ant-table-wrapper :is(.ant-table-content, .ant-table-body, .ant-table-header)::-webkit-scrollbar-thumb {
+  background: rgb(255 255 255 / 28%);
+  background-clip: padding-box;
+}
+
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) .ant-table-wrapper :is(.ant-table-content, .ant-table-body, .ant-table-header)::-webkit-scrollbar-thumb:hover,
+html:is([data-theme='dark'], [data-theme='obsidian'], [data-theme='slate']) .ant-table-wrapper :is(.ant-table-content, .ant-table-body, .ant-table-header)::-webkit-scrollbar-thumb:active {
+  background: rgb(255 255 255 / 42%);
+  background-clip: padding-box;
+}
+
+/* ─── 全局动效降级：尊重 prefers-reduced-motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── 全国物流轨迹图：南海诸岛右下角小图（裁剪自主图） ─── */
+.national-track-map__south-sea {
+  position: absolute;
+  z-index: 2;
+  right: 12px;
+  bottom: 12px;
+  width: 72px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-border-soft);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--color-bg-white) 92%, transparent);
+  box-shadow: 0 2px 8px rgb(20 54 80 / 8%);
+  pointer-events: none;
+}
+
+.national-track-map__south-sea .echart {
+  flex: 1;
+  min-height: 0;
+}
+
+.national-track-map__south-sea span {
+  display: block;
+  padding: 2px 0;
+  color: var(--color-text-3);
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+  border-top: 1px solid var(--color-border-soft);
+}

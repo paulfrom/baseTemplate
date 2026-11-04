@@ -1,0 +1,146 @@
+.page-stat-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.page-stat-cards--cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.page-stat-cards--cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.page-stat-cards--cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+
+.page-stat-card {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 62px;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+  padding: 8px 14px;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-white);
+  box-shadow: 0 1px 2px rgb(20 54 80 / 3%);
+  user-select: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.page-stat-card__icon-wrap {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-1);
+  color: var(--color-text-2);
+  font-size: 16px;
+}
+
+.page-stat-card__content {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.page-stat-card--clickable { cursor: pointer; }
+.page-stat-card--clickable:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--color-primary) 42%, var(--color-border-soft));
+  box-shadow: 0 4px 12px rgb(0 142 224 / 9%);
+}
+
+.page-stat-card--active {
+  border-color: var(--color-primary) !important;
+  background: color-mix(in srgb, var(--color-primary) 4%, var(--color-bg-white));
+  box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--color-primary) 28%, transparent);
+}
+
+.page-stat-card__header {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  line-height: 1.2;
+}
+
+.page-stat-card__title {
+  overflow: hidden;
+  color: var(--color-text-2);
+  font-size: var(--font-size-help);
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.page-stat-card__body {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 6px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.page-stat-card__value {
+  color: var(--color-text-1);
+  font-family: var(--font-family-number);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.page-stat-card__unit {
+  margin-left: 2px;
+  color: var(--color-text-3);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.page-stat-card__footer {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: baseline;
+  overflow: hidden;
+  color: var(--color-text-3);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.page-stat-card__dot { margin: 0 4px; opacity: 0.45; }
+
+.page-stat-card--primary .page-stat-card__value { color: var(--color-primary); }
+.page-stat-card--primary .page-stat-card__icon-wrap { background: var(--color-processing-bg); color: var(--color-primary); }
+.page-stat-card--warning .page-stat-card__value { color: var(--color-warning-text); }
+.page-stat-card--warning .page-stat-card__icon-wrap { background: var(--color-warning-bg); color: var(--color-warning-text); }
+.page-stat-card--success .page-stat-card__value { color: var(--color-success-text); }
+.page-stat-card--success .page-stat-card__icon-wrap { background: var(--color-success-bg); color: var(--color-success-text); }
+.page-stat-card--error .page-stat-card__value { color: var(--color-error-text); }
+.page-stat-card--error .page-stat-card__icon-wrap { background: var(--color-danger-bg); color: var(--color-error-text); }
+.page-stat-card--purple .page-stat-card__value { color: var(--color-accent-violet); }
+.page-stat-card--purple .page-stat-card__icon-wrap { background: color-mix(in srgb, var(--color-accent-violet) 12%, transparent); color: var(--color-accent-violet); }
+
+@media (max-width: 1024px) {
+  .page-stat-cards,
+  .page-stat-cards--cols-5,
+  .page-stat-cards--cols-6 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .page-stat-cards,
+  .page-stat-cards--cols-3,
+  .page-stat-cards--cols-5,
+  .page-stat-cards--cols-6 {
+    grid-template-columns: 1fr;
+  }
+}

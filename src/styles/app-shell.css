@@ -1,0 +1,1704 @@
+.app-shell {
+  height: 100%;
+  background: var(--color-bg-2);
+}
+
+.app-shell__sider {
+  position: fixed !important;
+  z-index: 20;
+  inset: 0 auto 0 0;
+  overflow: hidden;
+  background: var(--color-sidebar) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: var(--sidebar-width) !important;
+  min-width: var(--sidebar-width) !important;
+  max-width: var(--sidebar-width) !important;
+  flex: 0 0 var(--sidebar-width) !important;
+  transition: width 0.42s cubic-bezier(0.2, 0, 0, 1),
+              min-width 0.42s cubic-bezier(0.2, 0, 0, 1),
+              max-width 0.42s cubic-bezier(0.2, 0, 0, 1),
+              flex 0.42s cubic-bezier(0.2, 0, 0, 1) !important;
+  will-change: width, min-width, max-width, flex;
+}
+
+.app-shell__sider.ant-layout-sider-collapsed,
+.app-shell__sider--collapsed {
+  width: var(--sidebar-collapsed-width, 64px) !important;
+  min-width: var(--sidebar-collapsed-width, 64px) !important;
+  max-width: var(--sidebar-collapsed-width, 64px) !important;
+  flex: 0 0 var(--sidebar-collapsed-width, 64px) !important;
+}
+
+.app-shell__brand {
+  display: flex;
+  height: var(--header-height);
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px 0 16px;
+  border-bottom: 1px solid rgb(255 255 255 / 15%);
+  color: #ffffff;
+  background: rgb(0 0 0 / 12%);
+  flex-shrink: 0;
+  transition: padding 0.42s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.app-shell__sider.ant-layout-sider-collapsed .app-shell__brand,
+.app-shell__sider--collapsed .app-shell__brand {
+  justify-content: center;
+  padding: 0;
+}
+
+.app-shell__brand-copy {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  overflow: hidden;
+  margin-right: 6px;
+  opacity: 1;
+  width: auto;
+  transition: opacity 0.28s cubic-bezier(0.2, 0, 0, 1) 0.06s,
+              flex 0.42s cubic-bezier(0.2, 0, 0, 1),
+              width 0.42s cubic-bezier(0.2, 0, 0, 1),
+              margin 0.42s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.app-shell__sider.ant-layout-sider-collapsed .app-shell__brand-copy,
+.app-shell__sider--collapsed .app-shell__brand-copy {
+  opacity: 0;
+  flex: 0 0 0;
+  width: 0;
+  min-width: 0;
+  margin-right: 0;
+  pointer-events: none;
+  transition: opacity 0.16s cubic-bezier(0.2, 0, 0, 1),
+              flex 0.42s cubic-bezier(0.2, 0, 0, 1),
+              width 0.42s cubic-bezier(0.2, 0, 0, 1),
+              margin 0.42s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.app-shell__brand-copy strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.app-shell__collapse-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: rgb(255 255 255 / 8%);
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 6px;
+  color: rgb(255 255 255 / 85%);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), border-color 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1), transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-shell__collapse-btn:hover {
+  background: rgb(255 255 255 / 18%);
+  border-color: rgb(255 255 255 / 26%);
+  color: #ffffff;
+}
+
+.app-shell__collapse-btn:active {
+  transform: scale(0.92);
+  background: rgb(255 255 255 / 22%);
+}
+
+.app-shell__collapse-btn:focus-visible {
+  outline: 2px solid var(--color-primary-hover, #08a4fe);
+  outline-offset: 1px;
+}
+
+.app-shell__sidebar-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.app-shell__menu {
+  flex: 1 1 auto;
+  height: calc(100vh - var(--header-height));
+  padding-top: var(--space-xs);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: transparent !important;
+  border-inline-end: 0 !important;
+}
+
+.app-shell__sider .ant-menu-dark {
+  background: transparent !important;
+  color: rgb(255 255 255 / 85%) !important;
+}
+
+.app-shell__sider .ant-menu-dark .ant-menu-sub.ant-menu-inline {
+  background: rgb(0 0 0 / 14%) !important;
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 8%);
+  overflow: hidden;
+  max-height: 640px;
+  opacity: 1;
+  transition: max-height 0.32s cubic-bezier(0.2, 0, 0, 1),
+              opacity 0.2s cubic-bezier(0.2, 0, 0, 1),
+              margin 0.32s cubic-bezier(0.2, 0, 0, 1),
+              padding 0.32s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.app-shell__sider .ant-menu-dark .ant-menu-item,
+.app-shell__sider .ant-menu-dark .ant-menu-submenu-title,
+.app-shell__sider.ant-layout-sider-collapsed .ant-menu-dark .ant-menu-item,
+.app-shell__sider.ant-layout-sider-collapsed .ant-menu-dark .ant-menu-submenu-title,
+.app-shell__sider .ant-menu-inline-collapsed .ant-menu-item,
+.app-shell__sider .ant-menu-inline-collapsed .ant-menu-submenu-title {
+  height: 40px !important;
+  line-height: 40px !important;
+  margin-block: 4px !important;
+  color: rgb(255 255 255 / 85%) !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  transition: background-color 150ms ease, color 150ms ease, transform 100ms ease,
+              padding 0.42s cubic-bezier(0.2, 0, 0, 1) !important;
+}
+
+/* 收起过程就把图标滑到收缩终态，避免宽度走完再跳一次。 */
+.app-shell__sider--collapsed .app-shell__menu :is(.ant-menu-item, .ant-menu-submenu-title),
+.app-shell__sider .ant-menu-inline-collapsed :is(.ant-menu-item, .ant-menu-submenu-title) {
+  width: calc(100% - var(--space-md)) !important;
+  margin-inline: var(--space-xs) !important;
+  padding-inline: calc((var(--sidebar-collapsed-width) - 16px) / 2 - var(--space-xs)) !important;
+  justify-content: flex-start !important;
+}
+
+.app-shell__sider--collapsed .app-shell__menu .ant-menu-submenu-arrow {
+  opacity: 0 !important;
+}
+
+.app-shell__sider .ant-menu-inline-collapsed :is(.ant-menu-title-content, .ant-menu-submenu-arrow) {
+  width: 0 !important;
+  min-width: 0 !important;
+  opacity: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+.app-shell__sider--collapsed .app-shell__menu :is(.ant-menu-item-icon, .anticon),
+.app-shell__sider .ant-menu-inline-collapsed :is(.ant-menu-item-icon, .anticon) {
+  margin-inline: 0 !important;
+}
+
+/* 收起过程：子菜单随宽度一起淡出收拢，等宽度走完再切图标模式。 */
+.app-shell__sider--collapsed .ant-menu-sub.ant-menu-inline {
+  max-height: 0 !important;
+  opacity: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+.app-shell__sider .ant-menu-inline-collapsed .ant-menu-sub.ant-menu-inline {
+  display: none !important;
+}
+
+.app-shell__sider .ant-menu-dark .ant-menu-item:hover,
+.app-shell__sider .ant-menu-dark .ant-menu-submenu-title:hover {
+  background-color: rgb(255 255 255 / 12%) !important;
+  color: #ffffff !important;
+}
+
+.app-shell__sider .ant-menu-dark .ant-menu-item:active {
+  transform: scale(0.96);
+}
+
+.app-shell__sider .ant-menu-dark .ant-menu-item-selected {
+  background-color: var(--color-sidebar-selected, #1a8ad8) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 #ffffff;
+}
+
+/* Sider Floating Submenu Popup (for group items with submenus) */
+.ant-menu-submenu-popup {
+  z-index: 1050 !important;
+}
+
+.ant-menu-submenu-popup .ant-menu,
+.ant-menu-submenu-popup .ant-menu-sub,
+.ant-menu-submenu-popup .ant-menu-vertical,
+.ant-menu-submenu-popup .ant-menu-dark,
+.ant-menu-submenu-popup ul {
+  min-width: 160px !important;
+  width: 160px !important;
+  background: var(--color-sidebar, #0070c0) !important;
+  background-color: var(--color-sidebar, #0070c0) !important;
+  border-radius: var(--radius-md, 6px) !important;
+  box-shadow: 0 8px 24px -2px rgba(0, 40, 100, 0.35), 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  padding: 4px !important;
+  box-sizing: border-box !important;
+}
+
+.ant-menu-submenu-popup .ant-menu-item,
+.ant-menu-submenu-popup .ant-menu-submenu-title {
+  color: rgba(255, 255, 255, 0.9) !important;
+  height: 38px !important;
+  line-height: 38px !important;
+  margin: 2px 0 !important;
+  padding: 0 16px !important;
+  border-radius: 4px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  transition: background-color 120ms ease, color 120ms ease !important;
+}
+
+.ant-menu-submenu-popup .ant-menu-item:hover,
+.ant-menu-submenu-popup .ant-menu-submenu-title:hover {
+  background-color: rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+}
+
+.ant-menu-submenu-popup .ant-menu-item-selected {
+  background-color: var(--color-sidebar-selected, #1a8ad8) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  box-shadow: inset 3px 0 0 #ffffff !important;
+}
+
+/* Sider Tooltips for single 1st-level collapsed items (strictly unified with 160px popup card geometry) */
+body .ant-menu-inline-collapsed-tooltip .ant-tooltip-arrow {
+  display: none !important;
+}
+
+body .ant-menu-inline-collapsed-tooltip .ant-tooltip-inner {
+  min-width: 160px !important;
+  width: 160px !important;
+  height: 46px !important;
+  line-height: 46px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 16px !important;
+  background-color: var(--color-sidebar, #0070c0) !important;
+  background: var(--color-sidebar, #0070c0) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  border-radius: var(--radius-md, 6px) !important;
+  box-shadow: 0 8px 24px -2px rgba(0, 40, 100, 0.35), 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  box-sizing: border-box !important;
+}
+
+/* General tooltips across the app */
+body .ant-tooltip:not(.ant-menu-inline-collapsed-tooltip) .ant-tooltip-inner {
+  background-color: var(--color-sidebar, #0070c0) !important;
+  color: #ffffff !important;
+  border-radius: var(--radius-md, 6px) !important;
+  box-shadow: 0 6px 18px rgba(0, 40, 100, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  font-size: 13px !important;
+  padding: 6px 12px !important;
+}
+
+body .ant-tooltip:not(.ant-menu-inline-collapsed-tooltip) .ant-tooltip-arrow::before {
+  background-color: var(--color-sidebar, #0070c0) !important;
+  background: var(--color-sidebar, #0070c0) !important;
+}
+
+[data-theme='dark'] .ant-menu-submenu-popup .ant-menu,
+[data-theme='dark'] .ant-menu-submenu-popup .ant-menu-sub,
+[data-theme='dark'] .ant-menu-submenu-popup .ant-menu-vertical,
+[data-theme='dark'] .ant-menu-submenu-popup .ant-menu-dark,
+[data-theme='dark'] .ant-tooltip .ant-tooltip-inner {
+  background: var(--color-sidebar, #052a42) !important;
+  background-color: var(--color-sidebar, #052a42) !important;
+  border: 1px solid var(--color-border-soft, #303030) !important;
+}
+
+[data-theme='dark'] .ant-tooltip .ant-tooltip-arrow::before {
+  background-color: var(--color-sidebar, #052a42) !important;
+}
+
+/* 星穹夜主题 Tooltip 弹窗适配 */
+[data-theme='obsidian'] .ant-tooltip .ant-tooltip-inner {
+  background: #18181b !important;
+  background-color: #18181b !important;
+  color: #fafafa !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+}
+
+[data-theme='obsidian'] .ant-tooltip .ant-tooltip-arrow::before {
+  background: #18181b !important;
+  background-color: #18181b !important;
+}
+
+/* 玄武岩/云山灰主题 Tooltip 弹窗适配 */
+[data-theme='slate'] .ant-tooltip .ant-tooltip-inner {
+  background: #1e293b !important;
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+}
+
+[data-theme='slate'] .ant-tooltip .ant-tooltip-arrow::before {
+  background: #1e293b !important;
+  background-color: #1e293b !important;
+}
+
+/* 云境白主题 Tooltip 弹窗适配 */
+[data-theme='aurora'] .ant-tooltip .ant-tooltip-inner {
+  background: #18181b !important;
+  background-color: #18181b !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-theme='aurora'] .ant-tooltip .ant-tooltip-arrow::before {
+  background: #18181b !important;
+  background-color: #18181b !important;
+}
+
+.app-shell__back-portal-btn {
+  transition: transform 120ms ease, background-color 150ms ease, border-color 150ms ease !important;
+}
+
+.app-shell__back-portal-btn:active {
+  transform: scale(0.96);
+}
+
+.app-shell__back-portal-btn:focus-visible {
+  outline: 2px solid var(--color-primary, #008ee0) !important;
+  outline-offset: 2px !important;
+}
+
+.app-shell__main {
+  min-width: 0;
+  min-height: 100vh;
+  margin-left: var(--sidebar-width);
+  background: var(--color-bg-2);
+  transition: margin-left 0.42s cubic-bezier(0.2, 0, 0, 1);
+  will-change: margin-left;
+}
+
+.app-shell__main--topnav {
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+.app-shell__main--collapsed {
+  margin-left: var(--sidebar-collapsed-width, 64px);
+}
+
+.app-shell__header {
+  position: sticky;
+  z-index: 15;
+  top: 0;
+  display: flex;
+  height: var(--header-height);
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-lg);
+  border-bottom: 1px solid var(--color-border-soft);
+  background: color-mix(in srgb, var(--color-bg-white) 94%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.app-shell__context {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--color-text-2);
+}
+
+.app-shell__carrier-tag {
+  display: inline-flex;
+  align-items: center;
+  margin-left: var(--space-xs);
+  padding: 2px 10px;
+  background: var(--color-surface-subtle);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 4px;
+  color: var(--color-text-2);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.app-shell__carrier-tag:hover {
+  background: var(--color-processing-bg);
+  border-color: var(--color-processing-border);
+  color: var(--color-primary);
+}
+
+.app-shell__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.app-shell__theme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px !important;
+  width: 28px !important;
+  padding: 0 !important;
+  border-radius: var(--radius-md) !important;
+  font-size: var(--font-size-sm);
+  background: var(--color-bg-1) !important;
+  border-color: var(--color-border-soft) !important;
+  color: var(--color-text-1) !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.app-shell__theme-btn:hover,
+.app-shell__theme-btn:focus-visible {
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  outline: 2px solid var(--color-primary, #008ee0);
+  outline-offset: 2px;
+}
+
+/* ==================== 顶栏现代导航架构 (TopNav Aurora) ==================== */
+.app-shell--topnav .app-shell__header {
+  height: 64px !important;
+  min-height: 64px !important;
+  padding: 0 28px !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02) !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap !important;
+  gap: 20px;
+}
+
+.app-shell__topnav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+  margin-right: 16px;
+  background: transparent;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-family: inherit;
+  line-height: 1.2;
+  text-align: left;
+  transition: background-color 0.15s ease;
+}
+
+.app-shell__topnav-brand:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.app-shell__topnav-brand:focus-visible {
+  outline: 2px solid var(--color-primary, #008ee0);
+  outline-offset: 2px;
+}
+
+.app-shell__topnav-logo {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: #18181b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  position: relative;
+}
+
+.app-shell__topnav-logo::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 3px;
+  border: 1.5px solid #ffffff;
+  opacity: 0.85;
+}
+
+.app-shell__topnav-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #09090b;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+}
+
+.app-shell__topnav-nav-container {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-shell__nav-scroll-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  color: #71717a;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+  margin: 0 4px;
+}
+
+.app-shell__nav-scroll-btn:hover {
+  color: #09090b;
+  background: #f4f4f5;
+  border-color: #d4d4d8;
+  transform: scale(1.05);
+}
+
+[data-theme='obsidian'] .app-shell__nav-scroll-btn {
+  background: #18181b;
+  border-color: #27272a;
+  color: #a1a1aa;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='obsidian'] .app-shell__nav-scroll-btn:hover {
+  background: #27272a;
+  color: #ffffff;
+}
+
+[data-theme='slate'] .app-shell__nav-scroll-btn {
+  background: #222938;
+  border-color: #333d4e;
+  color: #cbd5e1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme='slate'] .app-shell__nav-scroll-btn:hover {
+  background: #2b3547;
+  color: #ffffff;
+}
+
+.app-shell__topnav-menu-wrapper {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.app-shell__topnav-menu-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.app-shell__topnav-menu {
+  width: auto;
+  min-width: max-content;
+  border-bottom: none !important;
+  background: transparent !important;
+  line-height: 64px !important;
+  height: 64px !important;
+  font-size: 14px;
+  font-weight: 500 !important;
+  display: flex !important;
+  align-items: center;
+}
+
+.app-shell__topnav-menu .ant-menu-submenu,
+.app-shell__topnav-menu .ant-menu-item {
+  background: transparent !important;
+}
+
+.app-shell__topnav-menu .ant-menu-submenu-selected,
+.app-shell__topnav-menu .ant-menu-submenu-active,
+.app-shell__topnav-menu .ant-menu-submenu-open {
+  background: transparent !important;
+}
+
+.app-shell__topnav-menu .ant-menu-item,
+.app-shell__topnav-menu .ant-menu-submenu-title {
+  padding: 0 14px !important;
+  color: #71717a !important;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out !important;
+  border-radius: 6px !important;
+  margin: 0 2px !important;
+  height: 34px !important;
+  line-height: 34px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+}
+
+.app-shell__topnav-menu .ant-menu-item:hover,
+.app-shell__topnav-menu .ant-menu-submenu-title:hover {
+  color: #09090b !important;
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
+.app-shell__topnav-menu .ant-menu-item-selected,
+.app-shell__topnav-menu .ant-menu-submenu-selected .ant-menu-submenu-title {
+  color: #09090b !important;
+  font-weight: 600 !important;
+  background: #f4f4f5 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* 彻底消灭 Antd 默认的 submenu-selected 突兀大色块背景 */
+.app-shell__topnav-menu.ant-menu-horizontal > .ant-menu-submenu-selected {
+  background-color: transparent !important;
+}
+
+.app-shell__topnav-menu.ant-menu-horizontal > .ant-menu-submenu {
+  background-color: transparent !important;
+}
+
+.app-shell__topnav-menu .ant-menu-submenu-selected {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+.app-shell__topnav-menu .ant-menu-submenu-selected::after,
+.app-shell__topnav-menu .ant-menu-submenu::after {
+  display: none !important;
+}
+
+.app-shell__topnav-menu .ant-menu-item-selected::after,
+.app-shell__topnav-menu .ant-menu-submenu-selected::after {
+  display: none !important;
+}
+
+/* 现代化浮动菜单 (Navbar Dropdown Popover) - 类似 navbar.gallery / appica.dev */
+.app-shell--topnav + .ant-menu-submenu-popup .ant-menu,
+body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu,
+body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu-sub,
+body:has(.app-shell--topnav) .ant-menu-overflow-item-rest .ant-menu,
+body:has(.app-shell--topnav) .ant-menu-submenu .ant-menu {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04) !important;
+  padding: 6px !important;
+  min-width: 150px;
+}
+
+body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu-item,
+body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu-submenu-title {
+  border-radius: 8px !important;
+  height: 36px !important;
+  line-height: 36px !important;
+  margin: 2px 0 !important;
+  padding: 0 12px !important;
+  color: #52525b !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  transition: background-color 0.15s ease, color 0.15s ease !important;
+}
+
+body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu-item:hover,
+body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu-submenu-title:hover {
+  color: #09090b !important;
+  background: #f4f4f5 !important;
+}
+
+body:has(.app-shell--topnav) .ant-menu-submenu-popup .ant-menu-item-selected {
+  color: #09090b !important;
+  font-weight: 600 !important;
+  background: #ebecef !important;
+}
+
+/* 兼顾不支持 :has 选择器的浏览器降级 */
+.ant-menu-submenu-popup .ant-menu {
+  border-radius: 10px;
+}
+
+/* ==================== 星穹夜 (Obsidian Dark TopNav) ==================== */
+[data-theme='obsidian'] .app-shell__header {
+  background: rgba(9, 9, 11, 0.85) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme='obsidian'] .app-shell__topnav-title {
+  color: #fafafa !important;
+}
+
+[data-theme='obsidian'] .app-shell__topnav-logo {
+  background: linear-gradient(135deg, #4f46e5 0%, #818cf8 100%) !important;
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.4) !important;
+}
+
+[data-theme='obsidian'] .app-shell__topnav-menu .ant-menu-item,
+[data-theme='obsidian'] .app-shell__topnav-menu .ant-menu-submenu-title {
+  color: #a1a1aa !important;
+}
+
+[data-theme='obsidian'] .app-shell__topnav-menu .ant-menu-item:hover,
+[data-theme='obsidian'] .app-shell__topnav-menu .ant-menu-submenu-title:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+[data-theme='obsidian'] .app-shell__topnav-menu .ant-menu-item-selected,
+[data-theme='obsidian'] .app-shell__topnav-menu .ant-menu-submenu-selected .ant-menu-submenu-title {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+body:has([data-theme='obsidian']) .ant-menu-submenu-popup .ant-menu {
+  background: rgba(18, 18, 21, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 12px 36px -4px rgba(0, 0, 0, 0.6) !important;
+}
+
+body:has([data-theme='obsidian']) .ant-menu-submenu-popup .ant-menu-item,
+body:has([data-theme='obsidian']) .ant-menu-submenu-popup .ant-menu-submenu-title {
+  color: #a1a1aa !important;
+  border-radius: 8px !important;
+  margin: 2px 0 !important;
+}
+
+body:has([data-theme='obsidian']) .ant-menu-submenu-popup .ant-menu-item:hover,
+body:has([data-theme='obsidian']) .ant-menu-submenu-popup .ant-menu-submenu-title:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+body:has([data-theme='obsidian']) .ant-menu-submenu-popup .ant-menu-item-selected {
+  color: #818cf8 !important;
+  background: rgba(99, 102, 241, 0.15) !important;
+}
+
+[data-theme='obsidian'] .app-shell__user-btn,
+[data-theme='obsidian'] .app-shell__theme-btn,
+[data-theme='obsidian'] .app-shell__back-portal-btn {
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  justify-content: center;
+  border-radius: 8px !important;
+  background: #18181b !important;
+  border-color: #27272a !important;
+  color: #e4e4e7 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme='obsidian'] .app-shell__user-btn:hover,
+[data-theme='obsidian'] .app-shell__theme-btn:hover,
+[data-theme='obsidian'] .app-shell__back-portal-btn:hover {
+  background: #27272a !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+
+/* 星穹夜页面级卡片与工作台 */
+[data-theme='obsidian'] .workbench {
+  --wb-page-bg: #09090b !important;
+}
+
+/* 星穹夜：数据驾驶舱适配 */
+[data-theme='obsidian'] .analytics-cockpit,
+[data-theme='obsidian'] .app-shell__content:has(> .analytics-cockpit) {
+  --analytics-page-bg: #09090b !important;
+  --analytics-text: #fafafa !important;
+  --analytics-label: #a1a1aa !important;
+  --analytics-muted: #71717a !important;
+  --analytics-panel-border: rgba(255, 255, 255, 0.08) !important;
+}
+
+body:has([data-theme='obsidian']) {
+  background: #09090b !important;
+}
+
+[data-theme='obsidian'] .analytics-cockpit__topbar-actions .ant-tag {
+  background: rgba(99, 102, 241, 0.12) !important;
+  border-color: rgba(99, 102, 241, 0.3) !important;
+  color: #a5b4fc !important;
+}
+
+[data-theme='obsidian'] .ant-card,
+[data-theme='obsidian'] .workbench-card,
+[data-theme='obsidian'] .page-stat-card {
+  background: #121215 !important;
+  border-color: rgba(255, 255, 255, 0.07) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme='obsidian'] .ant-card:hover,
+[data-theme='obsidian'] .page-stat-card:hover {
+  border-color: rgba(129, 140, 248, 0.4) !important;
+  box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.5), 0 0 10px rgba(99, 102, 241, 0.1) !important;
+}
+
+[data-theme='obsidian'] .ant-btn-default {
+  background: #18181b !important;
+  border-color: #27272a !important;
+  color: #e4e4e7 !important;
+}
+
+[data-theme='obsidian'] .ant-btn-default:hover {
+  background: #27272a !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+
+/* ==================== 玄武岩 (Slate Medium Dark TopNav) ==================== */
+.app-shell--slate-switch {
+  --color-sidebar: #1a202c;
+  --color-sidebar-selected: #334155;
+}
+
+.app-shell--slate-switch .app-shell__sider {
+  border-right: 1px solid rgb(255 255 255 / 8%);
+  transition: transform 0.32s cubic-bezier(0.2, 0, 0, 1), visibility 0s linear 0s !important;
+}
+
+.app-shell--slate-top .app-shell__sider {
+  transform: translateX(-100%);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.32s cubic-bezier(0.2, 0, 0, 1), visibility 0s linear 0.32s !important;
+}
+
+.app-shell--slate-switch .app-shell__brand {
+  background: #1a202c;
+  border-bottom-color: rgb(255 255 255 / 8%);
+}
+
+.app-shell--slate-switch .app-shell__sider .ant-menu-dark .ant-menu-item-selected {
+  box-shadow: inset 3px 0 0 #38bdf8;
+}
+
+.app-shell--slate-switch .app-shell__breadcrumb {
+  color: #94a3b8;
+}
+
+.app-shell--slate-switch .app-shell__breadcrumb-current {
+  color: #f1f5f9;
+}
+
+.app-shell__layout-toggle {
+  flex: 0 0 32px;
+}
+
+.app-shell__slate-nav,
+.app-shell__slate-subnav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.app-shell__slate-nav {
+  width: max-content;
+}
+
+.app-shell__slate-nav button,
+.app-shell__slate-subnav button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #aebed1;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.app-shell__slate-nav button {
+  height: 36px;
+  padding: 0 12px;
+}
+
+.app-shell__slate-nav button:hover,
+.app-shell__slate-subnav button:hover {
+  background: rgb(255 255 255 / 7%);
+  color: #fff;
+}
+
+.app-shell__slate-nav button.is-active,
+.app-shell__slate-subnav button.is-active {
+  background: rgb(148 163 184 / 16%);
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+.app-shell__slate-nav button:focus-visible,
+.app-shell__slate-subnav button:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: -2px;
+}
+
+.app-shell__slate-subnav {
+  min-height: 50px;
+  padding: 6px 28px;
+  overflow-x: auto;
+  background: #1a202c;
+  border-bottom: 1px solid rgb(255 255 255 / 8%);
+}
+
+.app-shell__slate-subnav button {
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shell--slate-switch .app-shell__sider,
+  .app-shell--slate-switch .app-shell__main {
+    transition: none !important;
+  }
+}
+
+[data-theme='slate'] .app-shell__header {
+  background: rgba(26, 32, 44, 0.85) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-theme='slate'] .app-shell__topnav-title {
+  color: #f1f5f9 !important;
+  font-weight: 600;
+}
+
+[data-theme='slate'] .app-shell__topnav-logo {
+  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.35);
+}
+
+[data-theme='slate'] .app-shell__topnav-menu .ant-menu-item,
+[data-theme='slate'] .app-shell__topnav-menu .ant-menu-submenu-title {
+  color: #94a3b8 !important;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+[data-theme='slate'] .app-shell__topnav-menu .ant-menu-item:hover,
+[data-theme='slate'] .app-shell__topnav-menu .ant-menu-submenu-title:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+[data-theme='slate'] .app-shell__topnav-menu .ant-menu-item-selected,
+[data-theme='slate'] .app-shell__topnav-menu .ant-menu-submenu-selected .ant-menu-submenu-title {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-theme='slate'] .app-shell__topnav-menu.ant-menu-horizontal > .ant-menu-submenu-selected {
+  background-color: transparent !important;
+}
+
+[data-theme='obsidian'] .app-shell__topnav-menu.ant-menu-horizontal > .ant-menu-submenu-selected {
+  background-color: transparent !important;
+}
+
+body:has([data-theme='slate']) .ant-menu-submenu-popup .ant-menu {
+  background: rgba(30, 36, 48, 0.95) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.45) !important;
+  padding: 6px !important;
+}
+
+body:has([data-theme='slate']) .ant-menu-submenu-popup .ant-menu-item,
+body:has([data-theme='slate']) .ant-menu-submenu-popup .ant-menu-submenu-title {
+  color: #cbd5e1 !important;
+  border-radius: 8px !important;
+  margin: 2px 0 !important;
+  transition: background-color 0.15s ease, color 0.15s ease !important;
+}
+
+body:has([data-theme='slate']) .ant-menu-submenu-popup .ant-menu-item:hover,
+body:has([data-theme='slate']) .ant-menu-submenu-popup .ant-menu-submenu-title:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+body:has([data-theme='slate']) .ant-menu-submenu-popup .ant-menu-item-selected {
+  color: #38bdf8 !important;
+  background: rgba(56, 189, 248, 0.14) !important;
+  font-weight: 600 !important;
+}
+
+[data-theme='slate'] .app-shell__user-btn,
+[data-theme='slate'] .app-shell__theme-btn,
+[data-theme='slate'] .app-shell__back-portal-btn {
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  justify-content: center;
+  border-radius: 8px !important;
+  background: #222938 !important;
+  border: 1px solid #333d4e !important;
+  color: #e2e8f0 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18) !important;
+}
+
+[data-theme='slate'] .app-shell__user-btn:hover,
+[data-theme='slate'] .app-shell__theme-btn:hover,
+[data-theme='slate'] .app-shell__back-portal-btn:hover {
+  background: #2b3547 !important;
+  border-color: #4b5568 !important;
+  color: #ffffff !important;
+}
+
+/* 玄武岩页面级与全站组件打磨 */
+[data-theme='slate'] .workbench {
+  --wb-page-bg: #1a202c !important;
+}
+
+[data-theme='slate'] .analytics-cockpit,
+[data-theme='slate'] .app-shell__content:has(> .analytics-cockpit) {
+  --analytics-page-bg: #1a202c !important;
+  --analytics-text: #f1f5f9 !important;
+  --analytics-label: #cbd5e1 !important;
+  --analytics-muted: #94a3b8 !important;
+  --analytics-panel-border: rgba(255, 255, 255, 0.08) !important;
+}
+
+body:has([data-theme='slate']) {
+  background: #1a202c !important;
+}
+
+[data-theme='slate'] .analytics-cockpit__topbar-actions .ant-tag {
+  background: rgba(56, 189, 248, 0.12) !important;
+  border-color: rgba(56, 189, 248, 0.3) !important;
+  color: #7dd3fc !important;
+  border-radius: 6px;
+}
+
+[data-theme='slate'] .ant-card,
+[data-theme='slate'] .workbench-card,
+[data-theme='slate'] .page-stat-card {
+  background: #222938 !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-theme='slate'] .ant-card:hover,
+[data-theme='slate'] .page-stat-card:hover {
+  border-color: rgba(56, 189, 248, 0.35) !important;
+  box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.25), 0 0 8px rgba(56, 189, 248, 0.1) !important;
+  transform: translateY(-1px);
+}
+
+[data-theme='slate'] .ant-btn-default {
+  background: #222938 !important;
+  border: 1px solid #333d4e !important;
+  color: #e2e8f0 !important;
+  border-radius: 8px !important;
+}
+
+[data-theme='slate'] .ant-btn-default:hover {
+  background: #2b3547 !important;
+  border-color: #4b5568 !important;
+  color: #ffffff !important;
+}
+
+/* 表格、表单输入框等中度灰深度契合 */
+[data-theme='slate'] .ant-input,
+[data-theme='slate'] .ant-select-selector {
+  background: #1a202c !important;
+  border-color: #333d4e !important;
+  color: #f1f5f9 !important;
+}
+
+[data-theme='slate'] .ant-table-thead > tr > th {
+  background: #1e2430 !important;
+  color: #cbd5e1 !important;
+  border-bottom: 1px solid #2b3544 !important;
+}
+
+[data-theme='slate'] .ant-table-tbody > tr > td {
+  border-bottom: 1px solid #242c3b !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme='slate'] .ant-table-tbody > tr:hover > td {
+  background: #262e3d !important;
+}
+
+
+/* ==================== 云境白全局页面级 UIUE 质感提升 ==================== */
+[data-theme='aurora'] {
+  letter-spacing: -0.01em;
+}
+
+[data-theme='aurora'] .workbench {
+  --wb-page-bg: #f4f4f5 !important;
+}
+
+/* 卡片悬浮与细腻质感 - 类似 appica.dev 的高质感柔和卡片 */
+[data-theme='aurora'] .ant-card,
+[data-theme='aurora'] .workbench-card,
+[data-theme='aurora'] .page-stat-card {
+  background: #ffffff !important;
+  border-color: rgba(228, 228, 231, 0.8) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 1px 2px -1px rgba(0, 0, 0, 0.02) !important;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-theme='aurora'] .ant-card:hover,
+[data-theme='aurora'] .page-stat-card:hover {
+  border-color: rgba(212, 212, 216, 0.9) !important;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02) !important;
+  transform: translateY(-1px);
+}
+
+/* 刷新数据按钮等次级操作现代极简微调 */
+[data-theme='aurora'] .ant-btn-default {
+  background: #ffffff;
+  border-color: #e4e4e7;
+  color: #27272a;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+[data-theme='aurora'] .ant-btn-default:hover {
+  background: #f4f4f5 !important;
+  border-color: #d4d4d8 !important;
+  color: #09090b !important;
+}
+
+/* 顶部菜单项微调：增加下沉指示器和箭头间距 */
+.app-shell--topnav .app-shell__topnav-menu .ant-menu-submenu-arrow {
+  margin-left: 4px;
+  opacity: 0.5;
+  transition: transform 0.2s ease;
+}
+
+.app-shell--topnav .app-shell__topnav-menu .ant-menu-submenu-open .ant-menu-submenu-arrow {
+  opacity: 0.9;
+}
+
+.app-shell--topnav .app-shell__actions {
+  flex-shrink: 0;
+  flex-wrap: nowrap !important;
+  gap: 10px;
+}
+
+.app-shell--topnav[data-theme='aurora'] .app-shell__user-btn {
+  display: inline-flex !important;
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  justify-content: center;
+  background: #ffffff !important;
+  border: 1px solid #e4e4e7 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  border-radius: 8px !important;
+  color: #27272a !important;
+}
+
+.app-shell--topnav[data-theme='aurora'] .app-shell__user-btn:hover {
+  background: #f4f4f5 !important;
+  border-color: #d4d4d8 !important;
+}
+
+.app-shell--topnav[data-theme='aurora'] .app-shell__theme-btn {
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  justify-content: center;
+  background: #ffffff !important;
+  border: 1px solid #e4e4e7 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  border-radius: 8px !important;
+  color: #27272a !important;
+}
+
+.app-shell--topnav[data-theme='aurora'] .app-shell__theme-btn:hover {
+  background: #f4f4f5 !important;
+  border-color: #d4d4d8 !important;
+}
+
+.app-shell--topnav[data-theme='aurora'] .app-shell__back-portal-btn {
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  justify-content: center;
+  background: #ffffff !important;
+  border: 1px solid #e4e4e7 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  border-radius: 8px !important;
+  color: #27272a !important;
+}
+
+.app-shell--topnav .app-shell__content {
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 24px 28px;
+  background: var(--color-bg-2) !important;
+}
+
+.app-shell__user-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px !important;
+  width: 28px !important;
+  height: 28px !important;
+  background: var(--color-bg-1);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md, 6px) !important;
+  color: var(--color-text-1);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  line-height: 1.4;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  user-select: none;
+}
+
+.app-shell__user-btn:hover,
+.app-shell__user-btn:focus-visible {
+  background: var(--color-bg-hover);
+  border-color: var(--color-primary);
+  outline: 2px solid var(--color-primary, #008ee0);
+  outline-offset: 2px;
+}
+
+.app-shell__user-name {
+  font-weight: 500;
+  color: var(--color-text-1);
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-shell__avatar {
+  background-color: var(--color-primary, #008ee0) !important;
+}
+
+[data-theme='aurora'] .app-shell__avatar {
+  background-color: #18181b !important;
+  color: #ffffff !important;
+}
+
+[data-theme='obsidian'] .app-shell__avatar {
+  background-color: #312e81 !important;
+  color: #c7d2fe !important;
+}
+
+[data-theme='slate'] .app-shell__avatar {
+  background-color: #0369a1 !important;
+  color: #e0f2fe !important;
+}
+
+.app-shell__user-arrow {
+  font-size: 10px;
+  color: var(--color-text-3);
+  transition: transform 0.2s ease;
+}
+
+
+.app-shell__org-panel {
+  width: 320px;
+  max-height: 420px;
+  overflow: auto;
+  padding: 12px;
+  background: var(--color-bg-white, #fff);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+}
+
+.app-shell__org-path {
+  margin-bottom: 8px;
+  color: var(--color-text-2);
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+}
+
+.app-shell__content {
+  display: flex;
+  min-width: 0;
+  min-height: calc(100vh - var(--header-height));
+  padding: var(--space-lg);
+  background: var(--color-bg-2);
+}
+
+.app-shell--topnav .app-shell__content {
+  min-height: calc(100vh - var(--header-height, 64px));
+}
+
+/* 承运商双栏工作区：页面整体可滚动，左右面板仍由各业务模块独立滚动。 */
+.app-shell__content--carrier-workspace {
+  --carrier-workspace-page-padding: var(--space-lg);
+
+  overflow-y: auto;
+  align-items: flex-start;
+}
+
+.app-shell__breadcrumb {
+  min-width: 0;
+  color: var(--color-text-3);
+  font-size: var(--font-size-help);
+}
+
+.app-shell__breadcrumb ol {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.app-shell__breadcrumb li {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.app-shell__breadcrumb-current {
+  overflow: hidden;
+  color: var(--color-text-1);
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-shell__breadcrumb-separator {
+  color: var(--color-text-3);
+}
+
+.app-placeholder {
+  display: grid;
+  width: 100%;
+  min-height: 420px;
+  place-items: center;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-white);
+  color: var(--color-text-2);
+}
+
+@media (width <= 1366px) {
+  .app-shell__content {
+    padding: var(--space-md);
+  }
+
+  .app-shell__content--carrier-workspace {
+    --carrier-workspace-page-padding: var(--space-md);
+  }
+}
+
+@media (width <= 1100px) {
+  .app-shell:not(.app-shell--topnav) .app-shell__header {
+    height: auto;
+    min-height: var(--header-height);
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding-block: var(--space-sm);
+  }
+
+  .app-shell:not(.app-shell--topnav) .app-shell__context,
+  .app-shell:not(.app-shell--topnav) .app-shell__actions {
+    flex-wrap: wrap;
+  }
+
+  .app-shell__context {
+    min-width: 0;
+  }
+
+  .app-shell__breadcrumb-current {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .app-shell__actions {
+    gap: var(--space-sm);
+  }
+}
+
+@media (width <= 720px) {
+  .app-shell__sider {
+    width: 64px !important;
+  }
+
+  .app-shell__brand {
+    justify-content: center;
+    padding-inline: var(--space-xs);
+  }
+
+  .app-shell__brand-copy {
+    display: none;
+  }
+
+  .app-shell__menu .ant-menu-title-content {
+    display: none;
+  }
+
+  .app-shell__menu .ant-menu-item,
+  .app-shell__menu .ant-menu-submenu-title {
+    padding-inline: 0 !important;
+    text-align: center;
+  }
+
+  .app-shell__menu .ant-menu-item .anticon,
+  .app-shell__menu .ant-menu-submenu-title .anticon {
+    margin-inline-end: 0;
+    font-size: 16px;
+  }
+
+  .app-shell__main {
+    margin-left: 64px;
+  }
+
+  .app-shell:not(.app-shell--topnav) .app-shell__header {
+    align-items: stretch;
+  }
+
+  .app-shell:not(.app-shell--topnav) .app-shell__context {
+    width: 100%;
+  }
+
+  .app-shell__breadcrumb li:not(:last-child),
+  .app-shell__breadcrumb li:last-child .app-shell__breadcrumb-separator {
+    display: none;
+  }
+
+  .app-shell:not(.app-shell--topnav) .app-shell__actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .app-shell:not(.app-shell--topnav) .app-shell__user-btn {
+    display: none;
+  }
+}
+
+/* ==================== TopNav 响应式折叠与移动端布局 (<=720px / 375px) ==================== */
+@media (width <= 1280px) {
+  .app-shell--topnav .app-shell__header {
+    padding: 0 16px !important;
+    gap: 12px;
+  }
+
+  .app-shell__topnav-brand {
+    margin-right: 8px;
+  }
+}
+
+@media (width <= 720px) {
+  .app-shell--topnav .app-shell__header {
+    height: auto !important;
+    min-height: 56px !important;
+    padding: 8px 12px !important;
+    flex-wrap: wrap !important;
+    gap: 8px 12px;
+    align-items: center;
+  }
+
+  .app-shell--topnav .app-shell__topnav-brand {
+    order: 1;
+    margin-right: 0;
+    padding: 2px 4px;
+  }
+
+  .app-shell--topnav .app-shell__topnav-title {
+    font-size: 14px;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .app-shell--topnav .app-shell__actions {
+    order: 2;
+    margin-left: auto;
+    gap: 6px;
+  }
+
+  .app-shell--topnav .app-shell__topnav-menu-wrapper {
+    order: 3;
+    width: 100%;
+    flex: 0 0 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .app-shell--topnav .app-shell__topnav-menu {
+    height: 44px !important;
+    line-height: 44px !important;
+  }
+
+  .app-shell--topnav .app-shell__user-name {
+    display: none;
+  }
+
+  .app-shell--topnav .app-shell__user-btn {
+    padding: 3px 6px !important;
+  }
+
+  .app-shell--topnav .app-shell__back-portal-btn,
+  .app-shell--topnav .app-shell__theme-btn {
+    min-height: 32px;
+  }
+
+  .app-shell--topnav .app-shell__back-portal-btn {
+    width: 32px !important;
+    padding-inline: 0 !important;
+    justify-content: center;
+  }
+
+  .app-shell--topnav .app-shell__theme-btn {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .app-shell--topnav .app-shell__carrier-tag {
+    display: none;
+  }
+
+  .app-shell--topnav .app-shell__content {
+    padding: 12px 8px;
+    min-height: auto;
+  }
+}
+
+@media (width <= 375px) {
+  .app-shell--topnav .app-shell__header {
+    padding: 6px 8px !important;
+    gap: 6px;
+  }
+
+  .app-shell--topnav .app-shell__topnav-title {
+    max-width: 100px;
+  }
+
+  .app-shell--topnav .app-shell__back-portal-btn span:not(.anticon) {
+    display: none;
+  }
+
+  .app-shell--topnav .app-shell__actions {
+    gap: 4px;
+  }
+}
+
+/* 用户菜单触发器：与主题、返回门户按钮保持同一高度与视觉权重。 */
+.app-shell__user-trigger {
+  width: auto !important;
+  gap: 7px;
+  padding: 2px 8px 2px 2px !important;
+  border-radius: 999px !important;
+}
+
+.app-shell__user-trigger .app-shell__user-arrow {
+  font-size: 9px;
+  opacity: 0.72;
+}
+
+.app-shell__user-summary {
+  display: flex;
+  min-width: 220px;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 2px;
+}
+
+.app-shell__user-summary > span {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.app-shell__user-summary strong {
+  color: var(--color-text-1);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.app-shell__user-summary small {
+  overflow: hidden;
+  color: var(--color-text-3);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-shell__user-theme-option {
+  display: inline-flex;
+  min-width: 130px;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-shell__user-theme-option .anticon-check {
+  margin-left: auto;
+  color: var(--color-primary);
+}
+
+.app-shell__theme-color-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+}
+
+@media (max-width: 720px) {
+  .app-shell__user-trigger .app-shell__user-name,
+  .app-shell__user-trigger .app-shell__user-arrow {
+    display: none;
+  }
+
+  .app-shell__user-trigger {
+    padding: 2px !important;
+  }
+}

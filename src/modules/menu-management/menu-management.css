@@ -1,0 +1,60 @@
+.management-menu-cell {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+}
+
+.management-menu-cell__icon {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  font-size: 15px;
+}
+
+.management-menu-cell__icon--page {
+  background: color-mix(in srgb, var(--color-primary) 11%, var(--color-bg-white));
+  color: var(--color-primary);
+}
+
+.management-menu-cell__icon--group {
+  background: color-mix(in srgb, var(--color-accent-violet) 11%, var(--color-bg-white));
+  color: var(--color-accent-violet);
+}
+
+.management-menu-cell__copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.management-menu-cell__copy .ant-typography {
+  margin: 0;
+}
+
+.management-menu-cell__copy .ant-typography-secondary {
+  font-size: var(--font-size-help);
+}
+
+.menu-management-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-info-border);
+  border-radius: var(--radius-md);
+  background: var(--color-info-bg);
+  color: var(--color-text-2);
+  font-size: var(--font-size-help);
+  line-height: 1.6;
+}
+
+.menu-management-tip .anticon {
+  margin-top: 3px;
+  color: var(--color-primary);
+}

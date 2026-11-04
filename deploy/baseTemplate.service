@@ -1,0 +1,31 @@
+# baseTemplate systemd 服务（可选，用于开机自启）
+#
+# 安装方式：
+#   sudo install -m 644 deploy/baseTemplate.service /etc/systemd/system/baseTemplate.service
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now baseTemplate
+#
+# 前置条件：已在 /home/paul/project/baseTemplate 执行过 npm ci / npm run build。
+# 若安装路径或用户不同，请同步修改 WorkingDirectory / User / ExecStart。
+
+[Unit]
+Description=baseTemplate prototype static server (127.0.0.1:8091)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=paul
+Group=paul
+WorkingDirectory=/home/paul/project/baseTemplate
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=8091
+ExecStart=/usr/bin/env node scripts/serve.mjs
+Restart=on-failure
+RestartSec=3
+StandardOutput=append:/home/paul/project/baseTemplate/.run/app.log
+StandardError=append:/home/paul/project/baseTemplate/.run/app.log
+
+[Install]
+WantedBy=multi-user.target

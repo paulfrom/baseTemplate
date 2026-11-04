@@ -1,0 +1,431 @@
+:root {
+  --color-primary: #008ee0;
+  --color-primary-hover: #08a4fe;
+  --color-primary-active: #047cc1;
+  --color-link: #006da9;
+  --color-error: #f5222d;
+  --color-success: #00b42a;
+  --color-warning: #ff7d00;
+  --color-processing: #008ee0;
+  --color-info: #008ee0;
+  --color-price-accent: #d97706;
+  --color-accent-violet: #7b61ff;
+  --color-chart-muted: #9ccff1;
+  --color-success-text: #087f2e;
+  --color-warning-text: #ad6800;
+  --color-error-text: #cf1322;
+  /* KPI 卡图标语义色（亮色） */
+  --color-kpi-icon-success: #16a34a;
+  --color-kpi-icon-warning: #ea580c;
+  --color-kpi-icon-error: #dc2626;
+
+  --color-text-1: #333333;
+  --color-text-2: #666666;
+  --color-text-3: #667085;
+  --color-text-4: #98a2b3;
+  --color-text-disabled: #b8c0cc;
+
+  --color-bg-white: #ffffff;
+  --color-bg-1: #fafafa;
+  --color-bg-2: #f5f5f5;
+  --color-bg-elevated: #ffffff;
+  --color-static-white: #ffffff;
+  --color-control-bg: #ffffff;
+  --color-control-border: #d0d5dd;
+  --color-surface-subtle: #f7fbfd;
+  --color-bg-subtle: var(--color-surface-subtle);
+  --color-surface-selected: #eef9fc;
+  --color-warning-bg: #fffbe6;
+  --color-warning-border: #ffe58f;
+  --color-danger-bg: #fff2f0;
+  --color-danger-border: #ffccc7;
+  --color-info-bg: #f4f9fb;
+  --color-info-border: #d9eef0;
+  --color-success-bg: #e8f8ef;
+  --color-success-border: #b7eb8f;
+  --color-processing-bg: #e6f7ff;
+  --color-processing-border: color-mix(in srgb, var(--color-primary) 42%, var(--color-border-soft));
+  --color-border-soft: #e8e8e8;
+  --color-border: #d9d9d9;
+  --color-mask: rgb(0 0 0 / 45%);
+  --color-sidebar: #0070c0;
+  --color-sidebar-hover: #005fa3;
+  --color-sidebar-selected: #1a8ad8;
+
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'PingFang SC',
+    'Microsoft YaHei', 'Source Han Sans SC', Arial, Roboto, sans-serif;
+  --font-family-number: Arial, 'PingFang SC', Roboto, sans-serif;
+  --font-size-title-main: 24px;
+  --font-size-title-sub: 20px;
+  --font-size-title-small: 16px;
+  --font-size-body: 14px;
+  --font-size-help: 12px;
+  --line-height-base: 1.6;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-max: 10px;
+  --border-width-base: 1px;
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 3px;
+
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+
+  --control-height-sm: 24px;
+  --control-height-md: 32px;
+  --control-height-lg: 40px;
+  --header-height: 56px;
+  --sidebar-width: 216px;
+  --sidebar-collapsed-width: 64px;
+  --shadow-elevated: 0 4px 16px rgb(0 0 0 / 8%);
+
+  /* ---- 门户入口页：语义令牌 ---- */
+  --color-header-bg: var(--color-primary);
+  --color-header-divider: rgb(255 255 255 / 12%);
+  --color-platform-fulfillment: #13c2c2;
+  --color-platform-fulfillment-active: #08979c;
+  --color-platform-fulfillment-soft: #e6fffb;
+  --color-platform-mall-soft: #e6f7ff;
+  --color-text-on-primary: var(--color-static-white);
+  --color-tag-blue-bg: var(--color-platform-mall-soft);
+  --color-tag-blue-text: var(--color-header-bg);
+  --color-tag-teal-bg: var(--color-platform-fulfillment-soft);
+  --color-tag-teal-text: var(--color-platform-fulfillment);
+
+  /* 承运商工作台主题化品牌横幅令牌 */
+  --color-carrier-hero-start: #006da9;
+  --color-carrier-hero-mid: #008ee0;
+  --color-carrier-hero-end: #06a6bb;
+  --shadow-carrier-hero: 0 10px 28px rgb(0 142 224 / 18%);
+
+  /* ---- 门户入口页：亮色视觉令牌 ---- */
+  --color-portal-page-bg: #f3f7fa;
+  --color-portal-header-start: #005a9f;
+  --color-portal-header-end: #006bb8;
+  --color-portal-header-hover: rgb(255 255 255 / 12%);
+  --color-portal-header-active: rgb(0 0 0 / 12%);
+  --color-portal-header-avatar: rgb(255 255 255 / 18%);
+  --color-portal-brand-border: rgb(255 255 255 / 52%);
+  --color-portal-brand-surface: var(--color-static-white);
+  --color-portal-brand-text: var(--color-portal-header-start);
+  --color-portal-nav-indicator: var(--color-static-white);
+  --color-portal-main-highlight: rgb(255 255 255 / 86%);
+  --color-portal-main-bg-start: #eaf6ff;
+  --color-portal-main-bg-mid: #f4f9fc;
+  --color-portal-main-bg-end: #f5f7f9;
+  --color-portal-footer-bg: var(--color-portal-main-bg-end);
+  --color-portal-title: #12365a;
+  --color-portal-subtitle: #526f8b;
+  --color-portal-surface: rgb(255 255 255 / 94%);
+  --color-portal-card-border: rgb(0 112 192 / 10%);
+  --color-portal-illustration-highlight: rgb(255 255 255 / 92%);
+  --color-portal-illustration-blue-start: #eef8ff;
+  --color-portal-illustration-teal-start: #effffd;
+  --color-portal-tag-blue-border: rgb(0 142 224 / 12%);
+  --color-portal-tag-teal-border: rgb(19 194 194 / 14%);
+  --color-portal-cta-text: var(--color-static-white);
+  --color-portal-cta-blue-start: var(--color-portal-header-end);
+  --color-portal-skeleton-shimmer-edge: rgb(255 255 255 / 0%);
+  --color-portal-skeleton-shimmer-center: rgb(255 255 255 / 40%);
+
+  /* ---- 门户入口页：字体、布局与尺寸令牌 ---- */
+  --font-size-hero: clamp(36px, 2.25vw, 44px);
+  --font-size-brand: 18px;
+  --font-size-portal-card-title: 22px;
+  --font-size-portal-cta: 15px;
+  --font-size-portal-caret: 10px;
+  --header-height-portal: 64px;
+  --space-xl: 32px;
+  --space-3xl: 64px;
+  --portal-container-max: 1200px;
+  --portal-title-max: 880px;
+  --portal-brand-mark-size: 36px;
+  --portal-brand-subtitle-offset: 2px;
+  --portal-nav-indicator-bottom: 1px;
+  --portal-nav-indicator-height: 2px;
+  --portal-nav-divider-height: 20px;
+  --portal-network-height: 560px;
+  --portal-hero-min-height: 236px;
+  --portal-hero-padding-top: 52px;
+  --portal-hero-padding-bottom: 104px;
+  --portal-card-grid-gap: 28px;
+  --portal-card-grid-max: 1320px;
+  --portal-card-grid-overlap: -72px;
+  --portal-card-grid-padding-bottom: 72px;
+  --portal-card-min-height: 452px;
+  --portal-card-padding: 26px 28px 24px;
+  --portal-card-radius: 12px;
+  --portal-card-backdrop-blur: 8px;
+  --portal-card-accent-height: 3px;
+  --portal-card-illustration-height: 156px;
+  --portal-card-illustration-offset: 2px;
+  --portal-card-description-min-height: 52px;
+  --portal-tag-padding: 3px 10px;
+  --portal-tag-dot-size: 4px;
+  --portal-tag-dot-gap: 6px;
+  --portal-cta-width: 228px;
+  --portal-cta-width-fluid: 78%;
+  --portal-cta-height: 44px;
+  --portal-cta-radius: 22px;
+  --portal-skeleton-circle-size: 96px;
+  --portal-skeleton-bar-height: 12px;
+  --portal-skeleton-title-width: 280px;
+  --portal-skeleton-title-height: 32px;
+  --portal-skeleton-description-width: 480px;
+  --portal-skeleton-card-title-height: 18px;
+  --portal-skeleton-description-compact-width: 320px;
+  --portal-hero-compact-min-height: 220px;
+  --portal-hero-compact-padding-top: 44px;
+  --portal-card-compact-min-height: 424px;
+  --portal-card-illustration-compact-height: 138px;
+
+  /* ---- 门户入口页：阴影令牌 ---- */
+  --shadow-card: 0 2px 8px rgb(0 142 224 / 8%);
+  --shadow-portal-header: 0 2px 14px rgb(0 74 134 / 16%);
+  --shadow-portal-brand-mark: 0 5px 16px rgb(0 45 89 / 18%);
+  --shadow-portal-title: 0 2px 0 rgb(255 255 255 / 76%);
+  --shadow-portal-card: 0 12px 32px rgb(34 79 112 / 10%);
+  --shadow-portal-card-hover: 0 22px 46px rgb(24 83 127 / 16%);
+  --shadow-portal-card-active: 0 9px 24px rgb(34 79 112 / 12%);
+  --shadow-portal-cta-blue: 0 8px 18px rgb(0 112 192 / 18%);
+  --shadow-portal-cta-teal: 0 8px 18px rgb(19 194 194 / 20%);
+  --shadow-portal-cta-blue-hover: 0 11px 24px rgb(0 112 192 / 24%);
+  --shadow-portal-cta-teal-hover: 0 11px 24px rgb(19 194 194 / 26%);
+}
+
+[data-theme='dark'] {
+  --color-text-1: #f0f0f0;
+  --color-text-2: #c7c7c7;
+  --color-text-3: #8c8c8c;
+  --color-text-4: #6f6f6f;
+  --color-text-disabled: #595959;
+  --color-link: #69c0ff;
+  --color-success-text: #73d13d;
+  --color-warning-text: #ffc069;
+  --color-error-text: #ff7875;
+  /* KPI 卡图标语义色（深色） */
+  --color-kpi-icon-success: #73d13d;
+  --color-kpi-icon-warning: #ffc069;
+  --color-kpi-icon-error: #ff7875;
+  --color-bg-white: #141414;
+  --color-bg-1: #1f1f1f;
+  --color-bg-2: #0f1113;
+  --color-bg-elevated: #1f1f1f;
+  --color-control-bg: #1f1f1f;
+  --color-control-border: #434343;
+  --color-surface-subtle: #18232b;
+  --color-bg-subtle: var(--color-surface-subtle);
+  --color-surface-selected: #0e2d3b;
+  --color-warning-bg: #332b12;
+  --color-warning-border: #594214;
+  --color-danger-bg: #321417;
+  --color-danger-border: #5c1f24;
+  --color-info-bg: #122c36;
+  --color-info-border: #1e5664;
+  --color-success-bg: #15351f;
+  --color-success-border: #276738;
+  --color-processing-bg: #0e2a40;
+  --color-processing-border: #155b84;
+  --color-price-accent: #ffc069;
+  --color-accent-violet: #b37feb;
+  --color-chart-muted: #2b5d7d;
+  --color-border-soft: #303030;
+  --color-border: #434343;
+  --color-sidebar: #052a42;
+  --color-sidebar-hover: #083c5e;
+  --color-sidebar-selected: #0a4f7a;
+  --shadow-elevated: 0 4px 20px rgb(0 0 0 / 28%);
+
+  /* ---- 门户入口页深色语义覆盖 ---- */
+  --color-platform-mall-soft: #0e2a40;
+  --color-platform-fulfillment-soft: #0e2d2d;
+  --color-tag-blue-bg: #0e2a40;
+  --color-tag-blue-text: #5ebeff;
+  --color-tag-teal-bg: #0e2d2d;
+  --color-tag-teal-text: #5cdbd0;
+  --color-carrier-hero-start: #052a42;
+  --color-carrier-hero-mid: #07547f;
+  --color-carrier-hero-end: #0e7490;
+  --shadow-carrier-hero: 0 10px 28px rgb(0 0 0 / 30%);
+  --shadow-card: 0 2px 12px rgb(0 0 0 / 36%);
+
+  /* ---- 门户入口页深色视觉覆盖 ---- */
+  --color-portal-page-bg: #0f1113;
+  --color-portal-header-start: #06365a;
+  --color-portal-header-end: #07547f;
+  --color-portal-main-highlight: rgb(28 77 105 / 28%);
+  --color-portal-main-bg-start: #0d1f2a;
+  --color-portal-main-bg-mid: #111a20;
+  --color-portal-main-bg-end: #0f1113;
+  --color-portal-footer-bg: #0f1113;
+  --color-portal-title: #f0f6ff;
+  --color-portal-subtitle: #b7c7d6;
+  --color-portal-surface: rgb(20 20 20 / 94%);
+  --color-portal-card-border: rgb(105 192 255 / 20%);
+  --color-portal-illustration-highlight: rgb(255 255 255 / 8%);
+  --color-portal-illustration-blue-start: #102838;
+  --color-portal-illustration-teal-start: #102d2d;
+  --color-portal-tag-blue-border: rgb(94 190 255 / 24%);
+  --color-portal-tag-teal-border: rgb(92 219 208 / 24%);
+  --color-portal-skeleton-shimmer-edge: rgb(255 255 255 / 0%);
+  --color-portal-skeleton-shimmer-center: rgb(255 255 255 / 8%);
+  --shadow-portal-title: none;
+  --shadow-portal-card: 0 12px 32px rgb(0 0 0 / 28%);
+  --shadow-portal-card-hover: 0 22px 46px rgb(0 0 0 / 38%);
+  --shadow-portal-card-active: 0 9px 24px rgb(0 0 0 / 32%);
+}
+
+/* ---- 主题三：云境白 (顶栏现代架构) ---- */
+[data-theme='aurora'] {
+  --color-primary: #18181b;
+  --color-primary-hover: #27272a;
+  --color-primary-active: #09090b;
+  --color-link: #2563eb;
+  --color-processing: #18181b;
+  --color-info: #2563eb;
+
+  --color-text-1: #09090b;
+  --color-text-2: #52525b;
+  --color-text-3: #71717a;
+  --color-text-4: #a1a1aa;
+
+  --color-bg-white: #ffffff;
+  --color-bg-1: #fafafa;
+  --color-bg-2: #f4f4f5;
+  --color-bg-elevated: #ffffff;
+  --color-border-soft: #f4f4f5;
+  --color-border: #e4e4e7;
+  --color-surface-selected: #f4f4f5;
+  --color-error: #ef4444;
+  --color-error-text: #dc2626;
+  --color-warning: #f59e0b;
+  --color-warning-text: #d97706;
+  --color-success: #10b981;
+  --color-success-text: #059669;
+  --color-warning-bg: #fffbeb;
+  --color-warning-border: #fef3c7;
+  --color-danger-bg: #fef2f2;
+  --color-danger-border: #fee2e2;
+  --color-info-bg: #eff6ff;
+  --color-info-border: #dbeafe;
+  --color-success-bg: #ecfdf5;
+  --color-success-border: #d1fae5;
+  --color-processing-bg: #f4f4f5;
+  --color-processing-border: #e4e4e7;
+  --color-control-bg: #ffffff;
+  --color-control-border: #e4e4e7;
+  --color-surface-subtle: #fafafa;
+  --color-bg-subtle: var(--color-surface-subtle);
+  --color-carrier-hero-start: #ffffff;
+  --color-carrier-hero-mid: #f8fafc;
+  --color-carrier-hero-end: #f1f5f9;
+  --shadow-carrier-hero: 0 4px 20px -2px rgb(15 23 42 / 6%), 0 1px 3px rgb(15 23 42 / 3%);
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+/* ---- 主题四：星穹夜 (顶栏暗黑高阶架构) ---- */
+[data-theme='obsidian'] {
+  --color-primary: #818cf8;
+  --color-primary-hover: #a5b4fc;
+  --color-primary-active: #6366f1;
+  --color-link: #818cf8;
+  --color-processing: #818cf8;
+  --color-info: #818cf8;
+  --color-text-on-primary: #0f172a;
+
+  --color-text-1: #fafafa;
+  --color-text-2: #d4d4d8;
+  --color-text-3: #a1a1aa;
+  --color-text-4: #71717a;
+  --color-text-disabled: #52525b;
+
+  --color-bg-white: #121215;
+  --color-bg-1: #18181b;
+  --color-bg-2: #09090b;
+  --color-bg-elevated: #18181b;
+  --color-control-bg: #18181b;
+  --color-control-border: #27272a;
+  --color-border-soft: #1e1e24;
+  --color-border: #27272a;
+  --color-surface-subtle: #141418;
+  --color-surface-selected: #1f1f28;
+  --color-error: #f87171;
+  --color-error-text: #fca5a5;
+  --color-warning: #fbbf24;
+  --color-warning-text: #fde68a;
+  --color-success: #34d399;
+  --color-success-text: #6ee7b7;
+  --color-warning-bg: #291e0a;
+  --color-warning-border: #4d360f;
+  --color-danger-bg: #2e1115;
+  --color-danger-border: #571b23;
+  --color-info-bg: #1e1b4b;
+  --color-info-border: #312e81;
+  --color-success-bg: #062e20;
+  --color-success-border: #0d4a34;
+  --color-processing-bg: #1e1b4b;
+  --color-processing-border: #312e81;
+  --color-carrier-hero-start: #1e1b4b;
+  --color-carrier-hero-mid: #312e81;
+  --color-carrier-hero-end: #4f46e5;
+  --shadow-carrier-hero: 0 10px 28px rgb(30 27 75 / 34%);
+  --color-bg-subtle: var(--color-surface-subtle);
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+/* ---- 主题五：玄武岩 (Slate 中度现代灰顶栏架构) ---- */
+[data-theme='slate'] {
+  --color-primary: #38bdf8;
+  --color-primary-hover: #7dd3fc;
+  --color-primary-active: #0284c7;
+  --color-link: #38bdf8;
+  --color-processing: #38bdf8;
+  --color-info: #38bdf8;
+  --color-text-on-primary: #0f172a;
+
+  --color-text-1: #f1f5f9;
+  --color-text-2: #cbd5e1;
+  --color-text-3: #94a3b8;
+  --color-text-4: #64748b;
+  --color-text-disabled: #475569;
+
+  --color-bg-white: #262e3d;
+  --color-bg-1: #2d3748;
+  --color-bg-2: #1e2430;
+  --color-bg-elevated: #2d3748;
+  --color-control-bg: #262e3d;
+  --color-control-border: #374151;
+  --color-border-soft: #2b3544;
+  --color-border: #374151;
+  --color-surface-subtle: #222a38;
+  --color-surface-selected: #2d384b;
+  --color-error: #f87171;
+  --color-error-text: #fca5a5;
+  --color-warning: #fbbf24;
+  --color-warning-text: #fde68a;
+  --color-success: #34d399;
+  --color-success-text: #6ee7b7;
+  --color-warning-bg: #332614;
+  --color-warning-border: #563e1a;
+  --color-danger-bg: #33161c;
+  --color-danger-border: #5a222c;
+  --color-info-bg: #142a3e;
+  --color-info-border: #1e4566;
+  --color-success-bg: #103328;
+  --color-success-border: #1a5641;
+  --color-processing-bg: #142a3e;
+  --color-processing-border: #1e4566;
+  --color-carrier-hero-start: #0f172a;
+  --color-carrier-hero-mid: #1e293b;
+  --color-carrier-hero-end: #334155;
+  --shadow-carrier-hero: 0 10px 28px rgb(15 23 42 / 32%);
+  --color-bg-subtle: var(--color-surface-subtle);
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}

@@ -1,0 +1,65 @@
+/* 门户基础管理页（菜单 / 应用 / 用户配置）共用布局规则。 */
+.management-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  min-width: 0;
+}
+
+.management-page__header {
+  align-items: center;
+}
+
+.management-page__header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.management-panel.ant-card {
+  margin-top: 2px;
+}
+
+.management-row-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+.management-result-count {
+  font-size: var(--font-size-help);
+  white-space: nowrap;
+}
+
+.management-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--space-md);
+}
+
+.management-form-grid .ant-form-item,
+.management-editor-form > .ant-form-item {
+  margin-bottom: var(--space-sm);
+}
+
+.management-form-switches {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.management-form-switches .ant-form-item {
+  margin-bottom: 0;
+}
+
+@media (max-width: 720px) {
+  .management-page__header {
+    align-items: flex-start;
+  }
+
+  .management-form-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,42 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-show*/
+dist-ssr
+*.local
+.playwright-cli/
+.playwright-mcp/
+
+# 过程性产物：评审截图 / 实测截图 / 临时测试文件（本地保留，不进库）
+output/
+artifacts/
+review-*.png
+push-test*
+carrier-hall.yaml
+
+# Agent 工作记忆（本地协作数据，不进库）
+.workbuddy/
+__pycache__/
+*.pyc
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 部署运行时目录（pid / 日志 / 渲染后的 nginx 配置）
+.run/
