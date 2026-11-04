@@ -1,6 +1,6 @@
 # baseTemplate
 
-业务原型模板项目：保留完整的应用框架（门户入口、应用外壳、hash 路由、五套主题、图表基建、测试与质量门禁），业务页面只保留一个「数据驾驶舱」作为示例，适合作为新业务原型的起点。
+业务原型模板项目：保留完整的应用框架（门户入口、应用外壳、hash 路由、五套主题、图表基建、测试与质量门禁），内置「数据驾驶舱」示例，并参考 SEI Portal 补齐菜单、应用和用户配置基础能力，适合作为新业务原型的起点。
 
 ## 快速开始
 
@@ -11,6 +11,16 @@ npm run verify  # typecheck + lint + test + build 完整门禁
 ```
 
 启动后默认进入门户页（`#/portal`），点击「数据驾驶舱」卡片或侧边菜单进入 `#/analytics-cockpit`。
+
+## 门户基础配置
+
+外壳和用户菜单提供以下入口，页面均为可操作的纯前端原型：
+
+- `#/menu-management`：菜单分组、页面路由、权限标识、显示开关、排序及新增 / 编辑 / 删除；保存后同步侧边栏、顶部导航和面包屑。
+- `#/app-management`：应用卡片、分类、路由、标签、门户展示和启停状态；保存后同步门户首屏卡片。
+- `#/user-settings`：基本资料、头像颜色、默认主题、首页与密度偏好、通知开关，以及明确标注为演示的安全设置。
+
+菜单、应用和用户偏好共享 `src/app/portal-settings.ts` 中的本地事实源，默认写入浏览器 `localStorage` 的 `prototype_portal_settings_v1`，刷新后保留；可在各管理页点击「恢复默认」还原对应配置。权限标识、登录设备、密码修改和通知渠道仅用于原型演示，不代表真实权限、认证或后端能力。
 
 ## 技术栈
 
@@ -23,12 +33,16 @@ src/
 ├── App.tsx                    # 入口：主题令牌、门户/外壳分发
 ├── app/
 │   ├── hash-navigation.ts     # AppRoute 联合类型 + hash 路由（单一事实源）
+│   ├── portal-settings.ts     # 菜单 / 应用 / 用户偏好本地共享配置
 │   ├── route-registry.tsx     # route → lazy 页面组件注册表
-│   └── AppShell.tsx           # 应用外壳：侧边/顶栏布局、菜单、面包屑、主题切换
+│   └── AppShell.tsx           # 应用外壳：动态菜单、用户菜单、面包屑、主题切换
 ├── components/charts/         # EChart 封装、全国轨迹地图、趋势图 option 构建器
 ├── modules/
-│   ├── portal/                # 门户入口页（平台卡片）
-│   └── analytics-cockpit/     # 示例业务模块：数据驾驶舱（自带 mockData 与测试）
+│   ├── portal/                # 门户入口页（应用卡片与用户菜单）
+│   ├── analytics-cockpit/     # 示例业务模块：数据驾驶舱（自带 mockData 与测试）
+│   ├── menu-management/       # 菜单树与导航配置
+│   ├── app-management/        # 应用入口与门户卡片配置
+│   └── user-settings/         # 用户资料、主题、通知与安全演示
 ├── styles/                    # tokens.css（设计令牌）、全局与外壳样式
 └── test/setup.ts              # Vitest 环境（jsdom 补丁、antd message 清理）
 scripts/serve.mjs              # 零依赖静态服务器（托管 dist/，默认 127.0.0.1:8091）
@@ -42,10 +56,10 @@ install.sh                     # 安装到 /home/paul/project/baseTemplate 并�
 
 1. **路由**：`src/app/hash-navigation.ts` 中给 `AppRoute` 联合类型和 `knownRoutes` 加新路由 id；
 2. **渲染**：`src/app/route-registry.tsx` 中加 `lazy(() => import("../modules/<name>"))` 和 `renderMainRoute` 的 switch 分支；
-3. **菜单与文案**：`src/app/AppShell.tsx` 中补 `routeLabels` / `systemLabels`（必填），有分组时再补 `routeGroupLabels` / `routeToGroupMap` / `routeToOpenKeys`，并在 `menuItems`（侧边栏）与 `topNavInternalMenuItems`（顶栏主题）挂菜单项；
+3. **菜单与文案**：`src/app/AppShell.tsx` 中补 `routeLabels` / `systemLabels`（必填），有分组时再补 `routeGroupLabels` / `routeToGroupMap` / `routeToOpenKeys`；默认导航来自 `portal-settings.ts` 的菜单配置，新增页面还需在菜单管理中配置可见入口（或补充默认菜单）。
 4. **模块**：新建 `src/modules/<name>/`，包含页面组件、`index.ts` 导出、模块 css 与测试；数据用模块内 mock（参考 `analytics-cockpit/mockData.ts`）。
 
-如需在门户加入口卡片，编辑 `src/modules/portal/PortalPage.tsx` 的 `PLATFORM_CARDS`（现有两张「业务平台示例」占位卡片演示了接法）。
+如需在门户加入口卡片，进入「应用管理」新建应用并开启「门户展示」；如需随模板默认提供入口，在 `src/app/portal-settings.ts` 的 `DEFAULT_APPLICATIONS` 中追加配置。
 
 ## 主题
 

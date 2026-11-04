@@ -1,5 +1,7 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
+import { act } from "react"
+import { resetPortalSettings, savePortalMenu } from "./portal-settings"
 import { AppShell, PROTOTYPE_THEMES, type PrototypeThemeId } from "./AppShell"
 
 /**
@@ -9,11 +11,13 @@ import { AppShell, PROTOTYPE_THEMES, type PrototypeThemeId } from "./AppShell"
 
 beforeEach(() => {
   localStorage.clear()
+  resetPortalSettings()
 })
 
 afterEach(() => {
   cleanup()
   localStorage.clear()
+  resetPortalSettings()
 })
 
 function renderShell(props: { currentTheme?: PrototypeThemeId } = {}) {
@@ -43,6 +47,28 @@ describe("AppShell (template)", () => {
     expect(screen.getByRole("menuitem", { name: /数据驾驶舱/ })).toBeInTheDocument()
     expect(screen.getByRole("menuitem", { name: /系统配置/ })).toBeInTheDocument()
     expect(screen.getByTestId("page-content")).toBeInTheDocument()
+  })
+
+  it("uses the configured route for a newly created menu item", async () => {
+    const { onNavigate } = renderShell()
+    act(() => {
+      savePortalMenu({
+        id: "local-shortcut",
+        name: "快捷应用",
+        parentId: null,
+        type: "page",
+        route: "app-management",
+        icon: "apps",
+        visible: true,
+        sort: 70,
+        permission: "",
+        updatedAt: "2026-08-18",
+      })
+    })
+
+    const shortcut = await screen.findByRole("menuitem", { name: /快捷应用/ })
+    fireEvent.click(shortcut)
+    expect(onNavigate).toHaveBeenCalledWith("app-management")
   })
 
   it("navigates to the cockpit route when the menu item is clicked", () => {

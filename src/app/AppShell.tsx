@@ -25,8 +25,7 @@ import { usePortalSettings, type PortalIconKey, type PortalMenuItem } from "./po
  * 1. hash-navigation.ts 补 AppRoute；
  * 2. route-registry.tsx 补 lazy 渲染分支；
  * 3. 本文件补 routeLabels / systemLabels（必填）与 routeGroupLabels /
- *    routeToGroupMap / routeToOpenKeys（有分组菜单时填），并在 menuItems /
- *    topNavInternalMenuItems 中挂菜单项。
+ *    routeToGroupMap / routeToOpenKeys（有分组菜单时填）；可见菜单由 portal-settings 驱动。
  */
 
 export function SidebarToggleIcon({ className }: { className?: string }) {
@@ -114,7 +113,8 @@ function buildNavigationItems(menus: PortalMenuItem[], includeIcons: boolean): N
   const mapItem = (item: PortalMenuItem): NavigationItem => {
     const children = childrenByParent.get(item.id)?.map(mapItem)
     return {
-      key: item.id,
+      // 页面菜单以路由作为导航 key；新增菜单的 id 是本地随机值，不能拿它当路由。
+      key: item.type === "page" && item.route ? item.route : item.id,
       label: item.name,
       ...(includeIcons ? { icon: MENU_ICON_NODES[item.icon] } : {}),
       ...(children?.length ? { children } : {}),
@@ -179,8 +179,27 @@ const routeSubGroupLabels: Partial<Record<AppRoute, string>> = {}
 
 const routeToOpenKeys: Partial<Record<AppRoute, string[]>> = {}
 
-function getBreadcrumbLabels(route: AppRoute): string[] {
-  const labels = [systemLabels[route], routeGroupLabels[route], routeSubGroupLabels[route], routeLabels[route]].filter(
+function getMenuPath(menus: PortalMenuItem[], route: AppRoute): PortalMenuItem[] {
+  const current = menus.find((menu) => menu.type === "page" && menu.route === route)
+  if (!current) return []
+  const path: PortalMenuItem[] = []
+  const visited = new Set<string>()
+  let parentId = current.parentId
+  while (parentId && !visited.has(parentId)) {
+    visited.add(parentId)
+    const parent = menus.find((menu) => menu.id === parentId)
+    if (!parent) break
+    path.unshift(parent)
+    parentId = parent.parentId
+  }
+  return path
+}
+
+function getBreadcrumbLabels(route: AppRoute, menus: PortalMenuItem[] = []): string[] {
+  const currentMenu = menus.find((menu) => menu.type === "page" && menu.route === route)
+  const menuPath = getMenuPath(menus, route)
+  const groupLabels = menuPath.length ? menuPath.map((menu) => menu.name) : [routeGroupLabels[route]]
+  const labels = [systemLabels[route], ...groupLabels, routeSubGroupLabels[route], currentMenu?.name ?? routeLabels[route]].filter(
     (label): label is string => Boolean(label),
   )
 
@@ -266,10 +285,11 @@ export function AppShell({
   const collapseTimerRef = useRef<ReturnType<typeof window.setTimeout> | undefined>(undefined)
   // 必须按路由记忆化：数组每次渲染都新建的话，下面「补齐展开键」的 effect 会每渲染触发一次，
   // 用户手动收起的分组会被立刻重新顶开（走 routeToGroupMap 兜底的路由都会中招）。
-  const parentGroups = useMemo(
-    () => routeToOpenKeys[currentRoute] ?? (routeToGroupMap[currentRoute] ? [routeToGroupMap[currentRoute]] : []),
-    [currentRoute],
-  )
+  const parentGroups = useMemo(() => {
+    const configuredParents = getMenuPath(portalSettings.menus, currentRoute).map((menu) => menu.id)
+    if (configuredParents.length) return configuredParents
+    return routeToOpenKeys[currentRoute] ?? (routeToGroupMap[currentRoute] ? [routeToGroupMap[currentRoute]] : [])
+  }, [currentRoute, portalSettings.menus])
   const [openKeys, setOpenKeys] = useState<string[]>(() => parentGroups)
   const activeThemeId: PrototypeThemeId = currentTheme ?? (darkMode ? "dark" : "light")
   const activeTheme = PROTOTYPE_THEMES.find((t) => t.id === activeThemeId) ?? PROTOTYPE_THEMES[0]
@@ -375,7 +395,7 @@ export function AppShell({
     if (onSelectTheme) onSelectTheme(themeId)
   }
 
-  const breadcrumbLabels = getBreadcrumbLabels(currentRoute)
+  const breadcrumbLabels = getBreadcrumbLabels(currentRoute, portalSettings.menus)
 
   const handleMenuClick: MenuProps["onClick"] = ({ key }) => {
     if (typeof key === "string" && isAppRoute(key)) {

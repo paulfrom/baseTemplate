@@ -4,6 +4,7 @@ import {Suspense, useEffect, useState} from "react"
 import "./App.css"
 import {AppShell, type PrototypeThemeId} from "./app/AppShell"
 import {useHashNavigation} from "./app/hash-navigation"
+import {getPortalSettings, updatePortalUser} from "./app/portal-settings"
 import {renderMainRoute} from "./app/route-registry"
 import {PortalPage} from "./modules/portal"
 
@@ -110,9 +111,15 @@ function App() {
   const { navigate, route } = useHashNavigation()
   const [themeId, setThemeId] = useState<PrototypeThemeId>(() => {
     const saved = localStorage.getItem("prototype_theme_id")
-    return saved === "dark" || saved === "aurora" || saved === "obsidian" || saved === "slate" ? saved : "light"
+    const savedTheme = saved === "dark" || saved === "aurora" || saved === "obsidian" || saved === "slate" || saved === "light" ? saved : null
+    const preferredTheme = getPortalSettings().user.defaultTheme
+    return savedTheme ?? (["dark", "aurora", "obsidian", "slate"].includes(preferredTheme) ? preferredTheme : "light")
   })
   const darkMode = themeId === "dark" || themeId === "obsidian" || themeId === "slate"
+  const handleThemeSelect = (nextTheme: PrototypeThemeId) => {
+    setThemeId(nextTheme)
+    updatePortalUser({ defaultTheme: nextTheme })
+  }
 
   // Keep the theme on the document root so Ant Design portal components
   // (Modal, Drawer, Select dropdowns, etc.) receive the same CSS variables.
@@ -147,19 +154,19 @@ function App() {
           dataTheme={darkMode ? "dark" : "light"}
           onThemeChange={(isDark) => {
             // 门户只提供明暗开关，但不能把已选的命名主题静默降级成普通主题。
-            if (isDark) setThemeId(themeId === "aurora" ? "obsidian" : themeId === "slate" ? "obsidian" : themeId === "light" ? "dark" : themeId)
-            else setThemeId(themeId === "obsidian" || themeId === "slate" ? "aurora" : themeId === "dark" ? "light" : themeId)
+            if (isDark) handleThemeSelect(themeId === "aurora" ? "obsidian" : themeId === "slate" ? "obsidian" : themeId === "light" ? "dark" : themeId)
+            else handleThemeSelect(themeId === "obsidian" || themeId === "slate" ? "aurora" : themeId === "dark" ? "light" : themeId)
           }}
         />
       ) : (
         <AppShell
           currentRoute={route}
           currentTheme={themeId}
-          onSelectTheme={setThemeId}
+          onSelectTheme={handleThemeSelect}
           darkMode={darkMode}
           onNavigate={navigate}
         >
-          <Suspense fallback={null}>{renderMainRoute(route, { navigate, currentTheme: themeId, onSelectTheme: setThemeId })}</Suspense>
+          <Suspense fallback={null}>{renderMainRoute(route, { navigate, currentTheme: themeId, onSelectTheme: handleThemeSelect })}</Suspense>
         </AppShell>
       )}
     </ConfigProvider>

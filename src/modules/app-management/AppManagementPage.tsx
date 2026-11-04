@@ -247,8 +247,8 @@ export function AppManagementPage() {
       width: 230,
       render: (tags: string[]) => (
         <div className="management-tag-list">
-          {tags.slice(0, 2).map((tag) => <Tag key={tag} bordered={false}>{tag}</Tag>)}
-          {tags.length > 2 && <Tooltip title={tags.slice(2).join("、")}><Tag bordered={false}>+{tags.length - 2}</Tag></Tooltip>}
+          {tags.slice(0, 2).map((tag) => <Tag key={tag} variant="filled">{tag}</Tag>)}
+          {tags.length > 2 && <Tooltip title={tags.slice(2).join("、")}><Tag variant="filled">+{tags.length - 2}</Tag></Tooltip>}
           {tags.length === 0 && <Text type="secondary">—</Text>}
         </div>
       ),
