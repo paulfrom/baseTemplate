@@ -1,0 +1,49 @@
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react"
+import { message } from "@ead/suid"
+import { afterEach, beforeEach, describe, expect, it } from "vitest"
+import { act } from "react"
+import { PORTAL_ROUTE_DEFINITIONS } from "../../../config/router.config"
+import { getPortalSettings, resetPortalSettings } from "../../models/portal-settings"
+import { MenuManagementPage } from "./index"
+
+beforeEach(() => {
+  window.localStorage.clear()
+  resetPortalSettings()
+})
+
+afterEach(async () => {
+  await act(async () => { message.destroy() })
+  cleanup()
+  resetPortalSettings()
+})
+
+describe("router-backed menu management", () => {
+  it("lists current router entries and filters them without an add action", async () => {
+    render(<MenuManagementPage />)
+    expect(screen.getByRole("heading", { name: "菜单管理" })).toBeInTheDocument()
+    expect(screen.queryByRole("button", { name: /新增菜单/ })).not.toBeInTheDocument()
+    expect(screen.getByText(`筛选结果 ${PORTAL_ROUTE_DEFINITIONS.length} / ${PORTAL_ROUTE_DEFINITIONS.length} 项`)).toBeInTheDocument()
+    expect(screen.getByText("申请单示例")).toBeInTheDocument()
+    expect(screen.getByText("门户入口")).toBeInTheDocument()
+
+    fireEvent.change(screen.getByPlaceholderText("名称 / 路由 / 分组 / 权限"), { target: { value: "menu-management" } })
+    fireEvent.click(screen.getByRole("button", { name: /查询/ }))
+    await waitFor(() => expect(screen.getByText(`筛选结果 1 / ${PORTAL_ROUTE_DEFINITIONS.length} 项`)).toBeInTheDocument())
+    // 页面标题与行内名称同为“菜单管理”，用标题角色区分，筛选后其它页面不再出现。
+    expect(screen.getByRole("heading", { name: "菜单管理" })).toBeInTheDocument()
+    expect(screen.queryByText("申请单示例")).not.toBeInTheDocument()
+    expect(screen.queryByText("门户入口")).not.toBeInTheDocument()
+  })
+
+  it("persists the visibility checkbox and restores router defaults", async () => {
+    render(<MenuManagementPage />)
+    fireEvent.click(screen.getByRole("switch", { name: "工作台导航展示" }))
+    await waitFor(() => {
+      expect(getPortalSettings().menus.find((menu) => menu.id === "dashboard")?.visible).toBe(false)
+    })
+    fireEvent.click(screen.getByRole("button", { name: /恢复默认展示/ }))
+    await waitFor(() => {
+      expect(getPortalSettings().menus.find((menu) => menu.id === "dashboard")?.visible).toBe(true)
+    })
+  })
+})
