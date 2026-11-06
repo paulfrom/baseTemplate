@@ -1,0 +1,15 @@
+export default {
+  'sampleRequest.page': '申请单示例',
+  'sampleRequest.code': '编号',
+  'sampleRequest.title': '标题',
+  'sampleRequest.search': '输入编号或标题查询',
+  'sampleRequest.view': '查看',
+  'sampleRequest.retry': '重试',
+  'sampleRequest.missingId': '缺少业务记录标识',
+  'sampleRequest.loadFailed': '加载记录失败',
+  'sampleRequest.saveFailed': '保存失败',
+  'sampleRequest.deleteFailed': '删除失败',
+  'sampleRequest.code.required': '请输入编号',
+  'sampleRequest.title.required': '请输入标题',
+  'sampleRequest.tooLong': '去除首尾空格后不能超过 {max} 个字符',
+}

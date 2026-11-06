@@ -1,8 +1,8 @@
 # baseTemplate
 
-> 公司模板对齐要求：业务 UI 使用真实 SUID 组件，数据与操作全部 Mock。`#/sample-request` 展示 ExtTable、共用编辑表单与 WorkFlow.Approve 的模拟办理。详见 [组件与页面规则](docs/company-template-alignment.md)。当前仍使用 Vite / hash 外壳，尚未迁入公司 Umi / dva / qiankun 工程结构。
+> 公司模板对齐要求：业务 UI 使用真实 SUID 组件，数据与操作全部 Mock。目录已按公司模板 `eadp-mono-repo/frontend` 组织（`config/` + `src/pages`、`layouts`、`models`、`services`、`utils`、`plugins`、`locales`），`#/sample-request` 是迁入的 ExtTable 列表 + 共用主表单 + 只读详情，`#/workflow-example` 参照 `ProjectApply` 实现流程示例；引擎仍是 Vite / hash 路由，不是 Umi / dva / qiankun。详见 [组件与页面规则](docs/company-template-alignment.md)。
 
-业务原型模板项目：保留完整的应用框架（门户入口、应用外壳、hash 路由、五套主题、图表基建、测试与质量门禁），内置「数据驾驶舱」示例，并参考 SEI Portal 补齐菜单、应用和用户配置基础能力，适合作为新业务原型的起点。
+业务原型模板项目：保留完整的应用框架（门户入口、应用外壳、hash 路由、五套主题、测试与质量门禁），内置从公司模板迁入的「申请单示例」「工作台」「登录示例」三个页面，以及参照公司模板 `ProjectApply` 实现的基础「流程示例」，并保留门户与菜单管理基础能力，适合作为新业务原型的起点。
 
 ## 快速开始
 
@@ -12,42 +12,91 @@ npm run dev     # 本地开发，默认 http://127.0.0.1:5173
 npm run verify  # typecheck + lint + test + build 完整门禁
 ```
 
-启动后默认进入门户页（`#/portal`），点击「数据驾驶舱」卡片或侧边菜单进入 `#/analytics-cockpit`。
+启动后默认进入门户页（`#/portal`），点击「申请单示例」或「流程示例」卡片进入对应模块；左侧菜单可进入工作台（`#/dashboard`）与菜单管理（`#/menu-management`），登录示例在 `#/user/login`。
 
-## 门户基础配置
+### 用 pnpm 时注意 store 目录
+
+pnpm 11 把自身配置放在 `pnpm-workspace.yaml`（`.npmrc` 只放 registry / 认证）。其中 `storeDir` 必须和 `node_modules/.modules.yaml` 里记录的一致，否则 pnpm 认为 `node_modules` 不可用，会先删掉再重装：交互终端里变成确认提示，非交互终端直接报 `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY`，`pnpm run` 一律失败。跨盘符时 pnpm 默认会把 store 退回到项目内的 `.pnpm-store`，所以本仓库显式写死 `storeDir: D:\.pnpm-store`；换机器或换 store 位置时改这一行（或删掉让 pnpm 用默认值）后再执行 `pnpm install`。
+
+## 页面
+
+| 路由 | 页面 | 说明 |
+| --- | --- | --- |
+| `#/portal` | 门户入口 | 应用卡片首页，卡片来自门户配置 |
+| `#/dashboard` | 工作台 | 迁自公司模板，登录前后展示不同欢迎语 |
+| `#/sample-request` | 申请单示例 | ExtTable 列表，行操作为查看 / 编辑 / 删除 |
+| `#/sample-request/form?id=` | 申请单表单 | 新建与编辑共用主表单 |
+| `#/sample-request/detail?id=` | 申请单详情 | 主表单只读模式 |
+| `#/workflow-example` | 流程示例 | ExtTable 列表 + 流程状态筛选，行操作按状态显隐 |
+| `#/workflow-example/form?id=` | 费用申请单表单 | 新建 / 编辑 / 保存并发起流程，共用主表单 |
+| `#/workflow-example/detail?id=` | 费用申请单详情 | 主表单只读模式 |
+| `#/workflow-example/approve?id=&taskId=` | 流程审批办理 | `WorkFlow.Approve` 审批面板 + 只读主表单 |
+| `#/menu-management` | 菜单管理 | 读取路由表，只允许改导航展示勾选 |
+| `#/user/login` | 登录示例 | 迁自公司模板，任意账号可登录，演示验证码与多租户分支 |
+
+### 流程示例怎么用
+
+`#/workflow-example` 是参照公司模板 `src/pages/Project/ProjectApply` 实现的基础流程样例，用真实的 SUID `WorkFlow` 组件演示「发起 → 审批 → 终止」的完整链路：
+
+1. **列表**：四条演示单据分别处于草稿 / 审批中 / 已通过 / 已驳回；行操作按流程状态显隐——草稿可编辑，审批中可办理与终止流程。
+2. **发起流程**：打开单据点「保存并发起流程」，确认后由 `WorkFlow.StartFlow` 弹出流程类型与执行人选择，单据随即进入「审批中」。
+3. **审批办理**：列表点「审批办理」进入审批页，右侧是 `WorkFlow.Approve` 审批面板（同意 / 不同意 + 审批历史 + 流程日志 + 流程图），左侧是只读主表单；点「同意」逐节点流转到「已通过」。
+4. **终止流程**：列表点「终止流程」，`WorkFlow.EndFlow` 要求填写终止原因，单据变为「已终止」。
+
+BPM 服务没有真实实现：`WorkFlow` 发出的 `sei-bpm/**` 请求全部由 `src/mocks/browser.ts` 的 MSW handler 拦截，状态机在 `src/mocks/bpm.ts` 的内存里，刷新页面即回到演示数据。接入真实项目时把 handler 换成真实网关地址即可，页面代码不用改。
+
+## 门户与菜单配置
 
 外壳和用户菜单提供以下入口，页面均为可操作的纯前端原型：
 
-- `#/menu-management`：直接读取当前 Router 的页面清单，支持名称 / 路由 / 分组 / 权限筛选和“导航展示”勾选；取消勾选后同步隐藏侧边栏、顶部导航入口，不提供新增自定义菜单。
-- `#/app-management`：应用卡片、分类、路由、标签和门户展示配置；保存后同步门户首屏卡片，不提供应用启停切换，已配置路由的应用可直接进入。
-- `#/user-settings`：基本资料、头像颜色、默认主题、首页与密度偏好、通知开关，以及明确标注为演示的安全设置。
+- `#/menu-management`：直接读取 `config/router.config.ts` 的路由清单，支持名称 / 路由 / 分组 / 权限筛选和“导航展示”勾选；取消勾选后同步隐藏侧边栏、顶部导航入口，不提供新增自定义菜单。
 
-菜单、应用和用户偏好共享 `src/app/portal-settings.ts` 中的本地事实源，默认写入浏览器 `localStorage` 的 `prototype_portal_settings_v1`，刷新后保留；菜单的页面名称、层级、路由和权限始终以 `src/app/hash-navigation.ts` 的 `PORTAL_ROUTE_DEFINITIONS` 为准，仅持久化展示勾选。可在各管理页点击「恢复默认」还原对应配置。权限标识、登录设备、密码修改和通知渠道仅用于原型演示，不代表真实权限、认证或后端能力。
+菜单与用户偏好共享 `src/models/portal-settings.ts` 中的本地事实源，默认写入浏览器 `localStorage`，刷新后保留；菜单的页面名称、层级、路由和权限始终以路由表为准，仅持久化展示勾选。可在菜单管理页点击「恢复默认」还原。权限标识、通知渠道仅用于原型演示，不代表真实权限、认证或后端能力；登录页的账号密码只做形式校验，不连接任何认证服务。
 
 ## 技术栈
 
-React 18 + TypeScript + Vite + SUID 2.1.99 + ECharts 6 + MSW + Vitest/Testing Library。纯前端 Mock 数据，无后端、无登录、无真实权限。内部包安装源见 `.npmrc`；流程组件请求由浏览器 Service Worker 模拟，部署浏览器需支持 Service Worker（localhost 或 HTTPS）。
+React 18 + TypeScript + Vite + SUID 2.1.99 + MSW + Vitest/Testing Library。纯前端 Mock 数据，无后端、无真实登录、无真实权限。内部包安装源见 `.npmrc`。
+
+与公司模板的差异：引擎是 Vite + hash 路由（模板是 Umi 4 + dva + qiankun），因此 `umi` 的 `history` / `Link` / `getIntl` / `connect` 由 `src/utils/navigation.ts`、`src/components/Link.tsx`、`src/utils/intl.ts` 和 `src/models/global.ts` 提供等价能力；页面目录、路由表、布局、模型与服务层的位置与模板一致。
 
 ## 目录结构
 
 ```
+config/
+├── router.config.ts           # 路由表：路径、布局、页面组件、菜单元数据（单一事实源）
+├── theme.config.ts            # 五套主题的定义与 antd 运行时令牌
+└── proxy.config.ts            # 开发代理（原型无后端，留空）
+public/
+├── app.config.json            # 站点 base / 名称，由 src/utils/constants.ts 读取
+└── bpm-flow-chart.html        # 流程示例「流程图」页签的静态占位页
 src/
-├── App.tsx                    # 入口：主题令牌、门户/外壳分发
-├── app/
-│   ├── hash-navigation.ts     # AppRoute 联合类型 + hash 路由（单一事实源）
-│   ├── portal-settings.ts     # 菜单 / 应用 / 用户偏好本地共享配置
-│   ├── route-registry.tsx     # route → lazy 页面组件注册表
-│   └── AppShell.tsx           # 应用外壳：动态菜单、用户菜单、面包屑、主题切换
-├── components/charts/         # EChart 封装、全国轨迹地图、趋势图 option 构建器
-├── modules/
-│   ├── portal/                # 门户入口页（应用卡片与用户菜单）
-│   ├── analytics-cockpit/     # 示例业务模块：数据驾驶舱（自带 mockData 与测试）
-│   ├── sample-request/        # ExtTable 列表、共用主表单与模拟 WorkFlow 审批
-│   ├── menu-management/       # 菜单树与导航配置（ExtTable + Mock）
-│   ├── app-management/        # 应用入口与门户卡片配置（ExtTable + Mock）
-│   └── user-settings/         # 用户资料、主题、通知与安全演示
-├── mocks/browser.ts           # MSW 浏览器模拟层（仅原型服务契约）
-├── utils/operationColumn.ts   # 与公司模板一致的列表操作列宽规则
+├── app.tsx                    # 根容器：ConfigProvider + App，按路由表选择布局与页面
+├── main.tsx                   # Vite 入口（等价于 umi 生成的入口）
+├── loading.tsx                # 全局加载态
+├── global.css                 # 全局样式入口（对应模板 global.less）
+├── assets/                    # 静态资源
+├── components/                # 共享组件：Link、PortalIcon、PageStatCards、WorkflowApprovePage
+├── layouts/
+│   ├── AuthLayout.tsx         # 登录后外壳：动态菜单、面包屑、主题切换
+│   ├── LoginLayout.tsx        # 登录页外壳
+│   └── BlankLayout.tsx        # 无外壳布局（门户）
+├── locales/                   # 国际化词条（zh-CN / en-US）
+├── models/
+│   ├── global.ts              # 全局模型：语言、当前用户、模拟登录动作
+│   └── portal-settings.ts     # 菜单 / 应用 / 用户偏好本地共享配置
+├── pages/
+│   ├── Dashboard/             # 工作台（迁自公司模板）
+│   ├── Login/                 # 登录示例（迁自公司模板）
+│   ├── SampleRequest/         # 列表 / Form / Detail / 行操作 / 本地服务
+│   ├── WorkflowExample/       # 流程示例：列表 / Form / Detail / Approve / 行操作 / 本地服务
+│   ├── Portal/                # 门户入口页
+│   └── MenuManagement/        # 菜单树与导航配置（ExtTable + Mock）
+├── plugins/onError.tsx        # 运行时错误插件
+├── services/api.ts            # 登录等服务（本地 Mock，返回结构与模板一致）
+├── mocks/
+│   ├── browser.ts             # MSW 浏览器模拟层（拦截 BPM 契约）
+│   └── bpm.ts                 # BPM 契约模拟：流程实例 / 任务 / 审批历史状态机
+├── utils/                     # navigation / intl / constants / operationColumn
 ├── styles/                    # tokens.css（设计令牌）、全局与外壳样式
 └── test/setup.ts              # Vitest 环境（jsdom 补丁、SUID message 清理）
 scripts/serve.mjs              # 零依赖静态服务器（托管 dist/，默认 127.0.0.1:8091）
@@ -57,18 +106,18 @@ install.sh                     # 安装到 /home/paul/project/baseTemplate 并�
 
 ## 如何新增一个页面
 
-四个接线点，按顺序改：
+接线点只有一处：`config/router.config.ts`。
 
-1. **路由**：`src/app/hash-navigation.ts` 中给 `AppRoute` 联合类型和 `knownRoutes` 加新路由 id；
-2. **渲染**：`src/app/route-registry.tsx` 中加 `lazy(() => import("../modules/<name>"))` 和 `renderMainRoute` 的 switch 分支；
-3. **菜单与文案**：在 `src/app/hash-navigation.ts` 的 `PORTAL_ROUTE_DEFINITIONS` 补充页面名称、分组、图标和默认展示状态；`AppShell.tsx` 与菜单管理会读取同一份 Router 元数据。
-4. **模块**：新建 `src/modules/<name>/`，包含页面组件、`index.ts` 导出、模块 css 与测试；数据用模块内 mock。列表、编辑、流程页面参考 `sample-request/` 与 [公司模板对齐规则](docs/company-template-alignment.md)，不得改用普通 Table 或另造流程组件。
+1. **加路由**：在 `ROUTER_CONFIG` 里追加 `{ path, route, layout, component }`，`route` 用 `AppRoute` 联合类型里的新值，`component` 用 `lazy(() => import('../src/pages/<Name>'))`；
+2. **进菜单（可选）**：同一条记录里补 `menu`（名称、分组、图标、权限、排序、默认展示），`PORTAL_ROUTE_DEFINITIONS` 会自动派生，菜单管理与外壳读的是同一份；
+3. **子页面（可选）**：表单/详情这类页面补 `parentPath`，菜单高亮与面包屑自动归属父列表页；
+4. **建页面**：新建 `src/pages/<Name>/index.tsx` 与页面 css、测试；数据用页面目录内 `service.ts` 的本地 Mock。列表、编辑、详情参考 `pages/SampleRequest/` 与 [公司模板对齐规则](docs/company-template-alignment.md)，不得改用普通 Table 或另造一套表单。
 
-如需在门户加入口卡片，进入「应用管理」新建应用并开启「门户展示」；如需随模板默认提供入口，在 `src/app/portal-settings.ts` 的 `DEFAULT_APPLICATIONS` 中追加配置。
+如需在门户加入口卡片，在 `src/models/portal-settings.ts` 的 `DEFAULT_APPLICATIONS` 中追加配置并开启 `visibleOnPortal`。
 
 ## 主题
 
-外壳内置五套主题：建筑蓝（light，默认）、山野黑（dark）、云境白（aurora）、星穹夜（obsidian）、玄武岩（slate）。aurora/obsidian/slate 为顶栏布局，slate 支持顶栏/侧栏切换。主题令牌在 `src/styles/tokens.css`（CSS 变量）与 `src/App.tsx` 的 `PROTOTYPE_ANTD_THEME_TOKENS`（antd 运行时令牌）两处保持同一口径，新增主题需同时补两处。
+外壳内置五套主题：建筑蓝（light，默认）、山野黑（dark）、云境白（aurora）、星穹夜（obsidian）、玄武岩（slate）。aurora/obsidian/slate 为顶栏布局，slate 支持顶栏/侧栏切换。主题令牌在 `src/styles/tokens.css`（CSS 变量）与 `config/theme.config.ts` 的 `PROTOTYPE_ANTD_THEME_TOKENS`（antd 运行时令牌）两处保持同一口径，新增主题需同时补两处。
 
 ## 本机部署
 
@@ -152,6 +201,6 @@ VITE_BASE=/baseTemplate/ npm run build
 
 - `npm run typecheck`：TS 严格模式（含 noUnusedLocals/noUnusedParameters）
 - `npm run lint`：oxlint（react rules-of-hooks 为 error）
-- `npm test`：Vitest + jsdom；EChart 在测试中按惯例 mock（参考 `App.test.tsx`）
+- `npm test`：Vitest + jsdom；页面测试参考 `src/app.test.tsx`（路由级冒烟）与 `src/pages/SampleRequest/sample-request.test.tsx`（列表 + 本地服务）
 - `npm run build`：产物构建
 - CI：`.github/workflows/quality.yml` 在 push/PR 时跑完整门禁

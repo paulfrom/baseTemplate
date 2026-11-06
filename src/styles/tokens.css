@@ -1,13 +1,13 @@
 :root {
-  --color-primary: #008ee0;
-  --color-primary-hover: #08a4fe;
-  --color-primary-active: #047cc1;
-  --color-link: #006da9;
-  --color-error: #f5222d;
-  --color-success: #00b42a;
-  --color-warning: #ff7d00;
-  --color-processing: #008ee0;
-  --color-info: #008ee0;
+  --color-primary: #1677ff;
+  --color-primary-hover: #4096ff;
+  --color-primary-active: #0958d9;
+  --color-link: #0958d9;
+  --color-error: #ff4d4f;
+  --color-success: #52c41a;
+  --color-warning: #faad14;
+  --color-processing: #1677ff;
+  --color-info: #1677ff;
   --color-price-accent: #d97706;
   --color-accent-violet: #7b61ff;
   --color-chart-muted: #9ccff1;
@@ -19,11 +19,11 @@
   --color-kpi-icon-warning: #ea580c;
   --color-kpi-icon-error: #dc2626;
 
-  --color-text-1: #333333;
-  --color-text-2: #666666;
-  --color-text-3: #667085;
-  --color-text-4: #98a2b3;
-  --color-text-disabled: #b8c0cc;
+  --color-text-1: #000000e0;
+  --color-text-2: #00000073;
+  --color-text-3: #00000073;
+  --color-text-4: #00000040;
+  --color-text-disabled: #00000040;
 
   --color-bg-white: #ffffff;
   --color-bg-1: #fafafa;
@@ -31,10 +31,10 @@
   --color-bg-elevated: #ffffff;
   --color-static-white: #ffffff;
   --color-control-bg: #ffffff;
-  --color-control-border: #d0d5dd;
+  --color-control-border: #00000026;
   --color-surface-subtle: #f7fbfd;
   --color-bg-subtle: var(--color-surface-subtle);
-  --color-surface-selected: #eef9fc;
+  --color-surface-selected: #e6f4ff;
   --color-warning-bg: #fffbe6;
   --color-warning-border: #ffe58f;
   --color-danger-bg: #fff2f0;
@@ -48,9 +48,9 @@
   --color-border-soft: #e8e8e8;
   --color-border: #d9d9d9;
   --color-mask: rgb(0 0 0 / 45%);
-  --color-sidebar: #0070c0;
-  --color-sidebar-hover: #005fa3;
-  --color-sidebar-selected: #1a8ad8;
+  --color-sidebar: #001529;
+  --color-sidebar-hover: #ffffff14;
+  --color-sidebar-selected: #1677ff;
 
   --font-family-base: -apple-system, BlinkMacSystemFont, 'PingFang SC',
     'Microsoft YaHei', 'Source Han Sans SC', Arial, Roboto, sans-serif;
@@ -60,12 +60,12 @@
   --font-size-title-small: 16px;
   --font-size-body: 14px;
   --font-size-help: 12px;
-  --line-height-base: 1.6;
+  --line-height-base: 1.5714285714;
 
-  --radius-sm: 2px;
-  --radius-md: 4px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
   --radius-lg: 8px;
-  --radius-max: 10px;
+  --radius-max: 8px;
   --border-width-base: 1px;
   --focus-ring-width: 3px;
   --focus-ring-offset: 3px;
@@ -79,7 +79,7 @@
   --control-height-md: 32px;
   --control-height-lg: 40px;
   --header-height: 56px;
-  --sidebar-width: 216px;
+  --sidebar-width: 220px;
   --sidebar-collapsed-width: 64px;
   --shadow-elevated: 0 4px 16px rgb(0 0 0 / 8%);
 
@@ -97,8 +97,8 @@
   --color-tag-teal-text: var(--color-platform-fulfillment);
 
   /* 承运商工作台主题化品牌横幅令牌 */
-  --color-carrier-hero-start: #006da9;
-  --color-carrier-hero-mid: #008ee0;
+  --color-carrier-hero-start: #0958d9;
+  --color-carrier-hero-mid: #1677ff;
   --color-carrier-hero-end: #06a6bb;
   --shadow-carrier-hero: 0 10px 28px rgb(0 142 224 / 18%);
 
@@ -133,7 +133,7 @@
   --color-portal-skeleton-shimmer-center: rgb(255 255 255 / 40%);
 
   /* ---- 门户入口页：字体、布局与尺寸令牌 ---- */
-  --font-size-hero: clamp(36px, 2.25vw, 44px);
+  --font-size-hero: 24px;
   --font-size-brand: 18px;
   --font-size-portal-card-title: 22px;
   --font-size-portal-cta: 15px;
@@ -149,16 +149,16 @@
   --portal-nav-indicator-height: 2px;
   --portal-nav-divider-height: 20px;
   --portal-network-height: 560px;
-  --portal-hero-min-height: 236px;
-  --portal-hero-padding-top: 52px;
-  --portal-hero-padding-bottom: 104px;
-  --portal-card-grid-gap: 28px;
+  --portal-hero-min-height: 120px;
+  --portal-hero-padding-top: 24px;
+  --portal-hero-padding-bottom: 24px;
+  --portal-card-grid-gap: 24px;
   --portal-card-grid-max: 1320px;
-  --portal-card-grid-overlap: -72px;
+  --portal-card-grid-overlap: 0px;
   --portal-card-grid-padding-bottom: 72px;
   --portal-card-min-height: 452px;
-  --portal-card-padding: 26px 28px 24px;
-  --portal-card-radius: 12px;
+  --portal-card-padding: 24px;
+  --portal-card-radius: 8px;
   --portal-card-backdrop-blur: 8px;
   --portal-card-accent-height: 3px;
   --portal-card-illustration-height: 156px;
@@ -170,7 +170,7 @@
   --portal-cta-width: 228px;
   --portal-cta-width-fluid: 78%;
   --portal-cta-height: 44px;
-  --portal-cta-radius: 22px;
+  --portal-cta-radius: 6px;
   --portal-skeleton-circle-size: 96px;
   --portal-skeleton-bar-height: 12px;
   --portal-skeleton-title-width: 280px;
@@ -178,8 +178,8 @@
   --portal-skeleton-description-width: 480px;
   --portal-skeleton-card-title-height: 18px;
   --portal-skeleton-description-compact-width: 320px;
-  --portal-hero-compact-min-height: 220px;
-  --portal-hero-compact-padding-top: 44px;
+  --portal-hero-compact-min-height: 120px;
+  --portal-hero-compact-padding-top: 24px;
   --portal-card-compact-min-height: 424px;
   --portal-card-illustration-compact-height: 138px;
 

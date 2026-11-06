@@ -1,0 +1,14 @@
+# pnpm 11 起，pnpm 自身的配置项统一写在本文件里（.npmrc 只放 registry / 认证等 npm 兼容项）。
+#
+# storeDir 必须与 node_modules/.modules.yaml 里记录的 storeDir 一致，
+# 否则 pnpm 会认为 modules 目录不可用，试图删掉重装（交互式下变成确认提示，
+# 非交互式下直接报 ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY，pnpm run 一律失败）。
+# 本机 store 在 D 盘根目录（跨盘符无法硬链接到用户目录，pnpm 默认会退回到项目内的 .pnpm-store）。
+# 换机器或换 store 位置时，改这里（或删除本行让 pnpm 用默认 store）后再执行 pnpm install。
+storeDir: D:\.pnpm-store
+
+allowBuilds:
+  # msw 的 postinstall 会按 package.json 的 msw.workerDirectory 重新生成 public/mockServiceWorker.js
+  msw: true
+  # core-js@2 的 postinstall 只打印赞助信息，没有实际作用
+  core-js: false

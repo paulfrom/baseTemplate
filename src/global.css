@@ -1,0 +1,20 @@
+/* 全局样式入口，对应公司模板的 src/global.less。 */
+@import './styles/tokens.css';
+@import './styles/global.css';
+@import './styles/app-shell.css';
+@import './styles/prototype-patterns.css';
+@import './styles/management-pages.css';
+
+.layout-loading {
+  height: 100vh;
+}
+
+/* 登录页外壳：登录表单在屏幕中间，窄屏保留上下留白。 */
+.layout-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: var(--color-bg-2, #f5f7fa);
+}

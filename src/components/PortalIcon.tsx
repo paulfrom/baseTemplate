@@ -6,7 +6,7 @@ import {
   SettingOutlined,
   UserOutlined,
 } from "@ead/suid-icons"
-import type { PortalIconKey } from "../app/portal-settings"
+import type { PortalIconKey } from "../models/portal-settings"
 
 const ICON_MAP = {
   cockpit: FundOutlined,

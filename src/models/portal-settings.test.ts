@@ -20,7 +20,7 @@ describe("portal settings local store", () => {
   it("provides router-backed menus, applications and user configuration", () => {
     const settings = getPortalSettings()
     expect(settings.version).toBe(1)
-    expect(settings.applications).toHaveLength(4)
+    expect(settings.applications).toHaveLength(5)
     expect(settings.menus.filter((menu) => menu.type === "page").map((menu) => menu.route)).toEqual(
       PORTAL_ROUTE_DEFINITIONS.map((definition) => definition.route),
     )
@@ -38,16 +38,16 @@ describe("portal settings local store", () => {
     }
     savePortalApplication(application)
     expect(getPortalSettings().applications.find((item) => item.id === "app-test")).toMatchObject({ name: "测试应用", visibleOnPortal: true })
-    expect(JSON.parse(window.localStorage.getItem("prototype_portal_settings_v1") ?? "{}").applications).toHaveLength(5)
+    expect(JSON.parse(window.localStorage.getItem("prototype_portal_settings_v1") ?? "{}").applications).toHaveLength(6)
 
     savePortalApplication({ ...application, status: "disabled" })
     expect(getPortalSettings().applications.find((item) => item.id === "app-test")?.status).toBe("enabled")
     removePortalApplication("app-test")
-    expect(getPortalSettings().applications).toHaveLength(4)
+    expect(getPortalSettings().applications).toHaveLength(5)
 
     savePortalApplication(application)
     resetPortalApplications()
-    expect(getPortalSettings().applications).toHaveLength(4)
+    expect(getPortalSettings().applications).toHaveLength(5)
     expect(getPortalSettings().applications.some((item) => item.id === "app-test")).toBe(false)
   })
 

@@ -413,8 +413,7 @@ body .ead-tooltip:not(.ead-menu-inline-collapsed-tooltip) .ead-tooltip-arrow::be
   justify-content: space-between;
   padding: 0 var(--space-lg);
   border-bottom: 1px solid var(--color-border-soft);
-  background: color-mix(in srgb, var(--color-bg-white) 94%, transparent);
-  backdrop-filter: blur(10px);
+  background: var(--color-bg-white);
 }
 
 .app-shell__context {
@@ -827,24 +826,8 @@ body:has([data-theme='obsidian']) .ead-menu-submenu-popup .ead-menu-item-selecte
   --wb-page-bg: #09090b !important;
 }
 
-/* 星穹夜：数据驾驶舱适配 */
-[data-theme='obsidian'] .analytics-cockpit,
-[data-theme='obsidian'] .app-shell__content:has(> .analytics-cockpit) {
-  --analytics-page-bg: #09090b !important;
-  --analytics-text: #fafafa !important;
-  --analytics-label: #a1a1aa !important;
-  --analytics-muted: #71717a !important;
-  --analytics-panel-border: rgba(255, 255, 255, 0.08) !important;
-}
-
 body:has([data-theme='obsidian']) {
   background: #09090b !important;
-}
-
-[data-theme='obsidian'] .analytics-cockpit__topbar-actions .ead-tag {
-  background: rgba(99, 102, 241, 0.12) !important;
-  border-color: rgba(99, 102, 241, 0.3) !important;
-  color: #a5b4fc !important;
 }
 
 [data-theme='obsidian'] .ead-card,
@@ -1090,25 +1073,10 @@ body:has([data-theme='slate']) .ead-menu-submenu-popup .ead-menu-item-selected {
   --wb-page-bg: #1a202c !important;
 }
 
-[data-theme='slate'] .analytics-cockpit,
-[data-theme='slate'] .app-shell__content:has(> .analytics-cockpit) {
-  --analytics-page-bg: #1a202c !important;
-  --analytics-text: #f1f5f9 !important;
-  --analytics-label: #cbd5e1 !important;
-  --analytics-muted: #94a3b8 !important;
-  --analytics-panel-border: rgba(255, 255, 255, 0.08) !important;
-}
-
 body:has([data-theme='slate']) {
   background: #1a202c !important;
 }
 
-[data-theme='slate'] .analytics-cockpit__topbar-actions .ead-tag {
-  background: rgba(56, 189, 248, 0.12) !important;
-  border-color: rgba(56, 189, 248, 0.3) !important;
-  color: #7dd3fc !important;
-  border-radius: 6px;
-}
 
 [data-theme='slate'] .ead-card,
 [data-theme='slate'] .workbench-card,

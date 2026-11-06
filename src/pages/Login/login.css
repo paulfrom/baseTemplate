@@ -1,0 +1,28 @@
+/* 登录页样式（对应公司模板 src/pages/Login 的 createStyles 视觉）。
+   原型改用 CSS 变量而不是运行时的 antd-style。 */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 360px;
+}
+
+.login-page .login-form {
+  width: 100%;
+  padding: var(--space-md);
+  background: var(--color-bg-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.login-page .login-name {
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.login-page .ead-form-item {
+  margin-bottom: var(--space-md);
+}

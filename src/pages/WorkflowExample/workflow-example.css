@@ -1,0 +1,54 @@
+/*
+ * 流程示例（费用申请单）页面级样式。
+ * 只用 `src/styles/tokens.css` 的设计令牌，不在这里散落硬编码颜色。
+ */
+
+.workflow-example-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+/* 行内操作保持单行排布：WorkFlow.EndFlow 会多渲染一层包裹节点。 */
+.workflow-example-list-action,
+.workflow-example-end-flow {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 单据抬头：单号、流程状态与创建时间。 */
+.workflow-example-doc-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-border-soft);
+}
+
+.workflow-example-doc-header__code {
+  color: var(--color-text-1);
+  font-family: var(--font-family-number);
+  font-size: var(--font-size-title-small);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.workflow-example-doc-header__meta {
+  color: var(--color-text-3);
+  font-size: var(--font-size-help);
+}
+
+.workflow-example-form__body {
+  margin-top: var(--space-md);
+}
+
+/*
+ * 审批页：`WorkFlow.Approve` 的根节点是 Splitter，需要一个确定高度，
+ * 否则右侧审批面板会塌陷。这里按外壳头部高度与内容区内边距换算。
+ */
+.workflow-example-approve {
+  height: calc(100vh - var(--header-height) - 2 * var(--space-lg));
+  min-height: 480px;
+}

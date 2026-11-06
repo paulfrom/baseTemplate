@@ -12,6 +12,7 @@ dist
 dist-show*/
 dist-ssr
 *.local
+.pnpm-store/
 .playwright-cli/
 .playwright-mcp/
 

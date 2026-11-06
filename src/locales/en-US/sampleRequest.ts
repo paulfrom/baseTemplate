@@ -1,0 +1,15 @@
+export default {
+  'sampleRequest.page': 'Sample Request',
+  'sampleRequest.code': 'Code',
+  'sampleRequest.title': 'Title',
+  'sampleRequest.search': 'Search by code or title',
+  'sampleRequest.view': 'View',
+  'sampleRequest.retry': 'Retry',
+  'sampleRequest.missingId': 'Missing record identifier',
+  'sampleRequest.loadFailed': 'Failed to load the record',
+  'sampleRequest.saveFailed': 'Failed to save',
+  'sampleRequest.deleteFailed': 'Failed to delete',
+  'sampleRequest.code.required': 'Code is required',
+  'sampleRequest.title.required': 'Title is required',
+  'sampleRequest.tooLong': 'Must not exceed {max} characters after trimming',
+}

@@ -44,8 +44,9 @@ describe("AuthLayout (template)", () => {
 
     // 品牌名同时出现在侧边栏 brand 与面包屑首节，用 getAllByText
     expect(screen.getAllByText("baseTemplate").length).toBeGreaterThan(0)
-    expect(screen.getAllByRole("menuitem")).toHaveLength(3)
+    expect(screen.getAllByRole("menuitem")).toHaveLength(4)
     expect(screen.getByRole("menuitem", { name: /申请单示例/ })).toBeInTheDocument()
+    expect(screen.getByRole("menuitem", { name: /流程示例/ })).toBeInTheDocument()
     expect(screen.getByRole("menuitem", { name: /工作台/ })).toBeInTheDocument()
     expect(screen.getByRole("menuitem", { name: /系统配置/ })).toBeInTheDocument()
     expect(screen.getByTestId("page-content")).toBeInTheDocument()

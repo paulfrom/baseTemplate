@@ -25,6 +25,7 @@ afterEach(async () => {
 
 const PLATFORM_NAMES = [
   '申请单示例',
+  '流程示例',
   '业务平台示例 A',
   '业务平台示例 B',
 ]
@@ -41,7 +42,7 @@ describe('portal entry page', () => {
     }
   })
 
-  it('renders hero title, three platform cards and three CTA buttons after loading', async () => {
+  it('renders hero title, four platform cards and four CTA buttons after loading', async () => {
     render(createElement(PortalPage))
 
     const hero = await screen.findByRole('heading', {
@@ -56,7 +57,7 @@ describe('portal entry page', () => {
       ).toBeInTheDocument()
     }
 
-    expect(screen.getAllByText('进入平台')).toHaveLength(3)
+    expect(screen.getAllByText('进入平台')).toHaveLength(4)
     expect(screen.getAllByText('业务原型模板 · 保留框架 · 快速接入').length).toBeGreaterThan(0)
     expect(screen.getByText('© 2026 baseTemplate · 业务原型模板')).toBeInTheDocument()
   })

@@ -1,15 +1,11 @@
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { afterEach, describe, expect, it, vi } from 'vitest'
-import App from './App'
+import { cleanup, render, screen } from '@testing-library/react'
+import { afterEach, describe, expect, it } from 'vitest'
+import App from './app'
 
-// jsdom 环境没有 canvas，按仓库既有模式把 EChart 桩掉，
-// 避免 echarts 初始化失败影响路由级 smoke 测试。
-vi.mock('./components/charts/EChart', () => ({
-  MAP_MAINLAND: 'china-mainland',
-  MAP_SOUTH_SEA: 'china-south-sea',
-  mainlandGeoJson: { features: [] },
-  EChart: ({ ariaLabel }: { ariaLabel: string }) => <div role="img" aria-label={ariaLabel} />,
-}))
+/**
+ * 根容器冒烟测试：路由表 → 布局 → 页面 的整条链路。
+ * 页面都是 lazy 加载，断言各自的首屏内容，确认没有回落到默认页。
+ */
 
 afterEach(() => {
   cleanup()
@@ -17,43 +13,40 @@ afterEach(() => {
   window.location.hash = '#/portal'
 })
 
-describe('application shell', () => {
+describe('application root', () => {
   it('renders the portal as the default route', async () => {
     render(<App />)
-    await waitFor(() => {
-      expect(screen.getByRole('heading', { level: 1, name: '业务原型模板统一门户' })).toBeInTheDocument()
-    })
-    expect(screen.getAllByText('业务原型模板 · 保留框架 · 快速接入').length).toBeGreaterThan(0)
+    expect(
+      await screen.findByRole(
+        'heading',
+        { level: 1, name: '业务原型模板统一门户' },
+        { timeout: 20000 },
+      ),
+    ).toBeInTheDocument()
   })
 
-  it('keeps the named dark theme when toggling the portal appearance switch', async () => {
-    localStorage.setItem('prototype_theme_id', 'obsidian')
-    window.location.hash = '#/portal'
+  it('renders the dashboard page on its own route', async () => {
+    window.location.hash = '#/dashboard'
     render(<App />)
-
-    const themeSwitch = await screen.findByRole('switch', { name: '切换深色主题' })
-    expect(themeSwitch).toHaveAttribute('aria-checked', 'true')
-
-    fireEvent.click(themeSwitch)
-
-    await waitFor(() => {
-      expect(document.documentElement.dataset.theme).toBe('aurora')
-      expect(localStorage.getItem('prototype_theme_id')).toBe('aurora')
-    })
+    expect(
+      await screen.findByText('欢迎来到本模块进行开发', {}, { timeout: 20000 }),
+    ).toBeInTheDocument()
   })
 
-  it('renders the analytics cockpit route without crashing', async () => {
-    window.location.hash = '#/analytics-cockpit'
-    window.dispatchEvent(new Event('hashchange'))
+  it('renders the sample-request list under the auth layout', async () => {
+    window.location.hash = '#/sample-request'
     render(<App />)
+    expect(await screen.findByText('SQ-001', {}, { timeout: 20000 })).toBeInTheDocument()
+    // 列表页在应用外壳里，侧边栏品牌与面包屑都在。
+    expect(screen.getAllByText('baseTemplate').length).toBeGreaterThan(0)
+  })
 
-    // 路由页是 lazy 加载的，等驾驶舱自己的 h1 挂载才算真正渲染成功。
-    await waitFor(() => {
-      expect(screen.getByRole('heading', { level: 1, name: '数据驾驶舱' })).toBeInTheDocument()
-    }, { timeout: 4000 })
-    await waitFor(() => {
-      const content = document.querySelector('main')
-      expect(content?.childElementCount ?? 0).toBeGreaterThan(0)
-    }, { timeout: 4000 })
+  it('renders the login page under the login layout', async () => {
+    window.location.hash = '#/user/login'
+    render(<App />)
+    expect(
+      await screen.findByText(/用户登录/, {}, { timeout: 20000 }),
+    ).toBeInTheDocument()
+    expect(document.querySelector('.layout-login')).not.toBeNull()
   })
 })

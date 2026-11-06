@@ -11,8 +11,13 @@ export default defineConfig({
     alias: [
       { find: /^@ead\/suid$/, replacement: fileURLToPath(new URL('./node_modules/@ead/suid/es/index.js', import.meta.url)) },
       { find: /^@ead\/suid-utils-react$/, replacement: fileURLToPath(new URL('./node_modules/@ead/suid-utils-react/es/index.js', import.meta.url)) },
+      // react-lottie 加载时会初始化依赖 canvas 的 lottie-web，jsdom 直接抛错；
+      // 测试不渲染动画，直接替换成空组件（pnpm 下 vi.mock 拦不住外部化依赖）。
+      { find: /^react-lottie$/, replacement: fileURLToPath(new URL('./src/test/stubs/react-lottie.ts', import.meta.url)) },
     ],
-    server: { deps: { inline: [/@ead\//] } },
+    // react-lottie 必须内联：它被外部化时会绕过 vi.mock，
+    // 加载 lottie-web 需要 canvas，jsdom 环境直接抛错（测试环境不渲染动画）。
+    server: { deps: { inline: [/@ead\//, /react-lottie/] } },
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
     css: true,

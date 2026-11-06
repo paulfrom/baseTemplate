@@ -1,0 +1,20 @@
+/* 工作台样式（对应公司模板 src/pages/Dashboard/style.ts 的视觉效果）。
+   原型改用 CSS 变量而不是运行时的 antd-style：容器只保留一份样式入口，也便于测试环境渲染。 */
+.dashboard-page {
+  position: relative;
+}
+
+.dashboard-page .ead-result {
+  margin-top: 10%;
+}
+
+.dashboard-page .ead-result-icon {
+  color: var(--color-text-1);
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.dashboard-page .ead-result-subtitle {
+  color: var(--color-text-1);
+  font-weight: 700;
+}

@@ -10,19 +10,19 @@
 
 ## 架构约定
 
-- 公司开发模板基准为 `D:/资料合计/司库/sei-base-demo/sei-base-demo/frontend`；生成业务项目须遵循 [组件与页面规则](docs/company-template-alignment.md)，列表、编辑、流程参考 `src/modules/sample-request/` 的真实 SUID 组件组合。当前 Vite/hash 外壳尚未迁入公司 Umi/dva/qiankun 工程结构，不得宣称完整工程架构已一致。
-- 列表、编辑、流程页面必须使用公司模板的真实组件与组合规则，不得用同名自制组件代替。列表使用 `ExtTable` + Mock `dataSource`，普通编辑与流程页面复用同一主表单。
-- 对齐后的业务 UI 从 `@ead/suid` 导入，图标从 `@ead/suid-icons` 导入；不新增直接引用 `antd` 的业务页面。内部包不可用时明确报告阻断，不创建兼容层或替代实现。
-- 原型数据与操作均在前端模拟，不复制宿主登录、权限校验或真实 BPM 服务依赖。流程演示必须标明模拟；真实 WorkFlow 的服务契约通过 MSW 模拟，新增流程契约必须补充模块 Mock，禁止请求穿透真实 BPM。
+- 公司开发模板基准为 `D:/project/ead/templateProject/eadp-mono-repo/frontend`；生成业务项目须遵循 [组件与页面规则](docs/company-template-alignment.md)，列表、编辑、详情参考 `src/pages/SampleRequest/` 的真实 SUID 组件组合。目录已按模板组织，但引擎仍是 Vite/hash 外壳、未使用 Umi/dva/qiankun，不得宣称完整工程架构已一致。
+- 列表、编辑、详情页面必须使用公司模板的真实组件与组合规则，不得用同名自制组件代替。列表使用 `ExtTable` + Mock `dataSource`，编辑与只读详情复用同一主表单。
+- 对齐后的业务 UI 从 `@ead/suid` 导入，图标从 `@ead/suid-icons` 导入；不新增直接引用 `antd` 的业务页面，也不要在页面里用 `@ead/antd-style` 的 `createStyles`（该包在 jsdom 与当前依赖下会导致测试进程崩溃），页面样式用 CSS 变量写页面级 css。内部包不可用时明确报告阻断，不创建兼容层或替代实现。
+- 原型数据与操作均在前端模拟，不复制宿主登录、权限校验或真实 BPM 服务依赖。登录页只是形式演示（任意账号可登录）；接入真实 WorkFlow 的服务契约须走 `src/mocks/browser.ts` 的 MSW 拦截，禁止请求穿透真实 BPM。
 
-- `src/app/hash-navigation.ts` 的 `AppRoute` 是路由单一事实源；新增页面按 README「如何新增一个页面」的四个接线点顺序修改。
-- 页面一律放 `src/modules/<name>/`，通过 `route-registry.tsx` lazy 加载；模块数据用模块内 mock，不引入全局状态库。
-- 设计令牌以 `src/styles/tokens.css` 为准；antd 运行时令牌在 `src/App.tsx` 同步维护，不在组件里散落主题分支。
+- `config/router.config.ts` 的 `ROUTER_CONFIG` 是路由与菜单的单一事实源；新增页面只改这一处（详见 README「如何新增一个页面」）。
+- 页面一律放 `src/pages/<Name>/`，由路由表 `lazy` 加载；页面数据用页面目录内 `service.ts` 的本地 Mock，不引入全局状态库。
+- 设计令牌以 `src/styles/tokens.css` 为准；antd 运行时令牌在 `config/theme.config.ts` 同步维护，不在组件里散落主题分支。
 - 共享组件放 `src/components/`，避免各页面重复发明按钮、表格、状态和反馈样式。
 
 ## 验证与收手
 
 - 日常改动使用最小相关验证；交付前执行 `npm run verify`（typecheck + lint + test + build）。
-- 测试环境为 jsdom：涉及 EChart 的测试按仓库惯例 mock `components/charts/EChart`。
+- 测试环境为 jsdom：页面级测试用 `@ead/suid` 的 `App` 包裹（`App.useApp()` 依赖其上下文），路由级冒烟参考 `src/app.test.tsx`。
 - 不得把未执行的浏览器验证表述为已验证。
 - 当用户目标已满足、相关验证通过且未引入新的阻断问题时立即结束任务。

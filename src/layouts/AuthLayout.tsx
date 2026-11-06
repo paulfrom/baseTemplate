@@ -87,6 +87,7 @@ const systemLabels: Record<AppRoute, string> = {
   portal: "baseTemplate",
   dashboard: "baseTemplate",
   "sample-request": "baseTemplate",
+  "workflow-example": "baseTemplate",
   "menu-management": "baseTemplate",
   login: "baseTemplate",
 }
